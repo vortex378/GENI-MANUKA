@@ -9,7 +9,7 @@ import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
 import PayPalButton from "@/components/paypal-button"
-import WhatsAppProductButton from "@/components/whatsapp-product-button"
+import WhatsAppOrderButton from "@/components/whatsapp-order-button" // Using the new button
 
 export default function ManukatPage() {
   const brands = [
@@ -24,6 +24,7 @@ export default function ManukatPage() {
               weight: "250gr",
               price: 7500,
               image: "https://m.media-amazon.com/images/I/71+la-DryjL.jpg",
+              whatsappMessage: "Manuka Koru MGO 300+",
             },
           ],
         },
@@ -34,6 +35,7 @@ export default function ManukatPage() {
               weight: "250gr",
               price: 10000,
               image: "https://m.media-amazon.com/images/I/71qcOQdK05L._AC_UF1000,1000_QL80_.jpg",
+              whatsappMessage: "Manuka Koru MGO 500+",
             },
           ],
         },
@@ -44,6 +46,7 @@ export default function ManukatPage() {
               weight: "250gr",
               price: 17000,
               image: "https://bioceuticals.co.uk/cdn/shop/products/koru800.jpg?v=1590247373",
+              whatsappMessage: "Manuka Koru MGO 800+",
             },
           ],
         },
@@ -54,6 +57,7 @@ export default function ManukatPage() {
               weight: "250gr",
               price: 22000,
               image: "https://bioceuticals.co.uk/cdn/shop/products/koru1000.jpg?v=1590247497",
+              whatsappMessage: "Manuka Koru MGO 1000+",
             },
           ],
         },
@@ -64,6 +68,7 @@ export default function ManukatPage() {
               weight: "250gr",
               price: 33000,
               image: "https://m.media-amazon.com/images/I/71pEIvPrnDL.jpg",
+              whatsappMessage: "Manuka Koru MGO 1200+",
             },
           ],
         },
@@ -76,6 +81,7 @@ export default function ManukatPage() {
               image: "https://caresoul.in/cdn/shop/files/Koru1500_3_1024x1024.png?v=1742383386",
               isEuro: true,
               euroPrice: 1100,
+              whatsappMessage: "Manuka Koru MGO 1500+",
             },
           ],
         },
@@ -88,6 +94,7 @@ export default function ManukatPage() {
               image: "https://manukahoneyofnz.com/cdn/shop/files/MH-Website-Images-KORU1959_2_1200x.png?v=1712528245",
               isEuro: true,
               euroPrice: 2200,
+              whatsappMessage: "Manuka Koru MGO 1959+",
             },
           ],
         },
@@ -104,8 +111,14 @@ export default function ManukatPage() {
               weight: "250gr",
               price: 3000,
               image: "https://neozealand.com/cdn/shop/files/DSC3887_100.jpg?v=1718806711",
+              whatsappMessage: "Manuka NUI MGO 100+ 250g/500g",
             },
-            { weight: "500gr", price: 5500, image: "https://m.media-amazon.com/images/I/51hv3OL8NUL.jpg" },
+            {
+              weight: "500gr",
+              price: 5500,
+              image: "https://m.media-amazon.com/images/I/51hv3OL8NUL.jpg",
+              whatsappMessage: "Manuka NUI MGO 100+ 250g/500g",
+            },
           ],
         },
         {
@@ -116,11 +129,13 @@ export default function ManukatPage() {
               price: 3500,
               image:
                 "https://neozealand.com/cdn/shop/files/s-l1600_4_192aa3f2-472d-470f-b2f9-f2c4fb692a00.jpg?v=1709631267",
+              whatsappMessage: "Manuka NUI MGO 250+ 250/500gr",
             },
             {
               weight: "500gr",
               price: 6500,
               image: "https://m.media-amazon.com/images/I/61VPEnQQBYL._AC_UF1000,1000_QL80_.jpg",
+              whatsappMessage: "Manuka NUI MGO 250+ 250/500gr",
             },
           ],
         },
@@ -131,11 +146,13 @@ export default function ManukatPage() {
               weight: "250gr",
               price: 5000,
               image: "https://suztain.no/cdn/shop/files/2_7bec0993-af0d-4918-bf94-78353c3f9a41.jpg?v=1734095461",
+              whatsappMessage: "Manuka NUI MGO 400+ 250/500gr",
             },
             {
               weight: "500gr",
               price: 9500,
               image: "https://m.media-amazon.com/images/I/61IfN4YbhyL._AC_UF1000,1000_QL80_.jpg",
+              whatsappMessage: "Manuka NUI MGO 400+ 250/500gr",
             },
           ],
         },
@@ -146,11 +163,13 @@ export default function ManukatPage() {
               weight: "250gr",
               price: 7800,
               image: "https://neozealand.com/cdn/shop/files/DSC3887_600.png?v=1718807355",
+              whatsappMessage: "Manuka NUI MGO 600+ 250/500gr",
             },
             {
               weight: "500gr",
               price: 15000,
               image: "https://neozealand.com/cdn/shop/files/DSC3880_600.png?v=1718807355",
+              whatsappMessage: "Manuka NUI MGO 600+ 250/500gr",
             },
           ],
         },
@@ -168,16 +187,19 @@ export default function ManukatPage() {
               price: 3800,
               image:
                 "https://manukahealth.shop/cdn/shop/products/MH-Honey-MGO100_-250g-front-DE_grande.jpg?v=1658158893",
+              whatsappMessage: "Manuka Health MGO 100+ 250/500gr/1kg",
             },
             {
               weight: "500gr",
               price: 6500,
               image: "https://manukahealth.shop/cdn/shop/products/MH-Honey-MGO100_-500g-front-DE.jpg?v=1658515140",
+              whatsappMessage: "Manuka Health MGO 100+ 250/500gr/1kg",
             },
             {
               weight: "1kg",
               price: 12000,
               image: "https://manukahealth.shop/cdn/shop/products/MH-Honey-MGO100_-1kg-front-DE.jpg?v=1658515140",
+              whatsappMessage: "Manuka Health MGO 100+ 250/500gr/1kg",
             },
           ],
         },
@@ -189,23 +211,36 @@ export default function ManukatPage() {
               price: 4500,
               image:
                 "https://digitalcontent.api.tesco.com/v2/media/marketplace/479e576f-1fdf-4e1e-a5f1-043d53f4223a/I4N9uuryz_ynEx63lZcFOBLY8_1118806194.jpeg?h=960&w=960",
+              whatsappMessage: "Manuka Health MGO 250+ 250/500gr/1kg",
             },
             {
               weight: "500gr",
               price: 7500,
               image: "https://manukahealth.shop/cdn/shop/products/mh-honey-mgo250_-500g-front-de.jpg?v=1700054298",
+              whatsappMessage: "Manuka Health MGO 250+ 250/500gr/1kg",
             },
-            { weight: "1kg", price: 14000, image: "https://m.media-amazon.com/images/I/61jLQZHAS9L.jpg" },
+            {
+              weight: "1kg",
+              price: 14000,
+              image: "https://m.media-amazon.com/images/I/61jLQZHAS9L.jpg",
+              whatsappMessage: "Manuka Health MGO 250+ 250/500gr/1kg",
+            },
           ],
         },
         {
           mgo: "400+",
           variants: [
-            { weight: "250gr", price: 6500, image: "https://m.media-amazon.com/images/I/61rMDpbr6KL.jpg" },
+            {
+              weight: "250gr",
+              price: 6500,
+              image: "https://m.media-amazon.com/images/I/61rMDpbr6KL.jpg",
+              whatsappMessage: "Manuka Health MGO 400+ 250/500gr",
+            },
             {
               weight: "500gr",
               price: 13000,
               image: "https://manukahealth.shop/cdn/shop/products/mh-honey-mgo400_-500g-front-de.jpg?v=1717255689",
+              whatsappMessage: "Manuka Health MGO 400+ 250/500gr",
             },
           ],
         },
@@ -216,11 +251,13 @@ export default function ManukatPage() {
               weight: "250gr",
               price: 9000,
               image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgWwEziLn4fdq7YKeC4DrB5jS9aQ6sjcwsVg&s",
+              whatsappMessage: "Manuka Health MGO 550+ 250/500gr",
             },
             {
               weight: "500gr",
               price: 16500,
               image: "https://manukahealth.shop/cdn/shop/products/MH-Honey-MGO550_-500g-front-DE.jpg?v=1665054004",
+              whatsappMessage: "Manuka Health MGO 550+ 250/500gr",
             },
           ],
         },
@@ -238,6 +275,7 @@ export default function ManukatPage() {
               price: 2500,
               image:
                 "https://www.ardkeen.com/cdn/shop/files/MeloraMultifloraManukaHoneyMGO70_330g_1000x.png?v=1704196996",
+              whatsappMessage: "Manuka Melora MGO 70+ 340gr",
             },
           ],
         },
@@ -248,11 +286,13 @@ export default function ManukatPage() {
               weight: "250gr",
               price: 3800,
               image: "https://melora.co.uk/cdn/shop/products/300250g.jpg?v=1745410540&width=1445",
+              whatsappMessage: "Manuka Melora MGO 300+ 250/500gr",
             },
             {
               weight: "500gr",
               price: 7200,
               image: "https://melora.co.uk/cdn/shop/products/300500g.jpg?v=1745407645&width=1445",
+              whatsappMessage: "Manuka Melora MGO 300+ 250/500gr",
             },
           ],
         },
@@ -263,6 +303,7 @@ export default function ManukatPage() {
               weight: "250gr",
               price: 6200,
               image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9_gL7beWKi5bX7psfBC0_PmO6Nhsu66upOg&s",
+              whatsappMessage: "Manuka Melora MGO 526+ 250g",
             },
           ],
         },
@@ -331,23 +372,24 @@ export default function ManukatPage() {
                     </Badge>
                   </AnimatedSection>
 
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {product.variants.map((variant, variantIndex) => (
                       <AnimatedSection
                         key={`${variant.weight}-${variant.price}`}
                         animation="scaleIn"
                         delay={brandIndex * 100 + productIndex * 50 + variantIndex * 30}
                       >
-                        <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-4 group border-0 bg-white/90 backdrop-blur-sm h-full">
-                          <div className="aspect-square relative overflow-hidden">
+                        <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-4 group border-0 bg-white/90 backdrop-blur-sm h-full flex flex-col">
+                          <div className="aspect-square relative overflow-hidden w-full">
                             <Image
                               src={variant.image || "/placeholder.svg"}
                               alt={`${brand.name} MGO ${product.mgo} ${variant.weight}`}
                               fill
-                              className="object-cover group-hover:scale-110 transition-transform duration-700"
+                              className="object-contain group-hover:scale-110 transition-transform duration-700"
                             />
+                            {/* MGO Label: Circular badge at top-left with white text on a blue background */}
                             <Badge
-                              className={`absolute top-4 left-4 bg-gradient-to-r ${brand.color} text-white px-4 py-2 text-lg shadow-lg`}
+                              className={`absolute top-4 left-4 bg-blue-600 text-white px-4 py-2 text-lg shadow-lg rounded-full`}
                             >
                               MGO {product.mgo}
                             </Badge>
@@ -356,10 +398,10 @@ export default function ManukatPage() {
                             </div>
                           </div>
 
-                          <CardContent className="p-6 flex flex-col h-full">
+                          <CardContent className="p-6 flex flex-col flex-grow">
                             <div className="flex-grow">
                               <h3 className="font-bold text-xl mb-3 text-gray-900 group-hover:text-amber-600 transition-colors duration-300">
-                                {brand.name} MGO {product.mgo}
+                                {brand.name}
                               </h3>
                               <p className="text-gray-600 mb-4 leading-relaxed">
                                 Mjalte premium Manuka {variant.weight} me cilësi të lartë
@@ -374,8 +416,10 @@ export default function ManukatPage() {
                                   <span className="text-sm font-medium">E Certifikuar</span>
                                 </div>
                               </div>
+                            </div>
 
-                              <div className="text-center mb-6">
+                            <div className="mt-auto">
+                              <div className="text-center mb-4">
                                 {variant.isEuro ? (
                                   <div>
                                     <span className="text-3xl font-bold text-amber-600">{variant.euroPrice}€</span>
@@ -385,16 +429,16 @@ export default function ManukatPage() {
                                   <span className="text-3xl font-bold text-amber-600">{variant.price} L</span>
                                 )}
                               </div>
-                            </div>
 
-                            <div className="space-y-3">
-                              <PayPalButton
-                                productName={`${brand.name} MGO ${product.mgo} ${variant.weight}`}
-                                price={variant.price}
-                              />
-                              <WhatsAppProductButton
-                                productName={`${brand.name} MGO ${product.mgo} ${variant.weight}`}
-                              />
+                              {/* WhatsApp Order Button */}
+                              <WhatsAppOrderButton productName={`${brand.name} MGO ${product.mgo} ${variant.weight}`} />
+
+                              <div className="mt-4">
+                                <PayPalButton
+                                  productName={`${brand.name} MGO ${product.mgo} ${variant.weight}`}
+                                  price={variant.price}
+                                />
+                              </div>
                             </div>
                           </CardContent>
                         </Card>

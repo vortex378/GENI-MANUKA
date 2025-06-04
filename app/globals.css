@@ -175,7 +175,17 @@ html {
 
 /* Enhanced button animations */
 .animate-pulse-slow {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
 }
 
 /* WhatsApp button specific styles */
@@ -305,4 +315,62 @@ img {
 .animate-pulse,
 .animate-spin {
   will-change: transform;
+}
+
+/* Product Card Consistency */
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Ensure consistent image sizes */
+.aspect-square img {
+  object-fit: contain !important;
+}
+
+/* Ensure consistent badge positioning */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure consistent spacing in card content */
+.card-content > * {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.card-content > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Ensure consistent button heights */
+.button {
+  height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Improve grid responsiveness */
+@media (max-width: 768px) {
+  .grid.md\:grid-cols-2,
+  .grid.md\:grid-cols-3 {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid.md\:grid-cols-2,
+  .grid.md\:grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
 }

@@ -79,39 +79,54 @@ export default function Navigation() {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation - Improved */}
         <div
-          className={`md:hidden transition-all duration-300 overflow-hidden ${
-            isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          className={`md:hidden fixed inset-x-0 top-16 transition-all duration-300 ${
+            isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
           }`}
         >
-          <div className="py-4 space-y-2 bg-white/95 backdrop-blur-md rounded-lg mt-2 shadow-lg mx-2">
-            {navItems.map((item, index) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="block px-4 py-3 text-gray-700 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300 transform hover:translate-x-2 rounded-lg mx-2"
-                style={{ animationDelay: `${index * 100}ms` }}
-                onClick={() => setIsOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <div className="px-4 py-2">
-              <Button
-                className="w-full bg-amber-600 hover:bg-amber-700 transform hover:scale-105 transition-all duration-300"
-                onClick={() => {
-                  window.open(
-                    "https://www.instagram.com/manuka_mjalte_albania_2014?igsh=MXB2NHA2OWtlamdsMA==",
-                    "_blank",
-                  )
-                  setIsOpen(false)
-                }}
-              >
-                Blej Tani
-              </Button>
+          <div className="mx-4 mt-2 rounded-xl bg-white/95 backdrop-blur-md shadow-xl border border-gray-100 overflow-hidden">
+            <div className="py-2">
+              {navItems.map((item, index) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="flex items-center px-6 py-4 text-gray-700 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300 border-b border-gray-100 last:border-b-0"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <span className="text-base font-medium">{item.label}</span>
+                  <span className="ml-auto opacity-0 group-hover:opacity-100">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M9 18L15 12L9 6"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </Link>
+              ))}
+              <div className="px-6 py-4">
+                <Button
+                  className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  onClick={() => {
+                    window.open(
+                      "https://www.instagram.com/manuka_mjalte_albania_2014?igsh=MXB2NHA2OWtlamdsMA==",
+                      "_blank",
+                    )
+                    setIsOpen(false)
+                  }}
+                >
+                  Blej Tani
+                </Button>
+              </div>
             </div>
           </div>
+          {/* Semi-transparent overlay */}
+          <div className="fixed inset-0 bg-black/20 backdrop-blur-sm -z-10" onClick={() => setIsOpen(false)}></div>
         </div>
       </div>
     </nav>

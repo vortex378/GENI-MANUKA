@@ -9,7 +9,7 @@ import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
 import PayPalButton from "@/components/paypal-button"
-import WhatsAppProductButton from "@/components/whatsapp-product-button"
+import WhatsAppOrderButton from "@/components/whatsapp-order-button"
 
 export default function ProductsPage() {
   const supplements = [
@@ -22,6 +22,7 @@ export default function ProductsPage() {
       benefits: ["Përmirëson elasticitetin e lëkurës", "Mbështet shëndetin e nyjeve", "Anti-aging natyror"],
       icon: Heart,
       color: "from-pink-500 to-rose-500",
+      whatsappMessage: "Kolagjen Pure",
     },
     {
       id: 2,
@@ -32,6 +33,7 @@ export default function ProductsPage() {
       benefits: ["Kolagjen + MSM", "Mbështetje e plotë e nyjeve", "Rikuperim më i shpejtë"],
       icon: Zap,
       color: "from-blue-500 to-cyan-500",
+      whatsappMessage: "Kolagjen Peptides MSM",
     },
     {
       id: 3,
@@ -42,6 +44,7 @@ export default function ProductsPage() {
       benefits: ["Forcim i imunitetit", "Antioksidant i fuqishëm", "Energji natyrore"],
       icon: Shield,
       color: "from-orange-500 to-yellow-500",
+      whatsappMessage: "Vitamine C",
     },
     {
       id: 4,
@@ -52,6 +55,7 @@ export default function ProductsPage() {
       benefits: ["I pasur me proteina", "Detoksifikim natyror", "Energji e qëndrueshme"],
       icon: Heart,
       color: "from-green-500 to-emerald-500",
+      whatsappMessage: "Spirulina",
     },
     {
       id: 5,
@@ -62,6 +66,7 @@ export default function ProductsPage() {
       benefits: ["Përmirëson tretjen", "Mbështet shëndetin e zorrëve", "Kontroll i peshës"],
       icon: Zap,
       color: "from-purple-500 to-violet-500",
+      whatsappMessage: "Vital Fibre",
     },
     {
       id: 6,
@@ -72,6 +77,7 @@ export default function ProductsPage() {
       benefits: ["Pa kalori shtesë", "I sigurt për diabetikë", "Shije e ëmbël natyrore"],
       icon: Heart,
       color: "from-teal-500 to-cyan-500",
+      whatsappMessage: "Ksylitol",
     },
     {
       id: 7,
@@ -82,6 +88,7 @@ export default function ProductsPage() {
       benefits: ["Relaksim i muskujve", "Përmirëson gjumin", "Mbështet sistemin nervor"],
       icon: Shield,
       color: "from-indigo-500 to-purple-500",
+      whatsappMessage: "Magnez Aqua",
     },
     {
       id: 8,
@@ -92,6 +99,7 @@ export default function ProductsPage() {
       benefits: ["Energji natyrore", "Mbështetje imuniteti", "Minerale të pasura"],
       icon: Zap,
       color: "from-gray-600 to-gray-800",
+      whatsappMessage: "Shilajit Tablete",
     },
     {
       id: 9,
@@ -102,6 +110,7 @@ export default function ProductsPage() {
       benefits: ["Forma e pastër", "Dozim i kontrollueshëm", "Cilësi premium"],
       icon: Heart,
       color: "from-amber-600 to-orange-600",
+      whatsappMessage: "Shilajit Vazo",
     },
   ]
 
@@ -147,16 +156,16 @@ export default function ProductsPage() {
       {/* Products Grid */}
       <section className="pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {supplements.map((product, index) => (
               <AnimatedSection key={product.id} animation="scaleIn" delay={index * 50}>
-                <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-4 group border-0 bg-white/90 backdrop-blur-sm h-full">
-                  <div className="aspect-square relative overflow-hidden">
+                <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-4 group border-0 bg-white/90 backdrop-blur-sm h-full flex flex-col">
+                  <div className="aspect-square relative overflow-hidden w-full">
                     <Image
                       src={product.image || "/placeholder.svg"}
                       alt={product.name}
                       fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700"
+                      className="object-contain group-hover:scale-110 transition-transform duration-700"
                     />
                     <div
                       className={`absolute top-4 left-4 bg-gradient-to-r ${product.color} rounded-full p-3 shadow-lg`}
@@ -166,7 +175,7 @@ export default function ProductsPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
 
-                  <CardContent className="p-6 flex flex-col h-full">
+                  <CardContent className="p-6 flex flex-col flex-grow">
                     <div className="flex-grow">
                       <h3 className="font-bold text-xl mb-3 text-gray-900 group-hover:text-green-600 transition-colors duration-300">
                         {product.name}
@@ -181,23 +190,29 @@ export default function ProductsPage() {
                           </div>
                         ))}
                       </div>
+                    </div>
 
+                    <div className="mt-auto">
                       {product.price && (
-                        <div className="text-center mb-6">
+                        <div className="text-center mb-4">
                           <span className="text-3xl font-bold text-green-600">{product.price} L</span>
                         </div>
                       )}
 
                       {!product.price && (
-                        <div className="text-center mb-6">
+                        <div className="text-center mb-4">
                           <span className="text-lg text-gray-500 italic">Çmimi do të publikohet së shpejti</span>
                         </div>
                       )}
-                    </div>
 
-                    <div className="space-y-3">
-                      {product.price && <PayPalButton productName={product.name} price={product.price} />}
-                      <WhatsAppProductButton productName={product.name} />
+                      {/* WhatsApp Order Button */}
+                      <WhatsAppOrderButton productName={product.whatsappMessage} />
+
+                      {product.price && (
+                        <div className="mt-4">
+                          <PayPalButton productName={product.name} price={product.price} />
+                        </div>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
