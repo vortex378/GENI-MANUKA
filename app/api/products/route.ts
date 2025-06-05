@@ -1,62 +1,59 @@
 import { NextResponse } from "next/server"
-import prisma from "@/lib/prisma"
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/lib/auth"
-import slugify from "slugify"
+
+// Placeholder products data
+const products = [
+  {
+    id: "1",
+    name: "Premium Manuka Honey UMF 15+",
+    slug: "premium-manuka-honey-umf-15",
+    description: "Premium New Zealand Manuka Honey with UMF 15+ rating",
+    price: 89.99,
+    comparePrice: 120.0,
+    images: ["/placeholder.svg?height=400&width=400"],
+    category: "Premium",
+    stock: 50,
+    featured: true,
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: "2",
+    name: "Raw Manuka Honey UMF 10+",
+    slug: "raw-manuka-honey-umf-10",
+    description: "Raw, unprocessed Manuka Honey with UMF 10+ rating",
+    price: 59.99,
+    comparePrice: 80.0,
+    images: ["/placeholder.svg?height=400&width=400"],
+    category: "Raw",
+    stock: 30,
+    featured: true,
+    createdAt: new Date().toISOString(),
+  },
+]
 
 // GET all products
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url)
-  const category = searchParams.get("category")
-  const featured = searchParams.get("featured") === "true"
-
-  const where = {
-    ...(category ? { category } : {}),
-    ...(featured ? { featured: true } : {}),
-  }
-
   try {
-    const products = await prisma.product.findMany({
-      where,
-      orderBy: { createdAt: "desc" },
-    })
+    const { searchParams } = new URL(request.url)
+    const category = searchParams.get("category")
+    const featured = searchParams.get("featured") === "true"
 
-    return NextResponse.json(products)
+    let filteredProducts = products
+
+    if (category) {
+      filteredProducts = filteredProducts.filter((p) => p.category === category)
+    }
+
+    if (featured) {
+      filteredProducts = filteredProducts.filter((p) => p.featured)
+    }
+
+    return NextResponse.json(filteredProducts)
   } catch (error) {
     return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 })
   }
 }
 
-// POST new product (admin only)
+// POST new product (placeholder)
 export async function POST(request: Request) {
-  const session = await getServerSession(authOptions)
-
-  if (!session || session.user.role !== "ADMIN") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-  }
-
-  try {
-    const body = await request.json()
-    const { name, description, price, comparePrice, images, category, stock, featured } = body
-
-    const slug = slugify(name, { lower: true })
-
-    const product = await prisma.product.create({
-      data: {
-        name,
-        slug,
-        description,
-        price: Number.parseFloat(price),
-        comparePrice: comparePrice ? Number.parseFloat(comparePrice) : null,
-        images,
-        category,
-        stock: Number.parseInt(stock),
-        featured: featured || false,
-      },
-    })
-
-    return NextResponse.json(product, { status: 201 })
-  } catch (error) {
-    return NextResponse.json({ error: "Failed to create product" }, { status: 500 })
-  }
+  return NextResponse.json({ error: "Database not configured" }, { status: 503 })
 }
