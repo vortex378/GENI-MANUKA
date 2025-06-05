@@ -188,22 +188,6 @@ html {
   }
 }
 
-/* Add animate-ping-slow */
-.animate-ping-slow {
-  animation: ping 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes ping {
-  0% {
-    transform: scale(0.8);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
-  }
-}
-
 /* WhatsApp button specific styles */
 .whatsapp-float {
   position: fixed;

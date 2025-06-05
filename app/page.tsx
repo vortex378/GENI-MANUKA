@@ -8,7 +8,6 @@ import { Star, Leaf, Award, Shield, Instagram, ArrowRight, Sparkles } from "luci
 import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
-import PokPayButton from "@/components/pokpay-button"
 import PageWrapper from "./page-wrapper"
 
 export default function HomePage() {
@@ -153,7 +152,6 @@ export default function HomePage() {
                   name: "MGO 400+ Mjalte Manuka",
                   mgo: "400+",
                   rating: 5,
-                  price: 6500,
                   image: "https://manukahealth.shop/cdn/shop/products/mh-honey-mgo400_-500g-front-de.jpg?v=1717255689",
                   description: "Ideal për përdorim të përditshëm dhe mbështetje imuniteti",
                 },
@@ -161,7 +159,6 @@ export default function HomePage() {
                   name: "MGO 550+ Mjalte Manuka",
                   mgo: "550+",
                   rating: 5,
-                  price: 9000,
                   image: "https://manukahealth.shop/cdn/shop/products/MH-Honey-MGO550_-500g-front-DE.jpg?v=1665054004",
                   description: "Fuqi e shtuar për përfitime terapeutike",
                 },
@@ -169,7 +166,6 @@ export default function HomePage() {
                   name: "MGO 850+ Mjalte Manuka",
                   mgo: "850+",
                   rating: 5,
-                  price: 15000,
                   image: "https://neozealand.com/cdn/shop/files/DSC3887_600.png?v=1718807355",
                   description: "Cilësi premium për entuziastët seriozë të shëndetit",
                 },
@@ -203,10 +199,21 @@ export default function HomePage() {
                         </Badge>
                         <span className="text-xs text-gray-500">Cert: NZ-MH-{product.mgo.replace("+", "")}-2024</span>
                       </div>
-                      <div className="text-center mb-4">
-                        <span className="text-3xl font-bold text-amber-600">{product.price} L</span>
+                      <div className="relative group">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+                        <Button
+                          className="relative w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                          onClick={() =>
+                            window.open(
+                              "https://www.instagram.com/manuka_mjalte_albania_2014?igsh=MXB2NHA2OWtlamdsMA==",
+                              "_blank",
+                            )
+                          }
+                        >
+                          <Instagram className="mr-2 h-4 w-4" />
+                          Shiko në Instagram
+                        </Button>
                       </div>
-                      <PokPayButton productName={product.name} price={product.price} currency="ALL" />
                     </CardContent>
                   </Card>
                 </AnimatedSection>
