@@ -1,5 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server"
 
+// Force this route to be dynamic
+export const dynamic = "force-dynamic"
+
 const POKPAY_API_URL = "https://api.pokpay.io"
 const KEY_ID = "ffe259a0-47e1-4df3-b771-d5e31dc6935a"
 const SECRET_KEY = "eJCOQ354V/shVlfhNum58ck5OAE/aDta5MeaciZe"

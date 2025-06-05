@@ -7,7 +7,16 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
+    domains: [
+      'manukahealth.shop',
+      'us-i.makeupstore.com',
+      'images.unsplash.com',
+      'via.placeholder.com'
+    ],
     unoptimized: true,
+  },
+  experimental: {
+    serverComponentsExternalPackages: [],
   },
 }
 

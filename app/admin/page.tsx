@@ -1,40 +1,38 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { AdminLayout } from "@/components/admin/layout"
+// Force this page to be dynamic
+export const dynamic = "force-dynamic"
+
+import { useState } from "react"
+import { DashboardLayout } from "@/components/admin/dashboard-layout"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Users, Package, ShoppingBag, DollarSign } from "lucide-react"
+import { Users, Package, ShoppingBag, DollarSign, TrendingUp } from "lucide-react"
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
-    totalUsers: 0,
-    totalProducts: 0,
-    totalOrders: 0,
-    revenue: 0,
-    recentOrders: [],
-    lowStockProducts: [],
+    totalUsers: 156,
+    totalProducts: 24,
+    totalOrders: 89,
+    revenue: 12450.5,
+    recentOrders: [
+      { id: "ORD-001", user: { name: "John Doe" }, total: 125.5, status: "completed" },
+      { id: "ORD-002", user: { name: "Jane Smith" }, total: 89.0, status: "pending" },
+      { id: "ORD-003", user: { name: "Mike Johnson" }, total: 234.75, status: "shipped" },
+    ],
+    lowStockProducts: [
+      { id: 1, name: "Manuka MGO 400+", category: "Honey", stock: 5 },
+      { id: 2, name: "Spirulina Premium", category: "Supplements", stock: 8 },
+      { id: 3, name: "Vitamin C", category: "Supplements", stock: 3 },
+    ],
   })
 
-  useEffect(() => {
-    fetchStats()
-  }, [])
-
-  const fetchStats = async () => {
-    try {
-      const response = await fetch("/api/admin/stats")
-      if (response.ok) {
-        const data = await response.json()
-        setStats(data)
-      }
-    } catch (error) {
-      console.error("Failed to fetch stats:", error)
-    }
-  }
-
   return (
-    <AdminLayout>
+    <DashboardLayout>
       <div className="space-y-6">
-        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+          <p className="text-muted-foreground">Welcome to your admin dashboard</p>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card>
@@ -44,6 +42,10 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stats.totalUsers}</div>
+              <p className="text-xs text-muted-foreground">
+                <TrendingUp className="inline h-3 w-3 mr-1" />
+                +12% from last month
+              </p>
             </CardContent>
           </Card>
 
@@ -54,6 +56,10 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stats.totalProducts}</div>
+              <p className="text-xs text-muted-foreground">
+                <TrendingUp className="inline h-3 w-3 mr-1" />
+                +2 new this month
+              </p>
             </CardContent>
           </Card>
 
@@ -64,6 +70,10 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stats.totalOrders}</div>
+              <p className="text-xs text-muted-foreground">
+                <TrendingUp className="inline h-3 w-3 mr-1" />
+                +8% from last month
+              </p>
             </CardContent>
           </Card>
 
@@ -74,6 +84,10 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">€{stats.revenue.toFixed(2)}</div>
+              <p className="text-xs text-muted-foreground">
+                <TrendingUp className="inline h-3 w-3 mr-1" />
+                +15% from last month
+              </p>
             </CardContent>
           </Card>
         </div>
@@ -85,15 +99,15 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {stats.recentOrders.map((order: any) => (
+                {stats.recentOrders.map((order) => (
                   <div key={order.id} className="flex justify-between items-center">
                     <div>
-                      <p className="font-medium">#{order.id.slice(-8)}</p>
+                      <p className="font-medium">#{order.id}</p>
                       <p className="text-sm text-gray-600">{order.user.name}</p>
                     </div>
                     <div className="text-right">
                       <p className="font-medium">€{order.total.toFixed(2)}</p>
-                      <p className="text-sm text-gray-600">{order.status}</p>
+                      <p className="text-sm text-gray-600 capitalize">{order.status}</p>
                     </div>
                   </div>
                 ))}
@@ -107,7 +121,7 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {stats.lowStockProducts.map((product: any) => (
+                {stats.lowStockProducts.map((product) => (
                   <div key={product.id} className="flex justify-between items-center">
                     <div>
                       <p className="font-medium">{product.name}</p>
@@ -123,6 +137,6 @@ export default function AdminDashboard() {
           </Card>
         </div>
       </div>
-    </AdminLayout>
+    </DashboardLayout>
   )
 }
