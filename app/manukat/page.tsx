@@ -8,8 +8,8 @@ import { ArrowLeft, Award, Shield } from "lucide-react"
 import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
-import PayPalButton from "@/components/paypal-button"
-import WhatsAppOrderButton from "@/components/whatsapp-order-button"
+import WhatsAppOrderButton from "@/components/whatsapp-order-button" // Using the new button
+import PokPayButton from "@/components/pokpay-button"
 
 export default function ManukatPage() {
   const brands = [
@@ -387,8 +387,9 @@ export default function ManukatPage() {
                               fill
                               className="object-contain group-hover:scale-110 transition-transform duration-700"
                             />
+                            {/* MGO Label: Circular badge at top-left with white text on a blue background */}
                             <Badge
-                              className={`absolute top-4 left-4 bg-gradient-to-r ${brand.color} text-white px-4 py-2 text-lg shadow-lg`}
+                              className={`absolute top-4 left-4 bg-blue-600 text-white px-4 py-2 text-lg shadow-lg rounded-full`}
                             >
                               MGO {product.mgo}
                             </Badge>
@@ -400,7 +401,7 @@ export default function ManukatPage() {
                           <CardContent className="p-6 flex flex-col flex-grow">
                             <div className="flex-grow">
                               <h3 className="font-bold text-xl mb-3 text-gray-900 group-hover:text-amber-600 transition-colors duration-300">
-                                {brand.name} MGO {product.mgo}
+                                {brand.name}
                               </h3>
                               <p className="text-gray-600 mb-4 leading-relaxed">
                                 Mjalte premium Manuka {variant.weight} me cilësi të lartë
@@ -430,12 +431,13 @@ export default function ManukatPage() {
                               </div>
 
                               {/* WhatsApp Order Button */}
-                              <WhatsAppOrderButton productName={variant.whatsappMessage} />
+                              <WhatsAppOrderButton productName={`${brand.name} MGO ${product.mgo} ${variant.weight}`} />
 
                               <div className="mt-4">
-                                <PayPalButton
+                                <PokPayButton
                                   productName={`${brand.name} MGO ${product.mgo} ${variant.weight}`}
                                   price={variant.price}
+                                  currency="ALL"
                                 />
                               </div>
                             </div>
