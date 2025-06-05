@@ -1,5 +1,5 @@
-import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import type { NextAuthOptions } from "next-auth"
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcryptjs"
 import prisma from "@/lib/prisma"
@@ -8,7 +8,7 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
-      name: "Credentials",
+      name: "credentials",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
@@ -18,29 +18,30 @@ export const authOptions: NextAuthOptions = {
           return null
         }
 
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
-        })
+        try {
+          const user = await prisma.user.findUnique({
+            where: { email: credentials.email },
+          })
 
-        if (!user) {
+          if (!user || !user.password) {
+            return null
+          }
+
+          const isPasswordValid = await bcrypt.compare(credentials.password, user.password)
+
+          if (!isPasswordValid) {
+            return null
+          }
+
+          return {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            role: user.role,
+          }
+        } catch (error) {
+          console.error("Auth error:", error)
           return null
-        }
-
-        if (!user.password) {
-          return null
-        }
-
-        const passwordMatch = await bcrypt.compare(credentials.password, user.password)
-
-        if (!passwordMatch) {
-          return null
-        }
-
-        return {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          role: user.role,
         }
       },
     }),
@@ -51,24 +52,21 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id
         token.role = user.role
       }
       return token
     },
     async session({ session, token }) {
       if (token && session.user) {
-        session.user.id = token.id as string
+        session.user.id = token.sub!
         session.user.role = token.role as string
       }
       return session
     },
   },
   pages: {
-    signIn: "/admin/login",
-    error: "/admin/login",
+    signIn: "/auth/signin",
+    signUp: "/auth/signup",
   },
   secret: process.env.NEXTAUTH_SECRET,
 }
-
-export default authOptions
