@@ -9,6 +9,7 @@ import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
 import WhatsAppOrderButton from "@/components/whatsapp-order-button"
+import PokPayButton from "@/components/pokpay-button"
 
 export default function ManukatPage() {
   const brands = [
@@ -430,6 +431,13 @@ export default function ManukatPage() {
 
                               {/* WhatsApp Order Button */}
                               <WhatsAppOrderButton productName={variant.whatsappMessage} />
+
+                              <div className="mt-4">
+                                <PokPayButton
+                                  productName={`${brand.name} MGO ${product.mgo} ${variant.weight}`}
+                                  price={variant.price}
+                                />
+                              </div>
                             </div>
                           </CardContent>
                         </Card>

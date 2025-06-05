@@ -8,6 +8,7 @@ import { ArrowLeft, Heart, Zap, Shield } from "lucide-react"
 import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
+import PokPayButton from "@/components/pokpay-button"
 import WhatsAppOrderButton from "@/components/whatsapp-order-button"
 
 export default function ProductsPage() {
@@ -206,6 +207,12 @@ export default function ProductsPage() {
 
                       {/* WhatsApp Order Button */}
                       <WhatsAppOrderButton productName={product.whatsappMessage} />
+
+                      {product.price && (
+                        <div className="mt-4">
+                          <PokPayButton productName={product.name} price={product.price} />
+                        </div>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
