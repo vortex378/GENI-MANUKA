@@ -8,8 +8,8 @@ import { ArrowLeft, Award, Shield } from "lucide-react"
 import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
-import PayPalButton from "@/components/paypal-button"
 import WhatsAppOrderButton from "@/components/whatsapp-order-button" // Using the new button
+import PokPayButton from "@/components/pokpay-button"
 
 export default function ManukatPage() {
   const brands = [
@@ -434,9 +434,10 @@ export default function ManukatPage() {
                               <WhatsAppOrderButton productName={`${brand.name} MGO ${product.mgo} ${variant.weight}`} />
 
                               <div className="mt-4">
-                                <PayPalButton
+                                <PokPayButton
                                   productName={`${brand.name} MGO ${product.mgo} ${variant.weight}`}
                                   price={variant.price}
+                                  currency="ALL"
                                 />
                               </div>
                             </div>
