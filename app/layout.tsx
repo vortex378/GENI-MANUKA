@@ -2,38 +2,27 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "@/components/providers/theme-provider"
-import { SessionProvider } from "next-auth/react"
-import { AuthProvider } from "@/contexts/auth-context"
-import { CartProvider } from "@/contexts/cart-context"
-import { Toaster } from "@/components/ui/sonner"
+import { ThemeProvider } from "@/components/theme-provider"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Manuka Honey - Premium Organic Honey",
-  description: "Premium organic Manuka honey from New Zealand",
+  title: "Manuka Bio Organik",
+  description: "Mjalte premium Manuka nga Zelanda e Re për shëndet dhe mirëqenie",
     generator: 'v0.dev'
 }
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="sq">
       <body className={inter.className}>
-        <SessionProvider>
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-            <AuthProvider>
-              <CartProvider>
-                {children}
-                <Toaster />
-              </CartProvider>
-            </AuthProvider>
-          </ThemeProvider>
-        </SessionProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

@@ -8,8 +8,8 @@ import { ArrowLeft, Heart, Zap, Shield } from "lucide-react"
 import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
+import PayPalButton from "@/components/paypal-button"
 import WhatsAppOrderButton from "@/components/whatsapp-order-button"
-import PokPayButton from "@/components/pokpay-button"
 
 export default function ProductsPage() {
   const supplements = [
@@ -210,7 +210,7 @@ export default function ProductsPage() {
 
                       {product.price && (
                         <div className="mt-4">
-                          <PokPayButton productName={product.name} price={product.price} currency="ALL" />
+                          <PayPalButton productName={product.name} price={product.price} />
                         </div>
                       )}
                     </div>
