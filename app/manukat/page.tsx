@@ -8,7 +8,6 @@ import { ArrowLeft, Award, Shield } from "lucide-react"
 import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
-import PayPalButton from "@/components/paypal-button"
 import WhatsAppOrderButton from "@/components/whatsapp-order-button"
 
 export default function ManukatPage() {
@@ -431,13 +430,6 @@ export default function ManukatPage() {
 
                               {/* WhatsApp Order Button */}
                               <WhatsAppOrderButton productName={variant.whatsappMessage} />
-
-                              <div className="mt-4">
-                                <PayPalButton
-                                  productName={`${brand.name} MGO ${product.mgo} ${variant.weight}`}
-                                  price={variant.price}
-                                />
-                              </div>
                             </div>
                           </CardContent>
                         </Card>
