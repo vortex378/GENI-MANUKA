@@ -8,8 +8,8 @@ import { ArrowLeft, Heart, Zap, Shield } from "lucide-react"
 import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
-import PokPayButton from "@/components/pokpay-button"
 import WhatsAppOrderButton from "@/components/whatsapp-order-button"
+import PageWrapper from "../page-wrapper"
 
 export default function ProductsPage() {
   const supplements = [
@@ -115,114 +115,104 @@ export default function ProductsPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50">
-      <Navigation />
+    <PageWrapper>
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50">
+        <Navigation />
 
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-100/30 to-orange-100/30">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-amber-200/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-200/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        </div>
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="flex items-center mb-8">
-            <Link
-              href="/"
-              className="flex items-center text-amber-600 hover:text-amber-700 group transition-colors duration-300"
-            >
-              <ArrowLeft className="h-5 w-5 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
-              Kthehu në Kryefaqe
-            </Link>
-          </AnimatedSection>
-
-          <AnimatedSection className="text-center mb-16">
-            <Badge className="mb-6 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-3 text-lg">
-              Suplementet Shëndetësore
-            </Badge>
-            <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Produktet Tona të
-              <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent block">
-                Shëndetit
-              </span>
-            </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Suplementet më të mira natyrore për shëndetin dhe mirëqenien tuaj
-            </p>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Products Grid */}
-      <section className="pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {supplements.map((product, index) => (
-              <AnimatedSection key={product.id} animation="scaleIn" delay={index * 50}>
-                <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-4 group border-0 bg-white/90 backdrop-blur-sm h-full flex flex-col">
-                  <div className="aspect-square relative overflow-hidden w-full">
-                    <Image
-                      src={product.image || "/placeholder.svg"}
-                      alt={product.name}
-                      fill
-                      className="object-contain group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div
-                      className={`absolute top-4 left-4 bg-gradient-to-r ${product.color} rounded-full p-3 shadow-lg`}
-                    >
-                      <product.icon className="h-6 w-6 text-white" />
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-
-                  <CardContent className="p-6 flex flex-col flex-grow">
-                    <div className="flex-grow">
-                      <h3 className="font-bold text-xl mb-3 text-gray-900 group-hover:text-green-600 transition-colors duration-300">
-                        {product.name}
-                      </h3>
-                      <p className="text-gray-600 mb-4 leading-relaxed">{product.description}</p>
-
-                      <div className="space-y-2 mb-6">
-                        {product.benefits.map((benefit, idx) => (
-                          <div key={idx} className="flex items-center text-sm text-gray-600">
-                            <div className={`w-2 h-2 bg-gradient-to-r ${product.color} rounded-full mr-2`}></div>
-                            {benefit}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="mt-auto">
-                      {product.price && (
-                        <div className="text-center mb-4">
-                          <span className="text-3xl font-bold text-green-600">{product.price} L</span>
-                        </div>
-                      )}
-
-                      {!product.price && (
-                        <div className="text-center mb-4">
-                          <span className="text-lg text-gray-500 italic">Çmimi do të publikohet së shpejti</span>
-                        </div>
-                      )}
-
-                      {/* WhatsApp Order Button */}
-                      <WhatsAppOrderButton productName={product.whatsappMessage} />
-
-                      {product.price && (
-                        <div className="mt-4">
-                          <PokPayButton productName={product.name} price={product.price} />
-                        </div>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              </AnimatedSection>
-            ))}
+        {/* Hero Section */}
+        <section className="pt-24 pb-16 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-100/30 to-orange-100/30">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-amber-200/20 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-200/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
           </div>
-        </div>
-      </section>
 
-      <WhatsAppButton />
-    </div>
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <AnimatedSection className="flex items-center mb-8">
+              <Link
+                href="/"
+                className="flex items-center text-amber-600 hover:text-amber-700 group transition-colors duration-300"
+              >
+                <ArrowLeft className="h-5 w-5 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
+                Kthehu në Kryefaqe
+              </Link>
+            </AnimatedSection>
+
+            <AnimatedSection className="text-center mb-16">
+              <Badge className="mb-6 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-3 text-lg">
+                Suplementet Shëndetësore
+              </Badge>
+              <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                Produktet Tona të
+                <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent block">
+                  Shëndetit
+                </span>
+              </h1>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Suplementet më të mira natyrore për shëndetin dhe mirëqenien tuaj
+              </p>
+            </AnimatedSection>
+          </div>
+        </section>
+
+        {/* Products Grid */}
+        <section className="pb-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {supplements.map((product, index) => (
+                <AnimatedSection key={product.id} animation="scaleIn" delay={index * 50}>
+                  <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-4 group border-0 bg-white/90 backdrop-blur-sm h-full flex flex-col">
+                    <div className="aspect-square relative overflow-hidden w-full">
+                      <Image
+                        src={product.image || "/placeholder.svg"}
+                        alt={product.name}
+                        fill
+                        className="object-contain group-hover:scale-110 transition-transform duration-700"
+                      />
+                      <div
+                        className={`absolute top-4 left-4 bg-gradient-to-r ${product.color} rounded-full p-3 shadow-lg`}
+                      >
+                        <product.icon className="h-6 w-6 text-white" />
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+
+                    <CardContent className="p-6 flex flex-col flex-grow">
+                      <div className="flex-grow">
+                        <h3 className="font-bold text-xl mb-3 text-gray-900 group-hover:text-green-600 transition-colors duration-300">
+                          {product.name}
+                        </h3>
+                        <p className="text-gray-600 mb-4 leading-relaxed">{product.description}</p>
+
+                        <div className="space-y-2 mb-6">
+                          {product.benefits.map((benefit, idx) => (
+                            <div key={idx} className="flex items-center text-sm text-gray-600">
+                              <div className={`w-2 h-2 bg-gradient-to-r ${product.color} rounded-full mr-2`}></div>
+                              {benefit}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="mt-auto">
+                        {product.price && (
+                          <div className="text-center mb-4">
+                            <span className="text-3xl font-bold text-green-600">{product.price} L</span>
+                          </div>
+                        )}
+
+                        {/* WhatsApp Order Button */}
+                        <WhatsAppOrderButton productName={product.whatsappMessage} />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </AnimatedSection>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <WhatsAppButton />
+      </div>
+    </PageWrapper>
   )
 }

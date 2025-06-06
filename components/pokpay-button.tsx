@@ -24,13 +24,16 @@ export default function PokPayButton({ productName, price }: PokPayButtonProps) 
 
       <Button
         onClick={handlePokPayPayment}
-        className="relative w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl rounded-xl border-0 h-12 text-base font-semibold"
+        className="relative w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl rounded-xl border-0 h-14 text-sm font-semibold"
       >
-        <div className="flex items-center justify-center gap-3">
-          <div className="bg-white/20 rounded-full p-1.5 backdrop-blur-sm">
-            <CreditCard className="h-4 w-4 text-white" />
+        <div className="flex flex-col items-center justify-center gap-1">
+          <div className="flex items-center gap-2">
+            <div className="bg-white/20 rounded-full p-1.5 backdrop-blur-sm">
+              <CreditCard className="h-4 w-4 text-white" />
+            </div>
+            <span>Blej me PokPay - {price} L</span>
           </div>
-          <span>Blej me PokPay - {price} L</span>
+          <span className="text-xs text-blue-100 font-medium">Eugeni Fama</span>
         </div>
 
         {/* Inner glow effect */}

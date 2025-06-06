@@ -9,7 +9,7 @@ import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
 import WhatsAppOrderButton from "@/components/whatsapp-order-button"
-import PokPayButton from "@/components/pokpay-button"
+import PageWrapper from "../page-wrapper"
 
 export default function ManukatPage() {
   const brands = [
@@ -34,7 +34,8 @@ export default function ManukatPage() {
             {
               weight: "250gr",
               price: 10000,
-              image: "https://m.media-amazon.com/images/I/71qcOQdK05L._AC_UF1000,1000_QL80_.jpg",
+              image:
+                "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_2841-BerNBWshVNeJ2GNGar0J6eBTSxPPV1.png",
               whatsappMessage: "Manuka Koru MGO 500+",
             },
           ],
@@ -312,146 +313,141 @@ export default function ManukatPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50">
-      <Navigation />
+    <PageWrapper>
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50">
+        <Navigation />
 
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-100/30 to-orange-100/30">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-amber-200/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-200/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        </div>
+        {/* Hero Section */}
+        <section className="pt-24 pb-16 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-100/30 to-orange-100/30">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-amber-200/20 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-200/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="flex items-center mb-8">
-            <Link
-              href="/"
-              className="flex items-center text-amber-600 hover:text-amber-700 group transition-colors duration-300"
-            >
-              <ArrowLeft className="h-5 w-5 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
-              Kthehu në Kryefaqe
-            </Link>
-          </AnimatedSection>
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <AnimatedSection className="flex items-center mb-8">
+              <Link
+                href="/"
+                className="flex items-center text-amber-600 hover:text-amber-700 group transition-colors duration-300"
+              >
+                <ArrowLeft className="h-5 w-5 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
+                Kthehu në Kryefaqe
+              </Link>
+            </AnimatedSection>
 
-          <AnimatedSection className="text-center mb-16">
-            <Badge className="mb-6 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 text-lg">
-              Marka Premium Manuka
-            </Badge>
-            <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Manukat
-              <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent block">
-                Premium
-              </span>
-            </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Zgjidhni nga markat më të njohura të mjaltit Manuka nga Zelanda e Re
-            </p>
-          </AnimatedSection>
-        </div>
-      </section>
+            <AnimatedSection className="text-center mb-16">
+              <Badge className="mb-6 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 text-lg">
+                Marka Premium Manuka
+              </Badge>
+              <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                Manukat
+                <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent block">
+                  Premium
+                </span>
+              </h1>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Zgjidhni nga markat më të njohura të mjaltit Manuka nga Zelanda e Re
+              </p>
+            </AnimatedSection>
+          </div>
+        </section>
 
-      {/* Brands Section */}
-      <section className="pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {brands.map((brand, brandIndex) => (
-            <div key={brand.name} className="mb-20">
-              <AnimatedSection className="text-center mb-12" delay={brandIndex * 100}>
-                <h2
-                  className={`text-4xl lg:text-5xl font-bold bg-gradient-to-r ${brand.color} bg-clip-text text-transparent mb-4`}
-                >
-                  {brand.name}
-                </h2>
-                <div className={`w-24 h-1 bg-gradient-to-r ${brand.color} mx-auto rounded-full`}></div>
-              </AnimatedSection>
+        {/* Brands Section */}
+        <section className="pb-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {brands.map((brand, brandIndex) => (
+              <div key={brand.name} className="mb-20">
+                <AnimatedSection className="text-center mb-12" delay={brandIndex * 100}>
+                  <h2
+                    className={`text-4xl lg:text-5xl font-bold bg-gradient-to-r ${brand.color} bg-clip-text text-transparent mb-4`}
+                  >
+                    {brand.name}
+                  </h2>
+                  <div className={`w-24 h-1 bg-gradient-to-r ${brand.color} mx-auto rounded-full`}></div>
+                </AnimatedSection>
 
-              {brand.products.map((product, productIndex) => (
-                <div key={product.mgo} className="mb-12">
-                  <AnimatedSection className="text-center mb-8" delay={brandIndex * 100 + productIndex * 50}>
-                    <Badge className={`bg-gradient-to-r ${brand.color} text-white px-6 py-2 text-lg mb-4`}>
-                      MGO {product.mgo}
-                    </Badge>
-                  </AnimatedSection>
+                {brand.products.map((product, productIndex) => (
+                  <div key={product.mgo} className="mb-12">
+                    <AnimatedSection className="text-center mb-8" delay={brandIndex * 100 + productIndex * 50}>
+                      <Badge className={`bg-gradient-to-r ${brand.color} text-white px-6 py-2 text-lg mb-4`}>
+                        MGO {product.mgo}
+                      </Badge>
+                    </AnimatedSection>
 
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {product.variants.map((variant, variantIndex) => (
-                      <AnimatedSection
-                        key={`${variant.weight}-${variant.price}`}
-                        animation="scaleIn"
-                        delay={brandIndex * 100 + productIndex * 50 + variantIndex * 30}
-                      >
-                        <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-4 group border-0 bg-white/90 backdrop-blur-sm h-full flex flex-col">
-                          <div className="aspect-square relative overflow-hidden w-full">
-                            <Image
-                              src={variant.image || "/placeholder.svg"}
-                              alt={`${brand.name} MGO ${product.mgo} ${variant.weight}`}
-                              fill
-                              className="object-contain group-hover:scale-110 transition-transform duration-700"
-                            />
-                            <Badge
-                              className={`absolute top-4 left-4 bg-gradient-to-r ${brand.color} text-white px-4 py-2 text-lg shadow-lg`}
-                            >
-                              MGO {product.mgo}
-                            </Badge>
-                            <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                              <Award className="h-5 w-5 text-amber-600" />
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {product.variants.map((variant, variantIndex) => (
+                        <AnimatedSection
+                          key={`${variant.weight}-${variant.price}`}
+                          animation="scaleIn"
+                          delay={brandIndex * 100 + productIndex * 50 + variantIndex * 30}
+                        >
+                          <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-4 group border-0 bg-white/90 backdrop-blur-sm h-full flex flex-col">
+                            <div className="aspect-square relative overflow-hidden w-full">
+                              <Image
+                                src={variant.image || "/placeholder.svg"}
+                                alt={`${brand.name} MGO ${product.mgo} ${variant.weight}`}
+                                fill
+                                className="object-contain group-hover:scale-110 transition-transform duration-700"
+                              />
+                              <Badge
+                                className={`absolute top-4 left-4 bg-gradient-to-r ${brand.color} text-white px-4 py-2 text-lg shadow-lg`}
+                              >
+                                MGO {product.mgo}
+                              </Badge>
+                              <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <Award className="h-5 w-5 text-amber-600" />
+                              </div>
                             </div>
-                          </div>
 
-                          <CardContent className="p-6 flex flex-col flex-grow">
-                            <div className="flex-grow">
-                              <h3 className="font-bold text-xl mb-3 text-gray-900 group-hover:text-amber-600 transition-colors duration-300">
-                                {brand.name} MGO {product.mgo}
-                              </h3>
-                              <p className="text-gray-600 mb-4 leading-relaxed">
-                                Mjalte premium Manuka {variant.weight} me cilësi të lartë
-                              </p>
+                            <CardContent className="p-6 flex flex-col flex-grow">
+                              <div className="flex-grow">
+                                <h3 className="font-bold text-xl mb-3 text-gray-900 group-hover:text-amber-600 transition-colors duration-300">
+                                  {brand.name} MGO {product.mgo}
+                                </h3>
+                                <p className="text-gray-600 mb-4 leading-relaxed">
+                                  Mjalte premium Manuka {variant.weight} me cilësi të lartë
+                                </p>
 
-                              <div className="flex items-center justify-between mb-4">
-                                <Badge variant="outline" className="border-amber-600 text-amber-600">
-                                  {variant.weight}
-                                </Badge>
-                                <div className="flex items-center text-green-600">
-                                  <Shield className="h-4 w-4 mr-1" />
-                                  <span className="text-sm font-medium">E Certifikuar</span>
+                                <div className="flex items-center justify-between mb-4">
+                                  <Badge variant="outline" className="border-amber-600 text-amber-600">
+                                    {variant.weight}
+                                  </Badge>
+                                  <div className="flex items-center text-green-600">
+                                    <Shield className="h-4 w-4 mr-1" />
+                                    <span className="text-sm font-medium">E Certifikuar</span>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
 
-                            <div className="mt-auto">
-                              <div className="text-center mb-4">
-                                {variant.isEuro ? (
-                                  <div>
-                                    <span className="text-3xl font-bold text-amber-600">{variant.euroPrice}€</span>
-                                    <p className="text-sm text-gray-500">({variant.price} L)</p>
-                                  </div>
-                                ) : (
-                                  <span className="text-3xl font-bold text-amber-600">{variant.price} L</span>
-                                )}
+                              <div className="mt-auto">
+                                <div className="text-center mb-4">
+                                  {variant.isEuro ? (
+                                    <div>
+                                      <span className="text-3xl font-bold text-amber-600">{variant.euroPrice}€</span>
+                                      <p className="text-sm text-gray-500">({variant.price} L)</p>
+                                    </div>
+                                  ) : (
+                                    <span className="text-3xl font-bold text-amber-600">{variant.price} L</span>
+                                  )}
+                                </div>
+
+                                {/* WhatsApp Order Button */}
+                                <WhatsAppOrderButton productName={variant.whatsappMessage} />
                               </div>
-
-                              {/* WhatsApp Order Button */}
-                              <WhatsAppOrderButton productName={variant.whatsappMessage} />
-
-                              <div className="mt-4">
-                                <PokPayButton
-                                  productName={`${brand.name} MGO ${product.mgo} ${variant.weight}`}
-                                  price={variant.price}
-                                />
-                              </div>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </AnimatedSection>
-                    ))}
+                            </CardContent>
+                          </Card>
+                        </AnimatedSection>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-      </section>
+                ))}
+              </div>
+            ))}
+          </div>
+        </section>
 
-      <WhatsAppButton />
-    </div>
+        <WhatsAppButton />
+      </div>
+    </PageWrapper>
   )
 }

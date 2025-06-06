@@ -5,7 +5,7 @@ import type React from "react"
 import { useEffect } from "react"
 import { usePathname } from "next/navigation"
 
-export default function PageWrapper({
+export default function ManukatLayout({
   children,
 }: {
   children: React.ReactNode
@@ -14,16 +14,7 @@ export default function PageWrapper({
 
   // Scroll to top on page navigation
   useEffect(() => {
-    // Use setTimeout to ensure the page has rendered
-    const timer = setTimeout(() => {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "instant",
-      })
-    }, 0)
-
-    return () => clearTimeout(timer)
+    window.scrollTo(0, 0)
   }, [pathname])
 
   return <>{children}</>
