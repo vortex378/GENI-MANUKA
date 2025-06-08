@@ -21,7 +21,6 @@ export default function Navigation() {
     { href: "/", label: "Kryefaqja" },
     { href: "/manukat", label: "Manukat" },
     { href: "/products", label: "Produktet" },
-    { href: "/about", label: "Rreth Nesh" },
     { href: "/benefits", label: "Përfitimet" },
     { href: "/contact", label: "Kontakti" },
   ]

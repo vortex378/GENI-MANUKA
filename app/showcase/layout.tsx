@@ -5,7 +5,7 @@ import type React from "react"
 import { useEffect } from "react"
 import { usePathname } from "next/navigation"
 
-export default function AboutLayout({
+export default function ShowcaseLayout({
   children,
 }: {
   children: React.ReactNode

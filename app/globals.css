@@ -374,3 +374,108 @@ img {
     grid-template-columns: 1fr;
   }
 }
+
+/* Enhanced Mobile Scrolling Styles */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth momentum scrolling for iOS */
+.scroll-smooth {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Touch manipulation for better mobile interaction */
+.touch-manipulation {
+  touch-action: manipulation;
+}
+
+/* Snap scrolling for better UX */
+@supports (scroll-snap-type: x mandatory) {
+  .snap-x {
+    scroll-snap-type: x mandatory;
+  }
+
+  .snap-start {
+    scroll-snap-align: start;
+  }
+
+  .snap-stop {
+    scroll-snap-stop: always;
+  }
+}
+
+/* Enhanced mobile card sizing */
+@media (max-width: 640px) {
+  .product-card-mobile {
+    min-width: 280px;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card-mobile {
+    min-width: 260px;
+    max-width: 300px;
+  }
+}
+
+/* Improved touch targets */
+@media (max-width: 768px) {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Better button spacing on mobile */
+  .mobile-button {
+    padding: 12px 16px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+
+/* Fade effect for scroll hints */
+.scroll-fade-right {
+  background: linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.8) 50%, white 100%);
+}
+
+.scroll-fade-left {
+  background: linear-gradient(to left, transparent 0%, rgba(255, 255, 255, 0.8) 50%, white 100%);
+}
+
+/* Performance optimizations for mobile */
+@media (max-width: 768px) {
+  .mobile-optimized {
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Reduce animations on mobile for better performance */
+  .reduce-motion {
+    animation-duration: 0.2s !important;
+    transition-duration: 0.2s !important;
+  }
+}
+
+/* Better focus states for accessibility */
+.focus-visible:focus-visible {
+  outline: 2px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+/* Improved scroll indicators */
+.scroll-indicator {
+  transition: all 0.3s ease;
+}
+
+.scroll-indicator.active {
+  background-color: #f59e0b;
+  transform: scale(1.2);
+}

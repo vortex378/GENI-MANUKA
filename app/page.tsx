@@ -1,16 +1,83 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Star, Leaf, Award, Shield, Instagram, ArrowRight, Sparkles } from "lucide-react"
+import { Leaf, Award, Shield, Instagram, ArrowRight, Sparkles, Crown } from "lucide-react"
 import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
+import LoadingScreen from "@/components/loading-screen"
+import ProductCardRow from "@/components/product-card-row"
+import ManukaKoruShowcase from "@/components/manuka-koru-showcase"
 import PageWrapper from "./page-wrapper"
 
 export default function HomePage() {
+  const [isLoading, setIsLoading] = useState(true)
+
+  const handleLoadingComplete = () => {
+    setIsLoading(false)
+  }
+
+  // Featured Products Data
+  const featuredProducts = [
+    {
+      id: "koru-300",
+      name: "Manuka Koru MGO 300+",
+      description: "Mjalte Manuka premium me përmbajtje të lartë antioksidantësh",
+      image: "https://m.media-amazon.com/images/I/71+la-DryjL.jpg",
+      mgoLevel: "MGO 300+",
+      brand: "KORU" as const,
+      isPremium: true,
+      price: 7500,
+      rating: 5,
+      whatsappMessage: "Manuka Koru MGO 300+",
+    },
+    {
+      id: "koru-500",
+      name: "Manuka Koru MGO 500+",
+      description: "Mjalte Manuka me aktivitet të lartë antibakterial",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_2841-BerNBWshVNeJ2GNGar0J6eBTSxPPV1.png",
+      mgoLevel: "MGO 500+",
+      brand: "KORU" as const,
+      isPremium: false,
+      price: 10000,
+      rating: 5,
+      whatsappMessage: "Manuka Koru MGO 500+",
+    },
+    {
+      id: "koru-800",
+      name: "Manuka Koru MGO 800+",
+      description: "Mjalte Manuka super premium për përdorim terapeutik",
+      image: "https://bioceuticals.co.uk/cdn/shop/products/koru800.jpg?v=1590247373",
+      mgoLevel: "MGO 800+",
+      brand: "KORU" as const,
+      isPremium: true,
+      price: 17000,
+      rating: 5,
+      whatsappMessage: "Manuka Koru MGO 800+",
+    },
+    {
+      id: "koru-1000",
+      name: "Manuka Koru MGO 1000+",
+      description: "Mjalte Manuka me koncentrim të lartë të vetive aktive",
+      image: "https://bioceuticals.co.uk/cdn/shop/products/koru1000.jpg?v=1590247497",
+      mgoLevel: "MGO 1000+",
+      brand: "KORU" as const,
+      isPremium: false,
+      price: 22000,
+      rating: 5,
+      whatsappMessage: "Manuka Koru MGO 1000+",
+    },
+  ]
+
+  if (isLoading) {
+    return <LoadingScreen onLoadingComplete={handleLoadingComplete} duration={3000} />
+  }
+
   return (
     <PageWrapper>
       <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50">
@@ -133,7 +200,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Featured Products */}
+        {/* Featured Products Row */}
         <section className="py-20 bg-gradient-to-br from-amber-50 to-orange-50 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full">
             <div className="absolute top-20 left-20 w-64 h-64 bg-amber-200/20 rounded-full blur-3xl animate-pulse"></div>
@@ -146,98 +213,37 @@ export default function HomePage() {
               <p className="text-xl text-gray-600">Varietetet më të popullarizuara të mjaltit tonë Manuka</p>
             </AnimatedSection>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  name: "MGO 400+ Mjalte Manuka",
-                  mgo: "400+",
-                  rating: 5,
-                  image: "https://manukahealth.shop/cdn/shop/products/mh-honey-mgo400_-500g-front-de.jpg?v=1717255689",
-                  description: "Ideal për përdorim të përditshëm dhe mbështetje imuniteti",
-                },
-                {
-                  name: "MGO 550+ Mjalte Manuka",
-                  mgo: "550+",
-                  rating: 5,
-                  image: "https://manukahealth.shop/cdn/shop/products/MH-Honey-MGO550_-500g-front-DE.jpg?v=1665054004",
-                  description: "Fuqi e shtuar për përfitime terapeutike",
-                },
-                {
-                  name: "MGO 850+ Mjalte Manuka",
-                  mgo: "850+",
-                  rating: 5,
-                  image: "https://neozealand.com/cdn/shop/files/DSC3887_600.png?v=1718807355",
-                  description: "Cilësi premium për entuziastët seriozë të shëndetit",
-                },
-              ].map((product, index) => (
-                <AnimatedSection key={index} animation="fadeInUp" delay={index * 50}>
-                  <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-4 group border-0 bg-white/80 backdrop-blur-sm">
-                    <div className="aspect-square relative overflow-hidden">
-                      <Image
-                        src={product.image || "/placeholder.svg"}
-                        alt={product.name}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                      <Badge className="absolute top-4 left-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white px-4 py-2 text-lg">
-                        MGO {product.mgo}
-                      </Badge>
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <CardContent className="p-8">
-                      <h3 className="font-bold text-xl mb-3 text-gray-900">{product.name}</h3>
-                      <p className="text-gray-600 mb-4 leading-relaxed">{product.description}</p>
-                      <div className="flex items-center mb-6">
-                        {[...Array(product.rating)].map((_, i) => (
-                          <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
-                        ))}
-                        <span className="ml-2 text-gray-600">(5.0)</span>
-                      </div>
-                      <div className="flex items-center justify-between mb-4">
-                        <Badge variant="outline" className="border-green-600 text-green-600 bg-green-50">
-                          <Shield className="h-3 w-3 mr-1" />E Certifikuar
-                        </Badge>
-                        <span className="text-xs text-gray-500">Cert: NZ-MH-{product.mgo.replace("+", "")}-2024</span>
-                      </div>
-                      <div className="relative group">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
-                        <Button
-                          className="relative w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-                          onClick={() =>
-                            window.open(
-                              "https://www.instagram.com/manuka_mjalte_albania_2014?igsh=MXB2NHA2OWtlamdsMA==",
-                              "_blank",
-                            )
-                          }
-                        >
-                          <Instagram className="mr-2 h-4 w-4" />
-                          Shiko në Instagram
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </AnimatedSection>
-              ))}
-            </div>
+            <AnimatedSection delay={200}>
+              <ProductCardRow products={featuredProducts} />
+            </AnimatedSection>
 
             <AnimatedSection className="text-center mt-12" delay={100}>
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="relative border-2 border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white px-8 py-4 text-lg transform hover:scale-105 transition-all duration-300 bg-white shadow-lg hover:shadow-xl"
-                >
-                  <Sparkles className="mr-2 h-5 w-5" />
-                  Dhe jo vetëm manuka...
-                </Button>
+                <Link href="/showcase">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="relative border-2 border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white px-8 py-4 text-lg transform hover:scale-105 transition-all duration-300 bg-white shadow-lg hover:shadow-xl"
+                  >
+                    <Crown className="mr-2 h-5 w-5" />
+                    Shiko Koleksionin Koru
+                  </Button>
+                </Link>
               </div>
             </AnimatedSection>
           </div>
         </section>
 
-        {/* Benefits Preview */}
+        {/* Manuka Koru Showcase */}
         <section className="py-20 bg-white relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ManukaKoruShowcase />
+          </div>
+        </section>
+
+        {/* Benefits Preview */}
+        <section className="py-20 bg-gradient-to-br from-green-50 to-emerald-50 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <AnimatedSection animation="fadeInLeft">
@@ -317,8 +323,8 @@ export default function HomePage() {
                   {[
                     { href: "/manukat", label: "Manukat" },
                     { href: "/products", label: "Produktet" },
-                    { href: "/about", label: "Rreth Nesh" },
                     { href: "/benefits", label: "Përfitimet" },
+                    { href: "/showcase", label: "Koleksioni Koru" },
                     { href: "/contact", label: "Kontakti" },
                   ].map((link) => (
                     <li key={link.href}>

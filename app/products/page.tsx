@@ -1,10 +1,11 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Heart, Zap, Shield } from "lucide-react"
+import { ArrowLeft, Heart, Zap, Shield, Search, Filter } from "lucide-react"
 import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
@@ -12,11 +13,16 @@ import WhatsAppOrderButton from "@/components/whatsapp-order-button"
 import PageWrapper from "../page-wrapper"
 
 export default function ProductsPage() {
+  const [searchTerm, setSearchTerm] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState("")
+  const [priceFilter, setPriceFilter] = useState("")
+
   const supplements = [
     {
       id: 1,
       name: "Kolagjen",
       price: 2500,
+      category: "Bukuria & Anti-aging",
       image: "https://www.vianaturalia.ro/wp-content/uploads/2018/10/Colagen-bovin-450x450.jpg",
       description: "Kolagjen i pastër për shëndetin e lëkurës dhe nyjeve",
       benefits: ["Përmirëson elasticitetin e lëkurës", "Mbështet shëndetin e nyjeve", "Anti-aging natyror"],
@@ -28,6 +34,7 @@ export default function ProductsPage() {
       id: 2,
       name: "Kolagjen Peptides MSM",
       price: 2500,
+      category: "Bukuria & Anti-aging",
       image: "https://www.vianaturalia.ro/wp-content/uploads/2018/07/Colagen-cu-MSM-3-450x450.jpg",
       description: "Kolagjen me MSM për përfitime të shtuar",
       benefits: ["Kolagjen + MSM", "Mbështetje e plotë e nyjeve", "Rikuperim më i shpejtë"],
@@ -39,6 +46,7 @@ export default function ProductsPage() {
       id: 3,
       name: "Vitamin C",
       price: 1500,
+      category: "Imuniteti",
       image: "https://intenson.pl/cdn/shop/files/witaminaC150_960x720.png?v=1739975165",
       description: "Vitamin C i pastër për sistemin imunitar",
       benefits: ["Forcim i imunitetit", "Antioksidant i fuqishëm", "Energji natyrore"],
@@ -50,6 +58,7 @@ export default function ProductsPage() {
       id: 4,
       name: "Spirulina",
       price: 1500,
+      category: "Superfood",
       image: "https://us-i.makeupstore.com/j/j2/j2izpwefxtxp.jpg",
       description: "Superfood i gjelbër me proteina të larta",
       benefits: ["I pasur me proteina", "Detoksifikim natyror", "Energji e qëndrueshme"],
@@ -61,6 +70,7 @@ export default function ProductsPage() {
       id: 5,
       name: "Vital Fibre",
       price: 1500,
+      category: "Tretja",
       image: "https://www.smakolyk.co.uk/wp-content/uploads/2025/01/21992.png",
       description: "Fibra vitale për shëndetin e tretjes",
       benefits: ["Përmirëson tretjen", "Mbështet shëndetin e zorrëve", "Kontroll i peshës"],
@@ -72,6 +82,7 @@ export default function ProductsPage() {
       id: 6,
       name: "Ksylitol Sheqeri Diabetik",
       price: 1200,
+      category: "Diabetikë",
       image: "https://intenson.pl/cdn/shop/files/ksylitolchinski500_1280x.png?v=1741183860",
       description: "Ëmbëlsues natyror për diabetikë",
       benefits: ["Pa kalori shtesë", "I sigurt për diabetikë", "Shije e ëmbël natyrore"],
@@ -83,6 +94,7 @@ export default function ProductsPage() {
       id: 7,
       name: "Magnez Aqua",
       price: 2500,
+      category: "Relaksim & Gjumi",
       image: "https://intenson.pl/cdn/shop/files/0_AQ_LOVELY_1280x.jpg?v=1720014976",
       description: "Magnez i lëngshëm për thithje të shpejtë",
       benefits: ["Relaksim i muskujve", "Përmirëson gjumin", "Mbështet sistemin nervor"],
@@ -94,6 +106,7 @@ export default function ProductsPage() {
       id: 8,
       name: "Shilajit Tableta",
       price: null,
+      category: "Energji & Vitalitet",
       image: "https://cdn.stolichki.ru/s/drugs/medium/96/9681_2.jpg",
       description: "Shilajit në formë tabletash për përdorim të lehtë",
       benefits: ["Energji natyrore", "Mbështetje imuniteti", "Minerale të pasura"],
@@ -105,6 +118,7 @@ export default function ProductsPage() {
       id: 9,
       name: "Shilajit Vazo",
       price: null,
+      category: "Energji & Vitalitet",
       image: "https://ekodlaciebie.pl/6560-thickbox_default/mumio-altajskie-30-gr.jpg",
       description: "Shilajit i pastër në vazo për dozim të saktë",
       benefits: ["Forma e pastër", "Dozim i kontrollueshëm", "Cilësi premium"],
@@ -113,6 +127,28 @@ export default function ProductsPage() {
       whatsappMessage: "Shilajit Vazo",
     },
   ]
+
+  // Get unique categories
+  const categories = [...new Set(supplements.map((product) => product.category))]
+
+  // Filter products based on search, category, and price
+  const filteredProducts = supplements.filter((product) => {
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.benefits.some((benefit) => benefit.toLowerCase().includes(searchTerm.toLowerCase()))
+
+    const matchesCategory = selectedCategory === "" || product.category === selectedCategory
+
+    const matchesPrice =
+      priceFilter === "" ||
+      (priceFilter === "low" && product.price && product.price <= 1500) ||
+      (priceFilter === "medium" && product.price && product.price > 1500 && product.price <= 2500) ||
+      (priceFilter === "high" && product.price && product.price > 2500) ||
+      (priceFilter === "contact" && !product.price)
+
+    return matchesSearch && matchesCategory && matchesPrice
+  })
 
   return (
     <PageWrapper>
@@ -147,9 +183,77 @@ export default function ProductsPage() {
                   Shëndetit
                 </span>
               </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
                 Suplementet më të mira natyrore për shëndetin dhe mirëqenien tuaj
               </p>
+
+              {/* Search and Filter Section */}
+              <div className="max-w-4xl mx-auto space-y-6">
+                {/* Search Bar */}
+                <div className="relative">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                  <input
+                    type="text"
+                    placeholder="Kërko produkte, përfitime ose përshkrime..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-12 pr-4 py-4 border border-amber-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white/80 backdrop-blur-sm text-lg"
+                  />
+                </div>
+
+                {/* Filters */}
+                <div className="flex flex-wrap justify-center gap-4">
+                  {/* Category Filter */}
+                  <div className="relative">
+                    <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                    <select
+                      value={selectedCategory}
+                      onChange={(e) => setSelectedCategory(e.target.value)}
+                      className="pl-10 pr-8 py-3 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white/80 backdrop-blur-sm appearance-none cursor-pointer"
+                    >
+                      <option value="">Të gjitha kategoritë</option>
+                      {categories.map((category) => (
+                        <option key={category} value={category}>
+                          {category}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Price Filter */}
+                  <select
+                    value={priceFilter}
+                    onChange={(e) => setPriceFilter(e.target.value)}
+                    className="px-4 py-3 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white/80 backdrop-blur-sm appearance-none cursor-pointer"
+                  >
+                    <option value="">Të gjitha çmimet</option>
+                    <option value="low">Deri në 1500 L</option>
+                    <option value="medium">1500 - 2500 L</option>
+                    <option value="high">Mbi 2500 L</option>
+                    <option value="contact">Kontaktoni për çmim</option>
+                  </select>
+
+                  {/* Clear Filters */}
+                  {(searchTerm || selectedCategory || priceFilter) && (
+                    <button
+                      onClick={() => {
+                        setSearchTerm("")
+                        setSelectedCategory("")
+                        setPriceFilter("")
+                      }}
+                      className="px-6 py-3 bg-amber-500 text-white rounded-xl hover:bg-amber-600 transition-colors font-medium"
+                    >
+                      Pastro filtrat
+                    </button>
+                  )}
+                </div>
+
+                {/* Results Count */}
+                <div className="text-gray-600">
+                  {filteredProducts.length} produkt{filteredProducts.length !== 1 ? "e" : ""} u gjet
+                  {filteredProducts.length !== 1 ? "ën" : ""}
+                </div>
+              </div>
             </AnimatedSection>
           </div>
         </section>
@@ -157,57 +261,83 @@ export default function ProductsPage() {
         {/* Products Grid */}
         <section className="pb-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {supplements.map((product, index) => (
-                <AnimatedSection key={product.id} animation="scaleIn" delay={index * 50}>
-                  <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-4 group border-0 bg-white/90 backdrop-blur-sm h-full flex flex-col">
-                    <div className="aspect-square relative overflow-hidden w-full">
-                      <Image
-                        src={product.image || "/placeholder.svg"}
-                        alt={product.name}
-                        fill
-                        className="object-contain group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <div
-                        className={`absolute top-4 left-4 bg-gradient-to-r ${product.color} rounded-full p-3 shadow-lg`}
-                      >
-                        <product.icon className="h-6 w-6 text-white" />
-                      </div>
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-
-                    <CardContent className="p-6 flex flex-col flex-grow">
-                      <div className="flex-grow">
-                        <h3 className="font-bold text-xl mb-3 text-gray-900 group-hover:text-green-600 transition-colors duration-300">
-                          {product.name}
-                        </h3>
-                        <p className="text-gray-600 mb-4 leading-relaxed">{product.description}</p>
-
-                        <div className="space-y-2 mb-6">
-                          {product.benefits.map((benefit, idx) => (
-                            <div key={idx} className="flex items-center text-sm text-gray-600">
-                              <div className={`w-2 h-2 bg-gradient-to-r ${product.color} rounded-full mr-2`}></div>
-                              {benefit}
-                            </div>
-                          ))}
+            {filteredProducts.length > 0 ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {filteredProducts.map((product, index) => (
+                  <AnimatedSection key={product.id} animation="scaleIn" delay={index * 50}>
+                    <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-4 group border-0 bg-white/90 backdrop-blur-sm h-full flex flex-col">
+                      <div className="aspect-square relative overflow-hidden w-full">
+                        <Image
+                          src={product.image || "/placeholder.svg"}
+                          alt={product.name}
+                          fill
+                          className="object-contain group-hover:scale-110 transition-transform duration-700"
+                        />
+                        <div
+                          className={`absolute top-4 left-4 bg-gradient-to-r ${product.color} rounded-full p-3 shadow-lg`}
+                        >
+                          <product.icon className="h-6 w-6 text-white" />
                         </div>
+                        <Badge className="absolute top-4 right-4 bg-white/90 text-gray-700 px-3 py-1 text-sm">
+                          {product.category}
+                        </Badge>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </div>
 
-                      <div className="mt-auto">
-                        {product.price && (
-                          <div className="text-center mb-4">
-                            <span className="text-3xl font-bold text-green-600">{product.price} L</span>
+                      <CardContent className="p-6 flex flex-col flex-grow">
+                        <div className="flex-grow">
+                          <h3 className="font-bold text-xl mb-3 text-gray-900 group-hover:text-green-600 transition-colors duration-300">
+                            {product.name}
+                          </h3>
+                          <p className="text-gray-600 mb-4 leading-relaxed">{product.description}</p>
+
+                          <div className="space-y-2 mb-6">
+                            {product.benefits.map((benefit, idx) => (
+                              <div key={idx} className="flex items-center text-sm text-gray-600">
+                                <div
+                                  className={`w-2 h-2 bg-gradient-to-r ${product.color} rounded-full mr-2 flex-shrink-0`}
+                                ></div>
+                                {benefit}
+                              </div>
+                            ))}
                           </div>
-                        )}
+                        </div>
 
-                        {/* WhatsApp Order Button */}
-                        <WhatsAppOrderButton productName={product.whatsappMessage} />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </AnimatedSection>
-              ))}
-            </div>
+                        <div className="mt-auto">
+                          {product.price ? (
+                            <div className="text-center mb-4">
+                              <span className="text-3xl font-bold text-green-600">{product.price} L</span>
+                            </div>
+                          ) : (
+                            <div className="text-center mb-4">
+                              <span className="text-lg font-medium text-amber-600">Kontaktoni për çmim</span>
+                            </div>
+                          )}
+
+                          <WhatsAppOrderButton productName={product.whatsappMessage} />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </AnimatedSection>
+                ))}
+              </div>
+            ) : (
+              <AnimatedSection className="text-center py-20">
+                <div className="text-gray-500 text-xl mb-4">
+                  Nuk u gjetën produkte që përputhen me kriteret e kërkimit.
+                </div>
+                <button
+                  onClick={() => {
+                    setSearchTerm("")
+                    setSelectedCategory("")
+                    setPriceFilter("")
+                  }}
+                  className="px-6 py-3 bg-amber-500 text-white rounded-full hover:bg-amber-600 transition-colors"
+                >
+                  Pastro të gjitha filtrat
+                </button>
+              </AnimatedSection>
+            )}
           </div>
         </section>
 

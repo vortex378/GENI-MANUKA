@@ -211,8 +211,8 @@ export default function BenefitsPage() {
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-amber-400 to-orange-400 rounded-3xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
                   <Image
-                    src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3"
-                    alt="Kërkimi shkencor mbi mjaltën Manuka"
+                    src="https://images.unsplash.com/photo-1576671081837-49000212a370?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3"
+                    alt="Laborator kërkimi për mjaltën Manuka"
                     width={600}
                     height={600}
                     className="relative rounded-3xl shadow-2xl transform group-hover:scale-105 transition-transform duration-300 object-cover"
