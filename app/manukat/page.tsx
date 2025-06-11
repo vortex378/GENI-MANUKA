@@ -5,11 +5,11 @@ import Image from "next/image"
 import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Award, Shield, Search, Star, Zap, Crown } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { ArrowLeft, Search, Star, Crown, MessageCircle } from "lucide-react"
 import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
-import WhatsAppOrderButton from "@/components/whatsapp-order-button"
 import BrandFilter from "@/components/brand-filter"
 import PageWrapper from "../page-wrapper"
 
@@ -20,335 +20,270 @@ export default function ManukatPage() {
   const brands = [
     {
       name: "Manuka Koru",
-      color: "from-emerald-500 to-teal-500",
-      priority: 1, // Highest priority for featured display
+      color: "from-blue-500 to-indigo-500",
+      priority: 1,
       products: [
         {
+          id: "koru-300",
           mgo: "300+",
-          featured: true,
-          inDemand: false,
-          variants: [
-            {
-              weight: "250gr",
-              price: 7500,
-              image: "https://m.media-amazon.com/images/I/71+la-DryjL.jpg",
-              whatsappMessage: "Manuka Koru MGO 300+",
-              description: "Mjalte Manuka premium me përmbajtje të lartë antioksidantësh",
-              rating: 5,
-            },
-          ],
+          name: "Manuka Koru MGO 300+",
+          description: "Mjalte Manuka premium me përmbajtje të lartë antioksidantësh",
+          image: "https://m.media-amazon.com/images/I/71+la-DryjL.jpg",
+          price: 7500,
+          weight: "250gr",
+          isPremium: true,
+          whatsappMessage: "Manuka Koru MGO 300+",
         },
         {
+          id: "koru-500",
           mgo: "500+",
-          featured: false,
-          inDemand: true,
-          variants: [
-            {
-              weight: "250gr",
-              price: 10000,
-              image:
-                "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_2841-BerNBWshVNeJ2GNGar0J6eBTSxPPV1.png",
-              whatsappMessage: "Manuka Koru MGO 500+",
-              description: "Mjalte Manuka me aktivitet të lartë antibakterial",
-              rating: 5,
-            },
-          ],
+          name: "Manuka Koru MGO 500+",
+          description: "Mjalte Manuka me aktivitet të lartë antibakterial",
+          image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_2841-BerNBWshVNeJ2GNGar0J6eBTSxPPV1.png",
+          price: 10000,
+          weight: "250gr",
+          isPremium: false,
+          whatsappMessage: "Manuka Koru MGO 500+",
         },
         {
+          id: "koru-800",
           mgo: "800+",
-          featured: true,
-          inDemand: true,
-          variants: [
-            {
-              weight: "250gr",
-              price: 17000,
-              image: "https://bioceuticals.co.uk/cdn/shop/products/koru800.jpg?v=1590247373",
-              whatsappMessage: "Manuka Koru MGO 800+",
-              description: "Mjalte Manuka super premium për përdorim terapeutik",
-              rating: 5,
-            },
-          ],
+          name: "Manuka Koru MGO 800+",
+          description: "Mjalte Manuka super premium për përdorim terapeutik",
+          image: "https://bioceuticals.co.uk/cdn/shop/products/koru800.jpg?v=1590247373",
+          price: 17000,
+          weight: "250gr",
+          isPremium: true,
+          whatsappMessage: "Manuka Koru MGO 800+",
         },
         {
+          id: "koru-1000",
           mgo: "1000+",
-          featured: true,
-          inDemand: false,
-          variants: [
-            {
-              weight: "250gr",
-              price: 22000,
-              image: "https://bioceuticals.co.uk/cdn/shop/products/koru1000.jpg?v=1590247497",
-              whatsappMessage: "Manuka Koru MGO 1000+",
-              description: "Mjalte Manuka me koncentrim të lartë të vetive aktive",
-              rating: 5,
-            },
-          ],
+          name: "Manuka Koru MGO 1000+",
+          description: "Mjalte Manuka me koncentrim të lartë të vetive aktive",
+          image: "https://bioceuticals.co.uk/cdn/shop/products/koru1000.jpg?v=1590247497",
+          price: 22000,
+          weight: "250gr",
+          isPremium: true,
+          whatsappMessage: "Manuka Koru MGO 1000+",
         },
         {
+          id: "koru-1200",
           mgo: "1200+",
-          featured: true,
-          inDemand: false,
-          variants: [
-            {
-              weight: "250gr",
-              price: 33000,
-              image: "https://m.media-amazon.com/images/I/71pEIvPrnDL.jpg",
-              whatsappMessage: "Manuka Koru MGO 1200+",
-              description: "Mjalte Manuka ultra premium me fuqi maksimale",
-              rating: 5,
-            },
-          ],
+          name: "Manuka Koru MGO 1200+",
+          description: "Mjalte Manuka luksoze me veti të jashtëzakonshme",
+          image: "https://m.media-amazon.com/images/I/71pEIvPrnDL.jpg",
+          price: 33000,
+          weight: "250gr",
+          isPremium: true,
+          whatsappMessage: "Manuka Koru MGO 1200+",
         },
         {
+          id: "koru-1500",
           mgo: "1500+",
-          featured: true,
-          inDemand: false,
-          variants: [
-            {
-              weight: "250gr",
-              price: 110000,
-              image: "https://caresoul.in/cdn/shop/files/Koru1500_3_1024x1024.png?v=1742383386",
-              isEuro: true,
-              euroPrice: 1100,
-              whatsappMessage: "Manuka Koru MGO 1500+",
-              description: "Mjalte Manuka ekskluzive me cilësi të jashtëzakonshme",
-              rating: 5,
-            },
-          ],
+          name: "Manuka Koru MGO 1500+",
+          description: "Mjalte Manuka ekskluzive me cilësinë më të lartë",
+          image: "https://caresoul.in/cdn/shop/files/Koru1500_3_1024x1024.png?v=1742383386",
+          price: 110000,
+          euroPrice: 1100,
+          isEuro: true,
+          weight: "250gr",
+          isPremium: true,
+          whatsappMessage: "Manuka Koru MGO 1500+",
         },
         {
+          id: "koru-1959",
           mgo: "1959+",
-          featured: true,
-          inDemand: false,
-          variants: [
-            {
-              weight: "250gr",
-              price: 220000,
-              image: "https://manukahoneyofnz.com/cdn/shop/files/MH-Website-Images-KORU1959_2_1200x.png?v=1712528245",
-              isEuro: true,
-              euroPrice: 2200,
-              whatsappMessage: "Manuka Koru MGO 1959+",
-              description: "Mjalte Manuka më e fuqishme në botë",
-              rating: 5,
-            },
-          ],
+          name: "Manuka Koru MGO 1959+",
+          description: "Koleksioni më i rrallë - mjalte Manuka më e fuqishme në botë",
+          image: "https://manukahoneyofnz.com/cdn/shop/files/MH-Website-Images-KORU1959_2_1200x.png?v=1712528245",
+          price: 220000,
+          euroPrice: 2200,
+          isEuro: true,
+          weight: "250gr",
+          isPremium: true,
+          whatsappMessage: "Manuka Koru MGO 1959+",
         },
       ],
     },
     {
       name: "Manuka NUI",
-      color: "from-yellow-500 to-orange-500",
+      color: "from-green-500 to-emerald-500",
       priority: 2,
       products: [
         {
+          id: "nui-100-250",
           mgo: "100+",
-          featured: false,
-          inDemand: false,
-          variants: [
-            {
-              weight: "250gr",
-              price: 3000,
-              image: "https://neozealand.com/cdn/shop/files/DSC3887_100.jpg?v=1718806711",
-              whatsappMessage: "Manuka NUI MGO 100+ 250g",
-              description: "Madhësi familjare për përdorim të përditshëm",
-              rating: 5,
-            },
-            {
-              weight: "500gr",
-              price: 5500,
-              image: "https://m.media-amazon.com/images/I/51hv3OL8NUL.jpg",
-              whatsappMessage: "Manuka NUI MGO 100+ 500g",
-              description: "Madhësi familjare për përdorim të përditshëm",
-              rating: 5,
-            },
-          ],
+          name: "Manuka NUI MGO 100+",
+          description: "Mjalte Manuka ideale për përdorim të përditshëm",
+          image: "https://neozealand.com/cdn/shop/files/DSC3887_100.jpg?v=1718806711",
+          price: 3000,
+          weight: "250gr",
+          isPremium: false,
+          whatsappMessage: "Manuka NUI MGO 100+ 250g",
         },
         {
+          id: "nui-100-500",
+          mgo: "100+",
+          name: "Manuka NUI MGO 100+",
+          description: "Madhësi familjare për përdorim të përditshëm",
+          image: "https://m.media-amazon.com/images/I/51hv3OL8NUL.jpg",
+          price: 5500,
+          weight: "500gr",
+          isPremium: false,
+          whatsappMessage: "Manuka NUI MGO 100+ 500g",
+        },
+        {
+          id: "nui-250-250",
           mgo: "250+",
-          featured: false,
-          inDemand: false,
-          variants: [
-            {
-              weight: "250gr",
-              price: 3500,
-              image:
-                "https://neozealand.com/cdn/shop/files/s-l1600_4_192aa3f2-472d-470f-b2f9-f2c4fb692a00.jpg?v=1709631267",
-              whatsappMessage: "Manuka NUI MGO 250+ 250gr",
-              description: "Mjalte Manuka me aktivitet të fortë",
-              rating: 5,
-            },
-            {
-              weight: "500gr",
-              price: 6500,
-              image: "https://m.media-amazon.com/images/I/61VPEnQQBYL._AC_UF1000,1000_QL80_.jpg",
-              whatsappMessage: "Manuka NUI MGO 250+ 500gr",
-              description: "Madhësi familjare me aktivitet të fortë",
-              rating: 5,
-            },
-          ],
+          name: "Manuka NUI MGO 250+",
+          description: "Mjalte Manuka me aktivitet të fortë",
+          image:
+            "https://neozealand.com/cdn/shop/files/s-l1600_4_192aa3f2-472d-470f-b2f9-f2c4fb692a00.jpg?v=1709631267",
+          price: 3500,
+          weight: "250gr",
+          isPremium: false,
+          whatsappMessage: "Manuka NUI MGO 250+ 250gr",
         },
         {
+          id: "nui-250-500",
+          mgo: "250+",
+          name: "Manuka NUI MGO 250+",
+          description: "Madhësi familjare me aktivitet të fortë",
+          image: "https://m.media-amazon.com/images/I/61VPEnQQBYL._AC_UF1000,1000_QL80_.jpg",
+          price: 6500,
+          weight: "500gr",
+          isPremium: false,
+          whatsappMessage: "Manuka NUI MGO 250+ 500gr",
+        },
+        {
+          id: "nui-400-250",
           mgo: "400+",
-          featured: true,
-          inDemand: false,
-          variants: [
-            {
-              weight: "250gr",
-              price: 5000,
-              image: "https://suztain.no/cdn/shop/files/2_7bec0993-af0d-4918-bf94-78353c3f9a41.jpg?v=1734095461",
-              whatsappMessage: "Manuka NUI MGO 400+ 250gr",
-              description: "Mjalte Manuka me aktivitet të fortë",
-              rating: 5,
-            },
-            {
-              weight: "500gr",
-              price: 9500,
-              image: "https://m.media-amazon.com/images/I/61IfN4YbhyL._AC_UF1000,1000_QL80_.jpg",
-              whatsappMessage: "Manuka NUI MGO 400+ 500gr",
-              description: "Madhësi familjare me aktivitet të fortë",
-              rating: 5,
-            },
-          ],
+          name: "Manuka NUI MGO 400+",
+          description: "Mjalte Manuka me aktivitet të fortë",
+          image: "https://suztain.no/cdn/shop/files/2_7bec0993-af0d-4918-bf94-78353c3f9a41.jpg?v=1734095461",
+          price: 5000,
+          weight: "250gr",
+          isPremium: true,
+          whatsappMessage: "Manuka NUI MGO 400+ 250gr",
         },
         {
+          id: "nui-400-500",
+          mgo: "400+",
+          name: "Manuka NUI MGO 400+",
+          description: "Madhësi familjare me aktivitet të fortë",
+          image: "https://m.media-amazon.com/images/I/61IfN4YbhyL._AC_UF1000,1000_QL80_.jpg",
+          price: 9500,
+          weight: "500gr",
+          isPremium: true,
+          whatsappMessage: "Manuka NUI MGO 400+ 500gr",
+        },
+        {
+          id: "nui-600-250",
           mgo: "600+",
-          featured: false,
-          inDemand: false,
-          variants: [
-            {
-              weight: "250gr",
-              price: 7800,
-              image: "https://neozealand.com/cdn/shop/files/DSC3887_600.png?v=1718807355",
-              whatsappMessage: "Manuka NUI MGO 600+ 250gr",
-              description: "Mjalte Manuka me aktivitet të lartë",
-              rating: 5,
-            },
-            {
-              weight: "500gr",
-              price: 15000,
-              image: "https://neozealand.com/cdn/shop/files/DSC3880_600.png?v=1718807355",
-              whatsappMessage: "Manuka NUI MGO 600+ 500gr",
-              description: "Madhësi familjare me aktivitet të lartë",
-              rating: 5,
-            },
-          ],
+          name: "Manuka NUI MGO 600+",
+          description: "Mjalte Manuka me aktivitet të lartë",
+          image: "https://neozealand.com/cdn/shop/files/DSC3887_600.png?v=1718807355",
+          price: 7800,
+          weight: "250gr",
+          isPremium: true,
+          whatsappMessage: "Manuka NUI MGO 600+ 250gr",
+        },
+        {
+          id: "nui-600-500",
+          mgo: "600+",
+          name: "Manuka NUI MGO 600+",
+          description: "Madhësi familjare me aktivitet të lartë",
+          image: "https://neozealand.com/cdn/shop/files/DSC3880_600.png?v=1718807355",
+          price: 15000,
+          weight: "500gr",
+          isPremium: true,
+          whatsappMessage: "Manuka NUI MGO 600+ 500gr",
         },
       ],
     },
     {
       name: "Manuka Health",
-      color: "from-blue-500 to-indigo-500",
+      color: "from-indigo-500 to-purple-500",
       priority: 3,
       products: [
         {
+          id: "health-100-250",
           mgo: "100+",
-          featured: false,
-          inDemand: false,
-          variants: [
-            {
-              weight: "250gr",
-              price: 3800,
-              image:
-                "https://manukahealth.shop/cdn/shop/products/MH-Honey-MGO100_-250g-front-DE_grande.jpg?v=1658158893",
-              whatsappMessage: "Manuka Health MGO 100+ 250gr",
-              description: "Mjalte Manuka për përdorim të përditshëm",
-              rating: 5,
-            },
-            {
-              weight: "500gr",
-              price: 6500,
-              image: "https://manukahealth.shop/cdn/shop/products/MH-Honey-MGO100_-500g-front-DE.jpg?v=1658515140",
-              whatsappMessage: "Manuka Health MGO 100+ 500gr",
-              description: "Madhësi familjare për përdorim të përditshëm",
-              rating: 5,
-            },
-            {
-              weight: "1kg",
-              price: 12000,
-              image: "https://manukahealth.shop/cdn/shop/products/MH-Honey-MGO100_-1kg-front-DE.jpg?v=1658515140",
-              whatsappMessage: "Manuka Health MGO 100+ 1kg",
-              description: "Madhësi e madhe për familje",
-              rating: 5,
-            },
-          ],
+          name: "Manuka Health MGO 100+",
+          description: "Mjalte Manuka për përdorim të përditshëm",
+          image: "https://manukahealth.shop/cdn/shop/products/MH-Honey-MGO100_-250g-front-DE_grande.jpg?v=1658158893",
+          price: 3800,
+          weight: "250gr",
+          isPremium: false,
+          whatsappMessage: "Manuka Health MGO 100+ 250gr",
         },
         {
+          id: "health-100-500",
+          mgo: "100+",
+          name: "Manuka Health MGO 100+",
+          description: "Madhësi familjare për përdorim të përditshëm",
+          image: "https://manukahealth.shop/cdn/shop/products/MH-Honey-MGO100_-500g-front-DE.jpg?v=1658515140",
+          price: 6500,
+          weight: "500gr",
+          isPremium: false,
+          whatsappMessage: "Manuka Health MGO 100+ 500gr",
+        },
+        {
+          id: "health-100-1kg",
+          mgo: "100+",
+          name: "Manuka Health MGO 100+",
+          description: "Madhësi e madhe për familje",
+          image: "https://manukahealth.shop/cdn/shop/products/MH-Honey-MGO100_-1kg-front-DE.jpg?v=1658515140",
+          price: 12000,
+          weight: "1kg",
+          isPremium: false,
+          whatsappMessage: "Manuka Health MGO 100+ 1kg",
+        },
+        {
+          id: "health-250-250",
           mgo: "250+",
-          featured: true,
-          inDemand: false,
-          variants: [
-            {
-              weight: "250gr",
-              price: 4500,
-              image:
-                "https://digitalcontent.api.tesco.com/v2/media/marketplace/479e576f-1fdf-4e1e-a5f1-043d53f4223a/I4N9uuryz_ynEx63lZcFOBLY8_1118806194.jpeg?h=960&w=960",
-              whatsappMessage: "Manuka Health MGO 250+ 250gr",
-              description: "Mjalte Manuka me aktivitet të mirë",
-              rating: 5,
-            },
-            {
-              weight: "500gr",
-              price: 7500,
-              image: "https://manukahealth.shop/cdn/shop/products/mh-honey-mgo250_-500g-front-de.jpg?v=1700054298",
-              whatsappMessage: "Manuka Health MGO 250+ 500gr",
-              description: "Madhësi familjare me aktivitet të mirë",
-              rating: 5,
-            },
-            {
-              weight: "1kg",
-              price: 14000,
-              image: "https://m.media-amazon.com/images/I/61jLQZHAS9L.jpg",
-              whatsappMessage: "Manuka Health MGO 250+ 1kg",
-              description: "Madhësi e madhe për familje",
-              rating: 5,
-            },
-          ],
+          name: "Manuka Health MGO 250+",
+          description: "Mjalte Manuka me aktivitet të mirë",
+          image:
+            "https://digitalcontent.api.tesco.com/v2/media/marketplace/479e576f-1fdf-4e1e-a5f1-043d53f4223a/I4N9uuryz_ynEx63lZcFOBLY8_1118806194.jpeg?h=960&w=960",
+          price: 4500,
+          weight: "250gr",
+          isPremium: true,
+          whatsappMessage: "Manuka Health MGO 250+ 250gr",
         },
         {
+          id: "health-250-500",
+          mgo: "250+",
+          name: "Manuka Health MGO 250+",
+          description: "Madhësi familjare me aktivitet të mirë",
+          image: "https://manukahealth.shop/cdn/shop/products/mh-honey-mgo250_-500g-front-de.jpg?v=1700054298",
+          price: 7500,
+          weight: "500gr",
+          isPremium: true,
+          whatsappMessage: "Manuka Health MGO 250+ 500gr",
+        },
+        {
+          id: "health-400-250",
           mgo: "400+",
-          featured: false,
-          inDemand: false,
-          variants: [
-            {
-              weight: "250gr",
-              price: 6500,
-              image: "https://m.media-amazon.com/images/I/61rMDpbr6KL.jpg",
-              whatsappMessage: "Manuka Health MGO 400+ 250gr",
-              description: "Mjalte Manuka me aktivitet të lartë",
-              rating: 5,
-            },
-            {
-              weight: "500gr",
-              price: 13000,
-              image: "https://manukahealth.shop/cdn/shop/products/mh-honey-mgo400_-500g-front-de.jpg?v=1717255689",
-              whatsappMessage: "Manuka Health MGO 400+ 500gr",
-              description: "Madhësi familjare me aktivitet të lartë",
-              rating: 5,
-            },
-          ],
+          name: "Manuka Health MGO 400+",
+          description: "Mjalte Manuka me aktivitet të lartë",
+          image: "https://m.media-amazon.com/images/I/61rMDpbr6KL.jpg",
+          price: 6500,
+          weight: "250gr",
+          isPremium: true,
+          whatsappMessage: "Manuka Health MGO 400+ 250gr",
         },
         {
+          id: "health-550-250",
           mgo: "550+",
-          featured: false,
-          inDemand: false,
-          variants: [
-            {
-              weight: "250gr",
-              price: 9000,
-              image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgWwEziLn4fdq7YKeC4DrB5jS9aQ6sjcwsVg&s",
-              whatsappMessage: "Manuka Health MGO 550+ 250gr",
-              description: "Mjalte Manuka me aktivitet të fortë",
-              rating: 5,
-            },
-            {
-              weight: "500gr",
-              price: 16500,
-              image: "https://manukahealth.shop/cdn/shop/products/MH-Honey-MGO550_-500g-front-DE.jpg?v=1665054004",
-              whatsappMessage: "Manuka Health MGO 550+ 500gr",
-              description: "Madhësi familjare me aktivitet të fortë",
-              rating: 5,
-            },
-          ],
+          name: "Manuka Health MGO 550+",
+          description: "Mjalte Manuka me aktivitet të fortë",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgWwEziLn4fdq7YKeC4DrB5jS9aQ6sjcwsVg&s",
+          price: 9000,
+          weight: "250gr",
+          isPremium: true,
+          whatsappMessage: "Manuka Health MGO 550+ 250gr",
         },
       ],
     },
@@ -358,58 +293,48 @@ export default function ManukatPage() {
       priority: 4,
       products: [
         {
+          id: "melora-70",
           mgo: "70+",
-          featured: false,
-          inDemand: false,
-          variants: [
-            {
-              weight: "330gr",
-              price: 2500,
-              image:
-                "https://www.ardkeen.com/cdn/shop/files/MeloraMultifloraManukaHoneyMGO70_330g_1000x.png?v=1704196996",
-              whatsappMessage: "Manuka Melora MGO 70+ 340gr",
-              description: "Mjalte Manuka për fillestare",
-              rating: 5,
-            },
-          ],
+          name: "Melora MGO 70+",
+          description: "Mjalte Manuka për fillestare",
+          image: "https://www.ardkeen.com/cdn/shop/files/MeloraMultifloraManukaHoneyMGO70_330g_1000x.png?v=1704196996",
+          price: 2500,
+          weight: "330gr",
+          isPremium: false,
+          whatsappMessage: "Manuka Melora MGO 70+ 340gr",
         },
         {
+          id: "melora-300-250",
           mgo: "300+",
-          featured: false,
-          inDemand: false,
-          variants: [
-            {
-              weight: "250gr",
-              price: 3800,
-              image: "https://melora.co.uk/cdn/shop/products/300250g.jpg?v=1745410540&width=1445",
-              whatsappMessage: "Manuka Melora MGO 300+ 250gr",
-              description: "Mjalte Manuka me aktivitet të mirë",
-              rating: 5,
-            },
-            {
-              weight: "500gr",
-              price: 7200,
-              image: "https://melora.co.uk/cdn/shop/products/300500g.jpg?v=1745407645&width=1445",
-              whatsappMessage: "Manuka Melora MGO 300+ 500gr",
-              description: "Madhësi familjare me aktivitet të mirë",
-              rating: 5,
-            },
-          ],
+          name: "Melora MGO 300+",
+          description: "Mjalte Manuka me aktivitet të mirë",
+          image: "https://melora.co.uk/cdn/shop/products/300250g.jpg?v=1745410540&width=1445",
+          price: 3800,
+          weight: "250gr",
+          isPremium: false,
+          whatsappMessage: "Manuka Melora MGO 300+ 250gr",
         },
         {
+          id: "melora-300-500",
+          mgo: "300+",
+          name: "Melora MGO 300+",
+          description: "Madhësi familjare me aktivitet të mirë",
+          image: "https://melora.co.uk/cdn/shop/products/300500g.jpg?v=1745407645&width=1445",
+          price: 7200,
+          weight: "500gr",
+          isPremium: false,
+          whatsappMessage: "Manuka Melora MGO 300+ 500gr",
+        },
+        {
+          id: "melora-526",
           mgo: "526+",
-          featured: false,
-          inDemand: false,
-          variants: [
-            {
-              weight: "250gr",
-              price: 6200,
-              image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9_gL7beWKi5bX7psfBC0_PmO6Nhsu66upOg&s",
-              whatsappMessage: "Manuka Melora MGO 526+ 250g",
-              description: "Mjalte Manuka me aktivitet të lartë",
-              rating: 5,
-            },
-          ],
+          name: "Melora MGO 526+",
+          description: "Mjalte Manuka me aktivitet të lartë",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9_gL7beWKi5bX7psfBC0_PmO6Nhsu66upOg&s",
+          price: 6200,
+          weight: "250gr",
+          isPremium: true,
+          whatsappMessage: "Manuka Melora MGO 526+ 250g",
         },
       ],
     },
@@ -431,11 +356,8 @@ export default function ManukatPage() {
     return brand.products.filter(
       (product: any) =>
         product.mgo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.variants.some(
-          (variant: any) =>
-            variant.weight.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            variant.description.toLowerCase().includes(searchTerm.toLowerCase()),
-        ),
+        product.weight.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchTerm.toLowerCase()),
     )
   }
 
@@ -451,6 +373,21 @@ export default function ManukatPage() {
         return "MELORA"
       default:
         return brandName
+    }
+  }
+
+  const getBrandBadgeColor = (brandName: string) => {
+    switch (brandName) {
+      case "Manuka Koru":
+        return "bg-blue-500"
+      case "Manuka NUI":
+        return "bg-green-500"
+      case "Manuka Health":
+        return "bg-indigo-500"
+      case "Melora":
+        return "bg-purple-500"
+      default:
+        return "bg-blue-500"
     }
   }
 
@@ -520,8 +457,8 @@ export default function ManukatPage() {
               if (filteredProducts.length === 0) return null
 
               return (
-                <div key={brand.name} className="mb-20">
-                  <AnimatedSection className="text-center mb-12" delay={brandIndex * 100}>
+                <div key={brand.name} className="mb-16">
+                  <AnimatedSection className="text-center mb-8" delay={brandIndex * 100}>
                     <div className="flex items-center justify-center mb-6">
                       {brand.name === "Manuka Koru" && <Crown className="h-8 w-8 text-amber-500 mr-3 animate-pulse" />}
                       <h2
@@ -537,126 +474,113 @@ export default function ManukatPage() {
                     )}
                   </AnimatedSection>
 
-                  {filteredProducts.map((product, productIndex) => (
-                    <div key={product.mgo} className="mb-12">
-                      <AnimatedSection className="text-center mb-8" delay={brandIndex * 100 + productIndex * 50}>
-                        <Badge className={`bg-gradient-to-r ${brand.color} text-white px-6 py-2 text-lg mb-4`}>
-                          MGO {product.mgo}
-                        </Badge>
-                      </AnimatedSection>
-
-                      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        {product.variants.map((variant, variantIndex) => (
-                          <AnimatedSection
-                            key={`${variant.weight}-${variant.price}`}
-                            animation="scaleIn"
-                            delay={brandIndex * 100 + productIndex * 50 + variantIndex * 30}
-                          >
-                            <Card
-                              className={`overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-4 group border-0 h-full flex flex-col ${
-                                product.inDemand
-                                  ? "bg-gradient-to-br from-pink-50 to-rose-50 ring-2 ring-pink-200"
-                                  : "bg-white/90 backdrop-blur-sm"
-                              }`}
-                            >
-                              <div className="aspect-square relative overflow-hidden w-full">
-                                <Image
-                                  src={variant.image || "/placeholder.svg"}
-                                  alt={`${brand.name} MGO ${product.mgo} ${variant.weight}`}
-                                  fill
-                                  className="object-contain group-hover:scale-110 transition-transform duration-700"
-                                />
-
-                                {/* Top Badges */}
-                                <div className="absolute top-4 left-4 flex flex-col gap-2">
-                                  {variant.featured && (
-                                    <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-3 py-1 text-sm flex items-center gap-1">
-                                      <Star className="h-3 w-3 fill-current" />
-                                      Premium
-                                    </Badge>
-                                  )}
-                                  <Badge
-                                    className={`bg-gradient-to-r ${brand.color} text-white px-4 py-2 text-lg shadow-lg`}
-                                  >
-                                    MGO {product.mgo}
-                                  </Badge>
-                                </div>
-
-                                {/* In Demand Badge */}
-                                {product.inDemand && (
-                                  <Badge className="absolute top-4 right-4 bg-gradient-to-r from-red-500 to-pink-500 text-white px-3 py-1 text-sm flex items-center gap-1 animate-pulse">
-                                    <Zap className="h-3 w-3" />I KËRKUAR
-                                  </Badge>
-                                )}
-
-                                {/* Brand Badge */}
-                                <Badge
-                                  className={`absolute bottom-4 left-4 px-4 py-2 text-sm font-bold ${
-                                    brand.name === "Manuka Koru"
-                                      ? "bg-blue-500 text-white"
-                                      : brand.name === "Manuka NUI"
-                                        ? "bg-green-500 text-white"
-                                        : brand.name === "Manuka Health"
-                                          ? "bg-indigo-500 text-white"
-                                          : "bg-purple-500 text-white"
-                                  }`}
-                                >
-                                  {getBrandDisplayName(brand.name)}
+                  {/* Horizontal Product Cards */}
+                  <div className="overflow-x-auto pb-4">
+                    <div className="flex gap-6 min-w-max px-4">
+                      {filteredProducts.map((product, productIndex) => (
+                        <AnimatedSection
+                          key={product.id}
+                          animation="scaleIn"
+                          delay={brandIndex * 100 + productIndex * 50}
+                        >
+                          <Card className="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-0 overflow-hidden">
+                            {/* Product Image Section */}
+                            <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 p-6 h-64">
+                              {/* MGO Badge at Top */}
+                              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
+                                <Badge className="bg-gray-800 text-white px-4 py-2 text-lg font-bold rounded-full shadow-lg">
+                                  MGO {product.mgo}
                                 </Badge>
-
-                                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                  <Award className="h-5 w-5 text-amber-600" />
-                                </div>
                               </div>
 
-                              <CardContent className="p-6 flex flex-col flex-grow">
-                                <div className="flex-grow">
-                                  <h3 className="font-bold text-xl mb-2 text-gray-900 group-hover:text-amber-600 transition-colors duration-300">
-                                    {brand.name} MGO {product.mgo}
-                                  </h3>
-                                  <p className="text-lg font-medium text-gray-700 mb-3">({variant.weight})</p>
-                                  <p className="text-gray-600 mb-4 leading-relaxed text-sm">{variant.description}</p>
+                              {/* Premium Badge */}
+                              {product.isPremium && (
+                                <Badge className="absolute top-4 right-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-3 py-1 text-sm font-semibold rounded-full flex items-center gap-1 z-10 shadow-lg">
+                                  <Star className="h-3 w-3 fill-current" />
+                                  Premium
+                                </Badge>
+                              )}
 
-                                  <div className="flex items-center justify-between mb-4">
-                                    <Badge variant="outline" className="border-amber-600 text-amber-600">
-                                      {variant.weight}
-                                    </Badge>
-                                    <div className="flex items-center text-green-600">
-                                      <Shield className="h-4 w-4 mr-1" />
-                                      <span className="text-sm font-medium">E Certifikuar</span>
+                              {/* Product Image */}
+                              <div className="relative w-full h-full flex items-center justify-center mt-8">
+                                <Image
+                                  src={product.image || "/placeholder.svg"}
+                                  alt={product.name}
+                                  width={180}
+                                  height={180}
+                                  className="object-contain max-w-full max-h-full transition-transform duration-300 hover:scale-105"
+                                  loading={productIndex < 4 ? "eager" : "lazy"}
+                                />
+                              </div>
+
+                              {/* Brand Badge */}
+                              <Badge
+                                className={`absolute bottom-4 left-4 ${getBrandBadgeColor(brand.name)} text-white px-4 py-2 text-sm font-bold rounded-full shadow-lg`}
+                              >
+                                {getBrandDisplayName(brand.name)}
+                              </Badge>
+                            </div>
+
+                            {/* Product Info Section */}
+                            <CardContent className="p-6">
+                              <div className="space-y-4">
+                                {/* Product Name */}
+                                <h3 className="text-xl font-bold text-gray-900 leading-tight">
+                                  {product.name}
+                                  <span className="text-lg font-normal text-gray-600 block">({product.weight})</span>
+                                </h3>
+
+                                {/* Weight Badge */}
+                                <div className="text-center">
+                                  <span className="text-lg font-semibold text-gray-700">{product.weight}</span>
+                                </div>
+
+                                {/* Description */}
+                                <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">
+                                  {product.description}
+                                </p>
+
+                                {/* Pricing */}
+                                <div className="text-center pt-2">
+                                  {product.isEuro ? (
+                                    <div>
+                                      <span className="text-2xl font-bold text-blue-600">{product.euroPrice} Euro</span>
+                                      <p className="text-sm text-gray-500">({product.price.toLocaleString()} L)</p>
                                     </div>
-                                  </div>
-
-                                  {/* Star Rating */}
-                                  <div className="flex items-center mb-4">
-                                    {[...Array(variant.rating)].map((_, i) => (
-                                      <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
-                                    ))}
-                                    <span className="ml-2 text-gray-600 text-sm">(5.0)</span>
-                                  </div>
+                                  ) : (
+                                    <span className="text-2xl font-bold text-blue-600">
+                                      {product.price.toLocaleString()} L
+                                    </span>
+                                  )}
                                 </div>
 
-                                <div className="mt-auto">
-                                  <div className="text-center mb-4">
-                                    {variant.isEuro ? (
-                                      <div>
-                                        <span className="text-2xl font-bold text-blue-600">{variant.euroPrice}€</span>
-                                        <p className="text-sm text-gray-500">({variant.price} L)</p>
-                                      </div>
-                                    ) : (
-                                      <span className="text-2xl font-bold text-blue-600">{variant.price} L</span>
-                                    )}
-                                  </div>
-
-                                  <WhatsAppOrderButton productName={variant.whatsappMessage} />
+                                {/* Star Rating */}
+                                <div className="flex items-center justify-center gap-1">
+                                  {[...Array(5)].map((_, i) => (
+                                    <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                                  ))}
                                 </div>
-                              </CardContent>
-                            </Card>
-                          </AnimatedSection>
-                        ))}
-                      </div>
+
+                                {/* WhatsApp Button */}
+                                <Button
+                                  className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold py-3 rounded-xl transition-all duration-300 transform hover:scale-105"
+                                  onClick={() => {
+                                    const phoneNumber = "+355697320453"
+                                    const message = `Dua te porosis ${product.whatsappMessage}`
+                                    const whatsappUrl = `https://wa.me/${phoneNumber.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(message)}`
+                                    window.open(whatsappUrl, "_blank")
+                                  }}
+                                >
+                                  <MessageCircle className="mr-2 h-4 w-4" />
+                                  Porosi në WhatsApp
+                                </Button>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </AnimatedSection>
+                      ))}
                     </div>
-                  ))}
+                  </div>
                 </div>
               )
             })}
