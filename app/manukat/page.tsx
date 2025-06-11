@@ -1,12 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, Search, Star, Crown, MessageCircle } from "lucide-react"
+import { ArrowLeft, Search, Star, Crown, MessageCircle, ChevronLeft, ChevronRight } from "lucide-react"
 import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
@@ -16,6 +16,7 @@ import PageWrapper from "../page-wrapper"
 export default function ManukatPage() {
   const [selectedBrand, setSelectedBrand] = useState("")
   const [searchTerm, setSearchTerm] = useState("")
+  const scrollRefs = useRef<{ [key: string]: HTMLDivElement | null }>({})
 
   const brands = [
     {
@@ -391,6 +392,21 @@ export default function ManukatPage() {
     }
   }
 
+  const scroll = (brandName: string, direction: "left" | "right") => {
+    const container = scrollRefs.current[brandName]
+    if (container) {
+      const cardWidth = 320 // Card width + gap
+      const scrollAmount = cardWidth + 24 // Include gap
+      const currentScroll = container.scrollLeft
+      const targetScroll = direction === "left" ? currentScroll - scrollAmount : currentScroll + scrollAmount
+
+      container.scrollTo({
+        left: targetScroll,
+        behavior: "smooth",
+      })
+    }
+  }
+
   return (
     <PageWrapper>
       <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50">
@@ -474,111 +490,178 @@ export default function ManukatPage() {
                     )}
                   </AnimatedSection>
 
-                  {/* Horizontal Product Cards */}
-                  <div className="overflow-x-auto pb-4">
-                    <div className="flex gap-6 min-w-max px-4">
-                      {filteredProducts.map((product, productIndex) => (
-                        <AnimatedSection
-                          key={product.id}
-                          animation="scaleIn"
-                          delay={brandIndex * 100 + productIndex * 50}
-                        >
-                          <Card className="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-0 overflow-hidden">
-                            {/* Product Image Section */}
-                            <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 p-6 h-64">
-                              {/* MGO Badge at Top */}
-                              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
-                                <Badge className="bg-gray-800 text-white px-4 py-2 text-lg font-bold rounded-full shadow-lg">
-                                  MGO {product.mgo}
-                                </Badge>
-                              </div>
+                  {/* Product Count Indicator */}
+                  <div className="text-center mb-4">
+                    <Badge variant="outline" className="text-gray-600 border-gray-300">
+                      {filteredProducts.length} produkt{filteredProducts.length !== 1 ? "e" : ""}
+                    </Badge>
+                  </div>
 
-                              {/* Premium Badge */}
-                              {product.isPremium && (
-                                <Badge className="absolute top-4 right-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-3 py-1 text-sm font-semibold rounded-full flex items-center gap-1 z-10 shadow-lg">
-                                  <Star className="h-3 w-3 fill-current" />
-                                  Premium
-                                </Badge>
-                              )}
+                  {/* Horizontal Product Cards with Navigation */}
+                  <div className="relative group">
+                    {/* Desktop Navigation Arrows */}
+                    <div className="hidden md:block">
+                      <button
+                        onClick={() => scroll(brand.name, "left")}
+                        className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg rounded-full p-3 transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110"
+                        aria-label="Scroll left"
+                      >
+                        <ChevronLeft className="h-6 w-6 text-gray-700" />
+                      </button>
 
-                              {/* Product Image */}
-                              <div className="relative w-full h-full flex items-center justify-center mt-8">
-                                <Image
-                                  src={product.image || "/placeholder.svg"}
-                                  alt={product.name}
-                                  width={180}
-                                  height={180}
-                                  className="object-contain max-w-full max-h-full transition-transform duration-300 hover:scale-105"
-                                  loading={productIndex < 4 ? "eager" : "lazy"}
-                                />
-                              </div>
+                      <button
+                        onClick={() => scroll(brand.name, "right")}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg rounded-full p-3 transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110"
+                        aria-label="Scroll right"
+                      >
+                        <ChevronRight className="h-6 w-6 text-gray-700" />
+                      </button>
+                    </div>
 
-                              {/* Brand Badge */}
-                              <Badge
-                                className={`absolute bottom-4 left-4 ${getBrandBadgeColor(brand.name)} text-white px-4 py-2 text-sm font-bold rounded-full shadow-lg`}
-                              >
-                                {getBrandDisplayName(brand.name)}
-                              </Badge>
-                            </div>
-
-                            {/* Product Info Section */}
-                            <CardContent className="p-6">
-                              <div className="space-y-4">
-                                {/* Product Name */}
-                                <h3 className="text-xl font-bold text-gray-900 leading-tight">
-                                  {product.name}
-                                  <span className="text-lg font-normal text-gray-600 block">({product.weight})</span>
-                                </h3>
-
-                                {/* Weight Badge */}
-                                <div className="text-center">
-                                  <span className="text-lg font-semibold text-gray-700">{product.weight}</span>
+                    {/* Scrollable Container */}
+                    <div
+                      ref={(el) => (scrollRefs.current[brand.name] = el)}
+                      className="overflow-x-auto scrollbar-hide pb-4 scroll-smooth"
+                      style={{
+                        scrollSnapType: "x mandatory",
+                        WebkitOverflowScrolling: "touch",
+                        scrollbarWidth: "none",
+                        msOverflowStyle: "none",
+                      }}
+                    >
+                      <div className="flex gap-6 px-4" style={{ width: "max-content" }}>
+                        {filteredProducts.map((product, productIndex) => (
+                          <AnimatedSection
+                            key={product.id}
+                            animation="scaleIn"
+                            delay={brandIndex * 100 + productIndex * 50}
+                          >
+                            <Card
+                              className="flex-shrink-0 w-80 md:w-72 lg:w-80 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-0 overflow-hidden"
+                              style={{
+                                scrollSnapAlign: "start",
+                                scrollSnapStop: "always",
+                              }}
+                            >
+                              {/* Product Image Section */}
+                              <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 p-6 h-64">
+                                {/* MGO Badge at Top */}
+                                <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
+                                  <Badge className="bg-gray-800 text-white px-4 py-2 text-lg font-bold rounded-full shadow-lg">
+                                    MGO {product.mgo}
+                                  </Badge>
                                 </div>
 
-                                {/* Description */}
-                                <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">
-                                  {product.description}
-                                </p>
+                                {/* Premium Badge */}
+                                {product.isPremium && (
+                                  <Badge className="absolute top-4 right-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-3 py-1 text-sm font-semibold rounded-full flex items-center gap-1 z-10 shadow-lg">
+                                    <Star className="h-3 w-3 fill-current" />
+                                    Premium
+                                  </Badge>
+                                )}
 
-                                {/* Pricing */}
-                                <div className="text-center pt-2">
-                                  {product.isEuro ? (
-                                    <div>
-                                      <span className="text-2xl font-bold text-blue-600">{product.euroPrice} Euro</span>
-                                      <p className="text-sm text-gray-500">({product.price.toLocaleString()} L)</p>
-                                    </div>
-                                  ) : (
-                                    <span className="text-2xl font-bold text-blue-600">
-                                      {product.price.toLocaleString()} L
-                                    </span>
-                                  )}
+                                {/* Product Image */}
+                                <div className="relative w-full h-full flex items-center justify-center mt-8">
+                                  <Image
+                                    src={product.image || "/placeholder.svg"}
+                                    alt={product.name}
+                                    width={180}
+                                    height={180}
+                                    className="object-contain max-w-full max-h-full transition-transform duration-300 hover:scale-105"
+                                    loading={productIndex < 4 ? "eager" : "lazy"}
+                                  />
                                 </div>
 
-                                {/* Star Rating */}
-                                <div className="flex items-center justify-center gap-1">
-                                  {[...Array(5)].map((_, i) => (
-                                    <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
-                                  ))}
-                                </div>
-
-                                {/* WhatsApp Button */}
-                                <Button
-                                  className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold py-3 rounded-xl transition-all duration-300 transform hover:scale-105"
-                                  onClick={() => {
-                                    const phoneNumber = "+355697320453"
-                                    const message = `Dua te porosis ${product.whatsappMessage}`
-                                    const whatsappUrl = `https://wa.me/${phoneNumber.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(message)}`
-                                    window.open(whatsappUrl, "_blank")
-                                  }}
+                                {/* Brand Badge */}
+                                <Badge
+                                  className={`absolute bottom-4 left-4 ${getBrandBadgeColor(brand.name)} text-white px-4 py-2 text-sm font-bold rounded-full shadow-lg`}
                                 >
-                                  <MessageCircle className="mr-2 h-4 w-4" />
-                                  Porosi në WhatsApp
-                                </Button>
+                                  {getBrandDisplayName(brand.name)}
+                                </Badge>
                               </div>
-                            </CardContent>
-                          </Card>
-                        </AnimatedSection>
-                      ))}
+
+                              {/* Product Info Section */}
+                              <CardContent className="p-6">
+                                <div className="space-y-4">
+                                  {/* Product Name */}
+                                  <h3 className="text-xl font-bold text-gray-900 leading-tight">
+                                    {product.name}
+                                    <span className="text-lg font-normal text-gray-600 block">({product.weight})</span>
+                                  </h3>
+
+                                  {/* Weight Badge */}
+                                  <div className="text-center">
+                                    <span className="text-lg font-semibold text-gray-700">{product.weight}</span>
+                                  </div>
+
+                                  {/* Description */}
+                                  <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">
+                                    {product.description}
+                                  </p>
+
+                                  {/* Pricing */}
+                                  <div className="text-center pt-2">
+                                    {product.isEuro ? (
+                                      <div>
+                                        <span className="text-2xl font-bold text-blue-600">
+                                          {product.euroPrice} Euro
+                                        </span>
+                                        <p className="text-sm text-gray-500">({product.price.toLocaleString()} L)</p>
+                                      </div>
+                                    ) : (
+                                      <span className="text-2xl font-bold text-blue-600">
+                                        {product.price.toLocaleString()} L
+                                      </span>
+                                    )}
+                                  </div>
+
+                                  {/* Star Rating */}
+                                  <div className="flex items-center justify-center gap-1">
+                                    {[...Array(5)].map((_, i) => (
+                                      <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                                    ))}
+                                  </div>
+
+                                  {/* WhatsApp Button */}
+                                  <Button
+                                    className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold py-3 rounded-xl transition-all duration-300 transform hover:scale-105"
+                                    onClick={() => {
+                                      const phoneNumber = "+355697320453"
+                                      const message = `Dua te porosis ${product.whatsappMessage}`
+                                      const whatsappUrl = `https://wa.me/${phoneNumber.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(message)}`
+                                      window.open(whatsappUrl, "_blank")
+                                    }}
+                                  >
+                                    <MessageCircle className="mr-2 h-4 w-4" />
+                                    Porosi në WhatsApp
+                                  </Button>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          </AnimatedSection>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Mobile Scroll Indicators */}
+                    <div className="flex justify-center mt-4 md:hidden">
+                      <div className="flex space-x-2">
+                        {filteredProducts.map((_, index) => (
+                          <div
+                            key={index}
+                            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                              index === 0 ? "bg-amber-500" : "bg-gray-300"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Mobile Scroll Hint */}
+                    <div className="md:hidden text-center mt-2">
+                      <p className="text-sm text-gray-500">
+                        ← Rrëshqit për të parë të gjitha produktet ({filteredProducts.length}) →
+                      </p>
                     </div>
                   </div>
                 </div>
