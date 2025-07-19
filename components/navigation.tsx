@@ -37,7 +37,7 @@ export default function Navigation() {
           <Link href="/" className="flex items-center group">
             <Leaf className="h-8 w-8 text-amber-600 group-hover:scale-110 transition-transform duration-300" />
             <span className="ml-2 text-lg sm:text-xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors duration-300 truncate">
-              Manuka Bio Organik
+              Manuka Albania
             </span>
           </Link>
 

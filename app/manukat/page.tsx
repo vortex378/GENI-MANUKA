@@ -432,16 +432,17 @@ export default function ManukatPage() {
 
             <AnimatedSection className="text-center mb-16">
               <Badge className="mb-6 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 text-lg">
-                Marka Premium Manuka
+                Manuka Albania - Marka Premium Manuka
               </Badge>
               <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                Manukat
+                Manukat në Shqipëri
                 <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent block">
                   Premium
                 </span>
               </h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
-                Zgjidhni nga markat më të njohura të mjaltit Manuka nga Zelanda e Re
+                Manuka Albania ju ofron markat më të njohura të mjaltit Manuka nga Zelanda e Re. Zgjidhni nga Koru, NUI,
+                Health dhe Melora me çmime konkurruese në Shqipëri.
               </p>
 
               {/* Search Bar */}
@@ -449,7 +450,7 @@ export default function ManukatPage() {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                 <input
                   type="text"
-                  placeholder="Kërko sipas MGO, peshës ose përshkrimit..."
+                  placeholder="Kërko mjalte Manuka sipas MGO, peshës ose përshkrimit..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 border border-amber-200 rounded-full focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white/80 backdrop-blur-sm"

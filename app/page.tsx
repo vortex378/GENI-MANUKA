@@ -14,6 +14,7 @@ import LoadingScreen from "@/components/loading-screen"
 import ProductCardRow from "@/components/product-card-row"
 import ManukaKoruShowcase from "@/components/manuka-koru-showcase"
 import PageWrapper from "./page-wrapper"
+import FAQSection from "@/components/faq-section"
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true)
@@ -95,18 +96,19 @@ export default function HomePage() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <AnimatedSection animation="fadeInLeft" className="text-center lg:text-left">
                 <Badge className="mb-6 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-2 text-lg animate-bounce">
-                  100% Mjalte Manuka i Pastër nga Zelanda e Re
+                  Manuka Albania - 100% Mjalte Manuka i Pastër nga Zelanda e Re
                 </Badge>
                 <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 mb-8 leading-tight">
-                  Mjalte Manuka
+                  Manuka Albania
                   <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent block">
                     Premium
                   </span>
-                  <span className="text-3xl lg:text-4xl text-gray-600 font-normal">nga Natyra</span>
+                  <span className="text-3xl lg:text-4xl text-gray-600 font-normal">Mjalte Manuka</span>
                 </h1>
                 <p className="text-xl lg:text-2xl text-gray-600 mb-10 leading-relaxed">
-                  Përjetoni shijen autentike dhe përfitimet e fuqishme shëndetësore të mjaltit të vërtetë Manuka nga
-                  Zelanda e Re. I marrë drejtpërdrejt nga zonat e paprekura të natyrës dhe i testuar për pastërti.
+                  Manuka Albania ju ofron mjaltë premium Manuka nga Zelanda e Re. Mjalte autentik me MGO të lartë, i
+                  testuar për cilësi dhe i importuar drejtpërdrejt për tregun shqiptar. Zbuloni përfitimet e mjaltit
+                  Manuka në Shqipëri.
                 </p>
                 <div className="flex justify-center lg:justify-start">
                   <div className="relative group">
@@ -290,6 +292,9 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* FAQ Section */}
+        <FAQSection />
+
         {/* Footer */}
         <footer className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-amber-900/10 to-orange-900/10"></div>
@@ -298,10 +303,10 @@ export default function HomePage() {
               <AnimatedSection animation="fadeInUp">
                 <div className="flex items-center mb-6">
                   <Leaf className="h-10 w-10 text-amber-500" />
-                  <span className="ml-3 text-2xl font-bold">Manuka Bio Organik</span>
+                  <span className="ml-3 text-2xl font-bold">Manuka Albania</span>
                 </div>
                 <p className="text-gray-300 leading-relaxed mb-6">
-                  Mjalte premium Manuka nga Zelanda e Re për shëndet dhe mirëqenie.
+                  Manuka Albania - Mjalte premium Manuka nga Zelanda e Re për shëndet dhe mirëqenie në Shqipëri.
                 </p>
                 <Button
                   className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 transform hover:scale-105 transition-all duration-300"
@@ -362,18 +367,19 @@ export default function HomePage() {
               </AnimatedSection>
 
               <AnimatedSection animation="fadeInUp" delay={600}>
-                <h3 className="font-bold text-xl mb-6 text-amber-400">Informacione Kontakti</h3>
+                <h3 className="font-bold text-xl mb-6 text-amber-400">Kontaktoni Manuka Albania</h3>
                 <div className="text-gray-300 space-y-3">
-                  <p>Email: manuka.al@hotmail.com</p>
-                  <p>Telefon: +355 69 123 4567</p>
-                  <p>Hën-Pre: 9:00-18:00</p>
+                  <p>Email: info@manuka-albania.com</p>
+                  <p>WhatsApp: +355 69 732 0453</p>
+                  <p>Adresa: Tirana, Shqipëri</p>
+                  <p>Orari: Hën-Pre: 9:00-18:00</p>
                   <p>Shtunë: 10:00-16:00</p>
                 </div>
               </AnimatedSection>
             </div>
 
             <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
-              <p>&copy; 2024 Manuka-bio-organik.</p>
+              <p>&copy; 2024 Manuka Albania. Të gjitha të drejtat e rezervuara.</p>
             </div>
           </div>
         </footer>
