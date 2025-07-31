@@ -34,7 +34,7 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center group">
+          <Link href="/" className="flex items-center group" title="Manuka Albania - Kryefaqja">
             <Leaf className="h-8 w-8 text-amber-600 group-hover:scale-110 transition-transform duration-300" />
             <span className="ml-2 text-lg sm:text-xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors duration-300 truncate">
               Manuka Albania
@@ -48,6 +48,7 @@ export default function Navigation() {
                 key={item.href}
                 href={item.href}
                 className="text-gray-700 hover:text-amber-600 font-medium transition-all duration-300 relative group whitespace-nowrap"
+                title={`Manuka Albania - ${item.label}`}
               >
                 {item.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-600 group-hover:w-full transition-all duration-300"></span>
@@ -63,6 +64,7 @@ export default function Navigation() {
                     "_blank",
                   )
                 }
+                title="Blej Mjalte Manuka nga Manuka Albania"
               >
                 Blej Tani
               </Button>
@@ -73,6 +75,7 @@ export default function Navigation() {
           <button
             className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-300 flex-shrink-0"
             onClick={() => setIsOpen(!isOpen)}
+            aria-label="Hap menunë"
           >
             {isOpen ? <X className="h-6 w-6 text-gray-700" /> : <Menu className="h-6 w-6 text-gray-700" />}
           </button>
@@ -93,6 +96,7 @@ export default function Navigation() {
                   className="flex items-center px-6 py-4 text-gray-700 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300 border-b border-gray-100 last:border-b-0"
                   style={{ animationDelay: `${index * 100}ms` }}
                   onClick={() => setIsOpen(false)}
+                  title={`Manuka Albania - ${item.label}`}
                 >
                   <span className="text-base font-medium">{item.label}</span>
                   <span className="ml-auto opacity-0 group-hover:opacity-100">
@@ -118,6 +122,7 @@ export default function Navigation() {
                     )
                     setIsOpen(false)
                   }}
+                  title="Blej Mjalte Manuka nga Manuka Albania"
                 >
                   Blej Tani
                 </Button>

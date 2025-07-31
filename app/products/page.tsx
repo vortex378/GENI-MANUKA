@@ -1,11 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Heart, Zap, Shield, Search, Filter } from "lucide-react"
+import { ArrowLeft, Heart, Zap, Shield, Search, Filter, ChevronLeft, ChevronRight, Coffee } from "lucide-react"
 import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
@@ -16,12 +16,50 @@ export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("")
   const [priceFilter, setPriceFilter] = useState("")
+  const mateScrollRef = useRef<HTMLDivElement>(null)
+
+  // Mate Cups & Accessories
+  const mateAccessories = [
+    {
+      id: "mate-1",
+      name: "Gotë Mate Tradicionale me Lëkurë",
+      description: "Gotë mate tradicionale me mbështjellës lëkure dhe buzë metalike",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-07-30%20at%206.35.43%20PM%20%281%29-qCozmGwXBpWLM2cO5sI5GYmyOvSRhy.jpeg",
+      whatsappMessage: "Gotë Mate Tradicionale me Lëkurë",
+    },
+    {
+      id: "mate-2",
+      name: "Gotë Mate El Pasto",
+      description: "Gotë mate moderne El Pasto me dizajn të zi dhe elegant",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-07-30%20at%206.35.43%20PM%20%282%29-oBGzAYGdAMWIZ1rJowYVQI27G7Ldsp.jpeg",
+      whatsappMessage: "Gotë Mate El Pasto",
+    },
+    {
+      id: "mate-3",
+      name: "Gotë Mate Luksoze me Kristale",
+      description: "Gotë mate premium me rrip dekorativ metalik dhe kristale",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-07-30%20at%206.35.43%20PM%20%283%29-zepdKI3MqAaEBev92NdWhE7w67fXV1.jpeg",
+      whatsappMessage: "Gotë Mate Luksoze me Kristale",
+    },
+    {
+      id: "mate-4",
+      name: "Gotë Mate Klasike",
+      description: "Gotë mate klasike me mbështjellës lëkure dhe formë tradicionale",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-07-30%20at%206.35.43%20PM-qojk3DIUYLtdcPyVgweSdwUFC69D0V.jpeg",
+      whatsappMessage: "Gotë Mate Klasike",
+    },
+  ]
 
   const supplements = [
     {
       id: 1,
       name: "Kolagjen",
       price: 2500,
+      euroPrice: 25,
       category: "Bukuria & Anti-aging",
       image: "https://www.vianaturalia.ro/wp-content/uploads/2018/10/Colagen-bovin-450x450.jpg",
       description: "Kolagjen i pastër për shëndetin e lëkurës dhe nyjeve",
@@ -34,6 +72,7 @@ export default function ProductsPage() {
       id: 2,
       name: "Kolagjen Peptides MSM",
       price: 2500,
+      euroPrice: 25,
       category: "Bukuria & Anti-aging",
       image: "https://www.vianaturalia.ro/wp-content/uploads/2018/07/Colagen-cu-MSM-3-450x450.jpg",
       description: "Kolagjen me MSM për përfitime të shtuar",
@@ -46,6 +85,7 @@ export default function ProductsPage() {
       id: 3,
       name: "Vitamin C",
       price: 1500,
+      euroPrice: 15,
       category: "Imuniteti",
       image: "https://intenson.pl/cdn/shop/files/witaminaC150_960x720.png?v=1739975165",
       description: "Vitamin C i pastër për sistemin imunitar",
@@ -58,6 +98,7 @@ export default function ProductsPage() {
       id: 4,
       name: "Spirulina",
       price: 1500,
+      euroPrice: 15,
       category: "Superfood",
       image: "https://us-i.makeupstore.com/j/j2/j2izpwefxtxp.jpg",
       description: "Superfood i gjelbër me proteina të larta",
@@ -70,6 +111,7 @@ export default function ProductsPage() {
       id: 5,
       name: "Vital Fibre",
       price: 1500,
+      euroPrice: 15,
       category: "Tretja",
       image: "https://www.smakolyk.co.uk/wp-content/uploads/2025/01/21992.png",
       description: "Fibra vitale për shëndetin e tretjes",
@@ -82,6 +124,7 @@ export default function ProductsPage() {
       id: 6,
       name: "Ksylitol Sheqeri Diabetik",
       price: 1200,
+      euroPrice: 12,
       category: "Diabetikë",
       image: "https://intenson.pl/cdn/shop/files/ksylitolchinski500_1280x.png?v=1741183860",
       description: "Ëmbëlsues natyror për diabetikë",
@@ -94,6 +137,7 @@ export default function ProductsPage() {
       id: 7,
       name: "Magnez Aqua",
       price: 2500,
+      euroPrice: 25,
       category: "Relaksim & Gjumi",
       image: "https://intenson.pl/cdn/shop/files/0_AQ_LOVELY_1280x.jpg?v=1720014976",
       description: "Magnez i lëngshëm për thithje të shpejtë",
@@ -106,6 +150,7 @@ export default function ProductsPage() {
       id: 8,
       name: "Shilajit Tableta",
       price: null,
+      euroPrice: null,
       category: "Energji & Vitalitet",
       image: "https://cdn.stolichki.ru/s/drugs/medium/96/9681_2.jpg",
       description: "Shilajit në formë tabletash për përdorim të lehtë",
@@ -118,6 +163,7 @@ export default function ProductsPage() {
       id: 9,
       name: "Shilajit Vazo",
       price: null,
+      euroPrice: null,
       category: "Energji & Vitalitet",
       image: "https://ekodlaciebie.pl/6560-thickbox_default/mumio-altajskie-30-gr.jpg",
       description: "Shilajit i pastër në vazo për dozim të saktë",
@@ -125,6 +171,37 @@ export default function ProductsPage() {
       icon: Heart,
       color: "from-amber-600 to-orange-600",
       whatsappMessage: "Shilajit Vazo",
+    },
+    {
+      id: 10,
+      name: "Yerba Mate Canarias",
+      price: 1700,
+      euroPrice: 17,
+      category: "Energji & Vitalitet",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/canarias.jpg-4rXUieiGptTh0xR5HsTVvuqq8aqotD.png",
+      description: "Yerba Mate tradicionale nga Argjentina - energjizues natyror me antioksidantë",
+      benefits: [
+        "Energjizues natyror",
+        "I pasur me antioksidantë",
+        "Ndihmon me humbjen e peshës",
+        "Rregullon kolesterolin",
+      ],
+      icon: Zap,
+      color: "from-green-600 to-yellow-500",
+      whatsappMessage: "Yerba Mate Canarias 1kg",
+    },
+    {
+      id: 11,
+      name: "Yerba Mate Baldo",
+      price: 1700,
+      euroPrice: 17,
+      category: "Energji & Vitalitet",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/baldo.jpg-xkb9QP9gsQ82LeDt6XM3eI8N0PSAYb.webp",
+      description: "Yerba Mate premium nga Brazil - infuzion tradicional me vitamina dhe minerale",
+      benefits: ["Antioksidant i fuqishëm", "I pasur me vitamina", "Antidepresiv natyror", "Përmirëson tretjen"],
+      icon: Heart,
+      color: "from-red-500 to-green-500",
+      whatsappMessage: "Yerba Mate Baldo 1kg",
     },
   ]
 
@@ -142,13 +219,27 @@ export default function ProductsPage() {
 
     const matchesPrice =
       priceFilter === "" ||
-      (priceFilter === "low" && product.price && product.price <= 1500) ||
-      (priceFilter === "medium" && product.price && product.price > 1500 && product.price <= 2500) ||
-      (priceFilter === "high" && product.price && product.price > 2500) ||
-      (priceFilter === "contact" && !product.price)
+      (priceFilter === "low" && product.euroPrice && product.euroPrice <= 15) ||
+      (priceFilter === "medium" && product.euroPrice && product.euroPrice > 15 && product.euroPrice <= 25) ||
+      (priceFilter === "high" && product.euroPrice && product.euroPrice > 25) ||
+      (priceFilter === "contact" && !product.euroPrice)
 
     return matchesSearch && matchesCategory && matchesPrice
   })
+
+  const scrollMate = (direction: "left" | "right") => {
+    if (mateScrollRef.current) {
+      const cardWidth = 280
+      const scrollAmount = cardWidth + 24
+      const currentScroll = mateScrollRef.current.scrollLeft
+      const targetScroll = direction === "left" ? currentScroll - scrollAmount : currentScroll + scrollAmount
+
+      mateScrollRef.current.scrollTo({
+        left: targetScroll,
+        behavior: "smooth",
+      })
+    }
+  }
 
   return (
     <PageWrapper>
@@ -227,9 +318,9 @@ export default function ProductsPage() {
                     className="px-4 py-3 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white/80 backdrop-blur-sm appearance-none cursor-pointer"
                   >
                     <option value="">Të gjitha çmimet</option>
-                    <option value="low">Deri në 1500 L</option>
-                    <option value="medium">1500 - 2500 L</option>
-                    <option value="high">Mbi 2500 L</option>
+                    <option value="low">Deri në 15€ (1500 L)</option>
+                    <option value="medium">15€ - 25€ (1500 - 2500 L)</option>
+                    <option value="high">Mbi 25€ (2500 L)</option>
                     <option value="contact">Kontaktoni për çmim</option>
                   </select>
 
@@ -255,6 +346,148 @@ export default function ProductsPage() {
                 </div>
               </div>
             </AnimatedSection>
+          </div>
+        </section>
+
+        {/* Mate Cups & Accessories Section */}
+        <section className="py-16 bg-gradient-to-br from-green-50 to-emerald-50 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full">
+            <div className="absolute top-20 left-20 w-64 h-64 bg-green-200/20 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-20 right-20 w-80 h-80 bg-emerald-200/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          </div>
+
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <AnimatedSection className="text-center mb-12">
+              <div className="flex items-center justify-center mb-6">
+                <Coffee className="h-8 w-8 text-green-600 mr-3 animate-pulse" />
+                <Badge className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 text-lg font-bold">
+                  GOTA DHE PIPA
+                </Badge>
+                <Coffee className="h-8 w-8 text-green-600 ml-3 animate-pulse" />
+              </div>
+              <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-6">
+                Aksesorët për Yerba Mate
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Gota dhe pipa tradicionale për të shijuar Yerba Mate në stilin autentik argjentinas dhe brazilian
+              </p>
+            </AnimatedSection>
+
+            {/* Swipeable Mate Accessories */}
+            <div className="relative group">
+              {/* Desktop Navigation Arrows */}
+              <div className="hidden md:block">
+                <button
+                  onClick={() => scrollMate("left")}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg rounded-full p-3 transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110"
+                  aria-label="Scroll left"
+                >
+                  <ChevronLeft className="h-6 w-6 text-gray-700" />
+                </button>
+
+                <button
+                  onClick={() => scrollMate("right")}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg rounded-full p-3 transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110"
+                  aria-label="Scroll right"
+                >
+                  <ChevronRight className="h-6 w-6 text-gray-700" />
+                </button>
+              </div>
+
+              {/* Scrollable Container */}
+              <div
+                ref={mateScrollRef}
+                className="overflow-x-auto scrollbar-hide pb-4 scroll-smooth"
+                style={{
+                  scrollSnapType: "x mandatory",
+                  WebkitOverflowScrolling: "touch",
+                  scrollbarWidth: "none",
+                  msOverflowStyle: "none",
+                }}
+              >
+                <div className="flex gap-6 px-4" style={{ width: "max-content" }}>
+                  {mateAccessories.map((accessory, index) => (
+                    <AnimatedSection key={accessory.id} animation="scaleIn" delay={index * 100}>
+                      <Card
+                        className="flex-shrink-0 w-80 md:w-72 lg:w-80 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-0 overflow-hidden"
+                        style={{
+                          scrollSnapAlign: "start",
+                          scrollSnapStop: "always",
+                        }}
+                      >
+                        {/* Product Image Section */}
+                        <div className="relative bg-gradient-to-br from-green-50 to-emerald-50 p-6 h-64">
+                          {/* Mate Icon */}
+                          <div className="absolute top-4 left-4 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full p-3 shadow-lg">
+                            <Coffee className="h-6 w-6 text-white" />
+                          </div>
+
+                          {/* Category Badge */}
+                          <Badge className="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 text-sm font-bold rounded-full shadow-lg">
+                            MATE
+                          </Badge>
+
+                          {/* Product Image */}
+                          <div className="relative w-full h-full flex items-center justify-center mt-8">
+                            <Image
+                              src={accessory.image || "/placeholder.svg"}
+                              alt={accessory.name}
+                              width={180}
+                              height={180}
+                              className="object-contain max-w-full max-h-full transition-transform duration-300 hover:scale-105 rounded-lg"
+                              loading={index < 2 ? "eager" : "lazy"}
+                            />
+                          </div>
+                        </div>
+
+                        {/* Product Info Section */}
+                        <CardContent className="p-6">
+                          <div className="space-y-4">
+                            {/* Product Name */}
+                            <h3 className="text-xl font-bold text-gray-900 leading-tight text-center">
+                              {accessory.name}
+                            </h3>
+
+                            {/* Description */}
+                            <p className="text-gray-600 text-sm leading-relaxed text-center line-clamp-3">
+                              {accessory.description}
+                            </p>
+
+                            {/* Contact for Price */}
+                            <div className="text-center pt-2">
+                              <span className="text-lg font-medium text-green-600">Kontaktoni për çmim</span>
+                            </div>
+
+                            {/* WhatsApp Button */}
+                            <div className="pt-4">
+                              <button
+                                className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-semibold py-3 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
+                                onClick={() => {
+                                  const phoneNumber = "+355697320453"
+                                  const message = `Dua informacion për ${accessory.whatsappMessage}`
+                                  const whatsappUrl = `https://wa.me/${phoneNumber.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(message)}`
+                                  window.open(whatsappUrl, "_blank")
+                                }}
+                              >
+                                <Coffee className="mr-2 h-4 w-4" />
+                                Pyet për Çmim
+                              </button>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </AnimatedSection>
+                  ))}
+                </div>
+              </div>
+
+              {/* Mobile Scroll Hint */}
+              <div className="md:hidden text-center mt-4">
+                <p className="text-sm text-gray-500">
+                  ← Rrëshqit për të parë të gjitha gotat ({mateAccessories.length}) →
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -304,15 +537,19 @@ export default function ProductsPage() {
                         </div>
 
                         <div className="mt-auto">
-                          {product.price ? (
-                            <div className="text-center mb-4">
-                              <span className="text-3xl font-bold text-green-600">{product.price} L</span>
-                            </div>
-                          ) : (
-                            <div className="text-center mb-4">
-                              <span className="text-lg font-medium text-amber-600">Kontaktoni për çmim</span>
-                            </div>
-                          )}
+                          {/* Pricing */}
+                          <div className="text-center pt-2">
+                            {product.price ? (
+                              <div>
+                                <span className="text-2xl font-bold text-green-600">{product.euroPrice}€</span>
+                                <p className="text-sm text-gray-500">({product.price} L)</p>
+                              </div>
+                            ) : (
+                              <div className="text-center mb-4">
+                                <span className="text-lg font-medium text-amber-600">Kontaktoni për çmim</span>
+                              </div>
+                            )}
+                          </div>
 
                           <WhatsAppOrderButton productName={product.whatsappMessage} />
                         </div>

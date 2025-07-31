@@ -7,34 +7,34 @@ import AnimatedSection from "./animated-section"
 
 const faqs = [
   {
-    question: "Çfarë është mjalti Manuka dhe pse është i veçantë?",
+    question: "Çfarë është Manuka Albania dhe pse është i veçantë?",
     answer:
-      "Mjalti Manuka është një lloj mjalti premium që prodhohet nga bletët që mbledhin nektar nga lulet e pemës Manuka në Zelandën e Re. Ai përmban MGO (Methylglyoxal) që i jep veti antibakteriale të fuqishme dhe përfitime të veçanta shëndetësore.",
+      "Manuka Albania është kompania kryesore në Shqipëri që ofron mjalte premium Manuka nga Zelanda e Re. Mjalti ynë Manuka përmban MGO (Methylglyoxal) që i jep veti antibakteriale të fuqishme dhe përfitime të veçanta shëndetësore.",
   },
   {
-    question: "Si mund të porosis mjalte Manuka në Shqipëri?",
+    question: "Si mund të porosis mjalte Manuka nga Manuka Albania?",
     answer:
-      "Mund të porositni mjalte Manuka nga Manuka Albania duke na kontaktuar në WhatsApp në numrin +355697320453 ose duke na ndjekur në Instagram. Ofrojmë dërgesa në të gjithë Shqipërinë.",
+      "Mund të porositni mjalte Manuka nga Manuka Albania duke na kontaktuar në WhatsApp në numrin +355697320453 ose duke na ndjekur në Instagram. Ofrojmë dërgesa në të gjithë Shqipërinë me shërbim të shpejtë dhe të sigurt.",
   },
   {
-    question: "Çfarë do të thotë MGO në mjaltë Manuka?",
+    question: "Çfarë do të thotë MGO në mjaltë Manuka nga Manuka Albania?",
     answer:
-      "MGO (Methylglyoxal) është komponenti aktiv kryesor në mjaltë Manuka që përcakton fuqinë e tij antibakteriale. Sa më i lartë numri i MGO, aq më i fuqishëm është mjalti. Ofrojmë mjalte me MGO nga 70+ deri në 1959+.",
+      "MGO (Methylglyoxal) është komponenti aktiv kryesor në mjaltë Manuka që përcakton fuqinë e tij antibakteriale. Sa më i lartë numri i MGO, aq më i fuqishëm është mjalti. Manuka Albania ofron mjalte me MGO nga 70+ deri në 1959+.",
   },
   {
-    question: "Cilat janë markat e mjaltit Manuka që ofroni?",
+    question: "Cilat janë markat e mjaltit Manuka që ofron Manuka Albania?",
     answer:
       "Manuka Albania ofron marka të njohura si Koru, NUI, Manuka Health dhe Melora. Të gjitha markat janë të importuara drejtpërdrejt nga Zelanda e Re dhe janë të certifikuara për autenticitet.",
   },
   {
-    question: "Sa kushton mjalti Manuka në Shqipëri?",
+    question: "Sa kushton mjalti Manuka në Manuka Albania?",
     answer:
-      "Çmimet variojnë sipas markës dhe nivelit të MGO. Fillojnë nga 2,500 Lekë për MGO 70+ dhe shkojnë deri në 220,000 Lekë për varietetet më premium si Koru MGO 1959+.",
+      "Çmimet në Manuka Albania variojnë sipas markës dhe nivelit të MGO. Fillojnë nga 2,500 Lekë për MGO 70+ dhe shkojnë deri në 220,000 Lekë për varietetet më premium si Koru MGO 1959+.",
   },
   {
-    question: "A është i sigurt mjalti Manuka për fëmijët?",
+    question: "A është i sigurt mjalti Manuka nga Manuka Albania për fëmijët?",
     answer:
-      "Po, mjalti Manuka është i sigurt për fëmijët mbi 1 vjeç. Megjithatë, si me çdo mjalte, nuk rekomandohet për foshnjat nën 12 muaj. Konsultohuni me mjekun tuaj për dozën e duhur.",
+      "Po, mjalti Manuka nga Manuka Albania është i sigurt për fëmijët mbi 1 vjeç. Megjithatë, si me çdo mjalte, nuk rekomandohet për foshnjat nën 12 muaj. Konsultohuni me mjekun tuaj për dozën e duhur.",
   },
 ]
 
@@ -49,9 +49,9 @@ export default function FAQSection() {
     <section className="py-20 bg-gradient-to-br from-amber-50 to-orange-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Pyetje të Shpeshta për Mjaltë Manuka</h2>
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Pyetje të Shpeshta për Manuka Albania</h2>
           <p className="text-xl text-gray-600">
-            Gjeni përgjigjet për pyetjet më të shpeshta rreth mjaltit Manuka në Shqipëri
+            Gjeni përgjigjet për pyetjet më të shpeshta rreth mjaltit Manuka në Shqipëri dhe Manuka Albania
           </p>
         </AnimatedSection>
 

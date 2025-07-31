@@ -108,7 +108,7 @@ export default function HomePage() {
                 <p className="text-xl lg:text-2xl text-gray-600 mb-10 leading-relaxed">
                   Manuka Albania ju ofron mjaltë premium Manuka nga Zelanda e Re. Mjalte autentik me MGO të lartë, i
                   testuar për cilësi dhe i importuar drejtpërdrejt për tregun shqiptar. Zbuloni përfitimet e mjaltit
-                  Manuka në Shqipëri.
+                  Manuka në Shqipëri me Manuka Albania.
                 </p>
                 <div className="flex justify-center lg:justify-start">
                   <div className="relative group">
@@ -136,7 +136,7 @@ export default function HomePage() {
                   <div className="absolute -inset-4 bg-gradient-to-r from-amber-400 to-orange-400 rounded-3xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
                   <Image
                     src="https://manukahealth.shop/cdn/shop/products/MH-Honey-MGO100_-250g-front-DE_grande.jpg?v=1658158893"
-                    alt="Mjalte Manuka Premium"
+                    alt="Manuka Albania - Mjalte Premium Manuka nga Zelanda e Re"
                     width={600}
                     height={600}
                     priority
@@ -156,11 +156,9 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-r from-amber-50/50 to-orange-50/50"></div>
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <AnimatedSection className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-                Pse të Zgjedhësh Mjaltën Tonë Manuka?
-              </h2>
+              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Pse të Zgjedhësh Manuka Albania?</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Cilësi e pakompromis dhe autenticitet në çdo kavanoz
+                Cilësi e pakompromis dhe autenticitet në çdo kavanoz nga Manuka Albania
               </p>
             </AnimatedSection>
 
@@ -170,7 +168,7 @@ export default function HomePage() {
                   icon: Award,
                   title: "E Certifikuar Autentike",
                   description:
-                    "Çdo sasi testohet dhe certifikohet në mënyrë të pavarur për përmbajtjen MGO dhe autenticitetin",
+                    "Çdo sasi nga Manuka Albania testohet dhe certifikohet në mënyrë të pavarur për përmbajtjen MGO dhe autenticitetin",
                   delay: 0,
                 },
                 {
@@ -211,7 +209,7 @@ export default function HomePage() {
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <AnimatedSection className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Produktet Tona të Veçanta</h2>
+              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Produktet e Manuka Albania</h2>
               <p className="text-xl text-gray-600">Varietetet më të popullarizuara të mjaltit tonë Manuka</p>
             </AnimatedSection>
 
@@ -256,8 +254,8 @@ export default function HomePage() {
                   Fuqia e Natyrës për Shëndetin Tuaj
                 </h2>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                  Mjalti Manuka është më shumë se një ëmbëlsues natyror. Ai është një superfood i fuqishëm me përfitime
-                  të provuara shkencore.
+                  Mjalti Manuka nga Manuka Albania është më shumë se një ëmbëlsues natyror. Ai është një superfood i
+                  fuqishëm me përfitime të provuara shkencore.
                 </p>
                 <div className="space-y-6">
                   {[
@@ -281,7 +279,7 @@ export default function HomePage() {
                   <div className="absolute -inset-4 bg-gradient-to-r from-green-400 to-emerald-400 rounded-3xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
                   <Image
                     src="https://neozealand.com/cdn/shop/files/DSC3887_100.jpg?v=1718806711"
-                    alt="Përfitimet e Mjaltit Manuka"
+                    alt="Përfitimet e Mjaltit Manuka nga Manuka Albania"
                     width={500}
                     height={500}
                     className="relative rounded-3xl shadow-2xl transform group-hover:scale-105 transition-transform duration-300 object-cover"
