@@ -86,8 +86,6 @@ export default function ManukatPage() {
           description: "Mjalte Manuka ekskluzive me cilësinë më të lartë",
           image: "https://caresoul.in/cdn/shop/files/Koru1500_3_1024x1024.png?v=1742383386",
           price: 110000,
-          euroPrice: 1100,
-          isEuro: true,
           weight: "250gr",
           isPremium: true,
           whatsappMessage: "Manuka Koru MGO 1500+",
@@ -99,8 +97,6 @@ export default function ManukatPage() {
           description: "Koleksioni më i rrallë - mjalte Manuka më e fuqishme në botë",
           image: "https://manukahoneyofnz.com/cdn/shop/files/MH-Website-Images-KORU1959_2_1200x.png?v=1712528245",
           price: 220000,
-          euroPrice: 2200,
-          isEuro: true,
           weight: "250gr",
           isPremium: true,
           whatsappMessage: "Manuka Koru MGO 1959+",
@@ -602,18 +598,9 @@ export default function ManukatPage() {
 
                                   {/* Pricing */}
                                   <div className="text-center pt-2">
-                                    {product.isEuro ? (
-                                      <div>
-                                        <span className="text-2xl font-bold text-blue-600">
-                                          {product.euroPrice} Euro
-                                        </span>
-                                        <p className="text-sm text-gray-500">({product.price.toLocaleString()} L)</p>
-                                      </div>
-                                    ) : (
-                                      <span className="text-2xl font-bold text-blue-600">
-                                        {product.price.toLocaleString()} L
-                                      </span>
-                                    )}
+                                    <span className="text-2xl font-bold text-blue-600">
+                                      {product.price.toLocaleString()} L
+                                    </span>
                                   </div>
 
                                   {/* Star Rating */}

@@ -59,7 +59,6 @@ export default function ProductsPage() {
       id: 1,
       name: "Kolagjen",
       price: 2500,
-      euroPrice: 25,
       category: "Bukuria & Anti-aging",
       image: "https://www.vianaturalia.ro/wp-content/uploads/2018/10/Colagen-bovin-450x450.jpg",
       description: "Kolagjen i pastër për shëndetin e lëkurës dhe nyjeve",
@@ -72,7 +71,6 @@ export default function ProductsPage() {
       id: 2,
       name: "Kolagjen Peptides MSM",
       price: 2500,
-      euroPrice: 25,
       category: "Bukuria & Anti-aging",
       image: "https://www.vianaturalia.ro/wp-content/uploads/2018/07/Colagen-cu-MSM-3-450x450.jpg",
       description: "Kolagjen me MSM për përfitime të shtuar",
@@ -85,7 +83,6 @@ export default function ProductsPage() {
       id: 3,
       name: "Vitamin C",
       price: 1500,
-      euroPrice: 15,
       category: "Imuniteti",
       image: "https://intenson.pl/cdn/shop/files/witaminaC150_960x720.png?v=1739975165",
       description: "Vitamin C i pastër për sistemin imunitar",
@@ -98,7 +95,6 @@ export default function ProductsPage() {
       id: 4,
       name: "Spirulina",
       price: 1500,
-      euroPrice: 15,
       category: "Superfood",
       image: "https://us-i.makeupstore.com/j/j2/j2izpwefxtxp.jpg",
       description: "Superfood i gjelbër me proteina të larta",
@@ -111,7 +107,6 @@ export default function ProductsPage() {
       id: 5,
       name: "Vital Fibre",
       price: 1500,
-      euroPrice: 15,
       category: "Tretja",
       image: "https://www.smakolyk.co.uk/wp-content/uploads/2025/01/21992.png",
       description: "Fibra vitale për shëndetin e tretjes",
@@ -124,7 +119,6 @@ export default function ProductsPage() {
       id: 6,
       name: "Ksylitol Sheqeri Diabetik",
       price: 1200,
-      euroPrice: 12,
       category: "Diabetikë",
       image: "https://intenson.pl/cdn/shop/files/ksylitolchinski500_1280x.png?v=1741183860",
       description: "Ëmbëlsues natyror për diabetikë",
@@ -137,7 +131,6 @@ export default function ProductsPage() {
       id: 7,
       name: "Magnez Aqua",
       price: 2500,
-      euroPrice: 25,
       category: "Relaksim & Gjumi",
       image: "https://intenson.pl/cdn/shop/files/0_AQ_LOVELY_1280x.jpg?v=1720014976",
       description: "Magnez i lëngshëm për thithje të shpejtë",
@@ -150,7 +143,6 @@ export default function ProductsPage() {
       id: 8,
       name: "Shilajit Tableta",
       price: null,
-      euroPrice: null,
       category: "Energji & Vitalitet",
       image: "https://cdn.stolichki.ru/s/drugs/medium/96/9681_2.jpg",
       description: "Shilajit në formë tabletash për përdorim të lehtë",
@@ -163,7 +155,6 @@ export default function ProductsPage() {
       id: 9,
       name: "Shilajit Vazo",
       price: null,
-      euroPrice: null,
       category: "Energji & Vitalitet",
       image: "https://ekodlaciebie.pl/6560-thickbox_default/mumio-altajskie-30-gr.jpg",
       description: "Shilajit i pastër në vazo për dozim të saktë",
@@ -176,7 +167,6 @@ export default function ProductsPage() {
       id: 10,
       name: "Yerba Mate Canarias",
       price: 1700,
-      euroPrice: 17,
       category: "Energji & Vitalitet",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/canarias.jpg-4rXUieiGptTh0xR5HsTVvuqq8aqotD.png",
       description: "Yerba Mate tradicionale nga Argjentina - energjizues natyror me antioksidantë",
@@ -194,7 +184,6 @@ export default function ProductsPage() {
       id: 11,
       name: "Yerba Mate Baldo",
       price: 1700,
-      euroPrice: 17,
       category: "Energji & Vitalitet",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/baldo.jpg-xkb9QP9gsQ82LeDt6XM3eI8N0PSAYb.webp",
       description: "Yerba Mate premium nga Brazil - infuzion tradicional me vitamina dhe minerale",
@@ -219,10 +208,10 @@ export default function ProductsPage() {
 
     const matchesPrice =
       priceFilter === "" ||
-      (priceFilter === "low" && product.euroPrice && product.euroPrice <= 15) ||
-      (priceFilter === "medium" && product.euroPrice && product.euroPrice > 15 && product.euroPrice <= 25) ||
-      (priceFilter === "high" && product.euroPrice && product.euroPrice > 25) ||
-      (priceFilter === "contact" && !product.euroPrice)
+      (priceFilter === "low" && product.price && product.price <= 1500) ||
+      (priceFilter === "medium" && product.price && product.price > 1500 && product.price <= 2500) ||
+      (priceFilter === "high" && product.price && product.price > 2500) ||
+      (priceFilter === "contact" && !product.price)
 
     return matchesSearch && matchesCategory && matchesPrice
   })
@@ -318,9 +307,9 @@ export default function ProductsPage() {
                     className="px-4 py-3 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white/80 backdrop-blur-sm appearance-none cursor-pointer"
                   >
                     <option value="">Të gjitha çmimet</option>
-                    <option value="low">Deri në 15€ (1500 L)</option>
-                    <option value="medium">15€ - 25€ (1500 - 2500 L)</option>
-                    <option value="high">Mbi 25€ (2500 L)</option>
+                    <option value="low">Deri në 1500 L</option>
+                    <option value="medium">1500 - 2500 L</option>
+                    <option value="high">Mbi 2500 L</option>
                     <option value="contact">Kontaktoni për çmim</option>
                   </select>
 
@@ -540,10 +529,7 @@ export default function ProductsPage() {
                           {/* Pricing */}
                           <div className="text-center pt-2">
                             {product.price ? (
-                              <div>
-                                <span className="text-2xl font-bold text-green-600">{product.euroPrice}€</span>
-                                <p className="text-sm text-gray-500">({product.price} L)</p>
-                              </div>
+                              <span className="text-2xl font-bold text-green-600">{product.price} L</span>
                             ) : (
                               <div className="text-center mb-4">
                                 <span className="text-lg font-medium text-amber-600">Kontaktoni për çmim</span>
