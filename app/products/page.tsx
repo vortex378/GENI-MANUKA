@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Heart, Zap, Shield, Search, Filter, ChevronLeft, ChevronRight, Coffee } from "lucide-react"
+import { ArrowLeft, Heart, Zap, Shield, Search, Filter, ChevronLeft, ChevronRight, Coffee, Star } from "lucide-react"
 import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
@@ -191,6 +191,37 @@ export default function ProductsPage() {
       icon: Heart,
       color: "from-red-500 to-green-500",
       whatsappMessage: "Yerba Mate Baldo 1kg",
+    },
+    {
+      id: 12,
+      name: "Krokos Kozanis Safran 1g",
+      price: 1400,
+      category: "Erëza Premium",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-08-18%20at%2011.47.51%20AM-DP1YbnKt5NK1n1iiqYKbcuchW3a2Oa.jpeg",
+      description: "Safran premium grek nga Kozani me cilësi të lartë P.D.O - erëza më e shtrenjtë në botë",
+      benefits: [
+        "Antioksidant i fuqishëm",
+        "Përmirëson humorin",
+        "Mbështet shëndetin e syve",
+        "Aromë dhe ngjyrë unike",
+      ],
+      icon: Star,
+      color: "from-yellow-500 to-orange-500",
+      whatsappMessage: "Krokos Kozanis Safran 1g",
+    },
+    {
+      id: 13,
+      name: "Krokos Kozanis Safran 0.5g",
+      price: 750,
+      category: "Erëza Premium",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-08-18%20at%2011.47.51%20AM%20%281%29-bsYe5Ap9XA9YPTwWaYiy1EB6geNPKW.jpeg",
+      description: "Safran premium grek nga Kozani në paketim 0.5g - cilësi e garantuar P.D.O",
+      benefits: ["Cilësi e garantuar P.D.O", "Aromë intensive", "Ngjyrë e pasur", "Përdorim në gatim luksoze"],
+      icon: Star,
+      color: "from-orange-500 to-red-500",
+      whatsappMessage: "Krokos Kozanis Safran 0.5g",
     },
   ]
 
