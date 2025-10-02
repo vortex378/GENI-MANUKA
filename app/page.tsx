@@ -1,12 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Leaf, Award, Shield, Instagram, ArrowRight, Sparkles, Crown } from "lucide-react"
+import { Leaf, Award, Shield, Instagram, ArrowRight, Sparkles, Crown, Star, TrendingUp, Package } from "lucide-react"
 import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
@@ -18,10 +18,19 @@ import FAQSection from "@/components/faq-section"
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
   const handleLoadingComplete = () => {
     setIsLoading(false)
   }
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY })
+    }
+    window.addEventListener("mousemove", handleMouseMove)
+    return () => window.removeEventListener("mousemove", handleMouseMove)
+  }, [])
 
   // Featured Products Data
   const featuredProducts = [
@@ -75,47 +84,70 @@ export default function HomePage() {
     },
   ]
 
+  const stats = [
+    { icon: Package, value: "500+", label: "Klientë të Kënaqur", color: "from-blue-500 to-cyan-500" },
+    { icon: Award, value: "100%", label: "Cilësi Premium", color: "from-amber-500 to-orange-500" },
+    { icon: TrendingUp, value: "10+", label: "Vite Përvojë", color: "from-green-500 to-emerald-500" },
+    { icon: Star, value: "5.0", label: "Vlerësim Mesatar", color: "from-purple-500 to-pink-500" },
+  ]
+
   if (isLoading) {
-    return <LoadingScreen onLoadingComplete={handleLoadingComplete} duration={3000} />
+    return <LoadingScreen onLoadingComplete={handleLoadingComplete} duration={2500} />
   }
 
   return (
     <PageWrapper>
-      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-amber-50/30 to-orange-50/20 relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="fixed inset-0 pointer-events-none overflow-hidden">
+          <div
+            className="absolute w-[500px] h-[500px] bg-gradient-to-r from-amber-400/10 to-orange-400/10 rounded-full blur-3xl transition-all duration-1000 ease-out"
+            style={{
+              left: `${mousePosition.x - 250}px`,
+              top: `${mousePosition.y - 250}px`,
+            }}
+          />
+          <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-r from-amber-300/20 to-yellow-300/20 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-r from-orange-300/20 to-red-300/20 rounded-full blur-3xl animate-pulse delay-1000" />
+        </div>
+
         <Navigation />
 
-        {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          {/* Background Animation */}
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-100/20 to-orange-100/20">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-amber-200/30 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-200/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          </div>
-
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
+        {/* Hero Section - Modern & Bold */}
+        <section className="relative min-h-screen flex items-center justify-center pt-20 pb-16 px-4">
+          <div className="max-w-7xl mx-auto w-full">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <AnimatedSection animation="fadeInLeft" className="text-center lg:text-left">
-                <Badge className="mb-6 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-2 text-lg animate-bounce">
-                  Manuka Albania - 100% Mjalte Manuka i Pastër nga Zelanda e Re
-                </Badge>
-                <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 mb-8 leading-tight">
-                  Manuka Albania
-                  <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent block">
-                    Premium
+              {/* Left Content */}
+              <AnimatedSection animation="fadeInLeft" className="text-center lg:text-left space-y-8">
+                <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-amber-500/10 to-orange-500/10 rounded-full border border-amber-200/50 backdrop-blur-sm">
+                  <Sparkles className="h-5 w-5 text-amber-600 animate-pulse" />
+                  <span className="text-sm font-semibold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
+                    100% Autentik nga Zelanda e Re
                   </span>
-                  <span className="text-3xl lg:text-4xl text-gray-600 font-normal">Mjalte Manuka</span>
+                </div>
+
+                <h1 className="text-5xl lg:text-7xl font-black leading-tight">
+                  <span className="bg-gradient-to-r from-slate-900 via-amber-900 to-orange-900 bg-clip-text text-transparent">
+                    Cilësia Premium
+                  </span>
+                  <br />
+                  <span className="bg-gradient-to-r from-amber-600 via-orange-500 to-red-500 bg-clip-text text-transparent animate-gradient">
+                    Manuka Albania
+                  </span>
                 </h1>
-                <p className="text-xl lg:text-2xl text-gray-600 mb-10 leading-relaxed">
-                  Manuka Albania ju ofron mjaltë premium Manuka nga Zelanda e Re. Mjalte autentik me MGO të lartë, i
-                  testuar për cilësi dhe i importuar drejtpërdrejt për tregun shqiptar. Zbuloni përfitimet e mjaltit
-                  Manuka në Shqipëri me Manuka Albania.
+
+                <p className="text-xl text-slate-600 leading-relaxed max-w-xl">
+                  Zbuloni fuqinë e mjaltit premium Manuka të importuar drejtpërdrejt nga Zelanda e Re.
+                  <span className="font-semibold text-amber-600"> Cilësi e garantuar</span>, rezultate të provuara.
                 </p>
-                <div className="flex justify-center lg:justify-start">
-                  <div className="relative group">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+
+                {/* CTA Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                  <div className="group relative">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
                     <Button
                       size="lg"
-                      className="relative bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white px-8 py-4 text-lg transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                      className="relative bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white px-8 py-6 text-lg rounded-2xl font-bold shadow-2xl transform hover:scale-105 transition-all duration-300"
                       onClick={() =>
                         window.open(
                           "https://www.instagram.com/manuka_mjalte_albania_2014?igsh=MXB2NHA2OWtlamdsMA==",
@@ -123,27 +155,71 @@ export default function HomePage() {
                         )
                       }
                     >
-                      <Instagram className="mr-2 h-5 w-5" />
+                      <Instagram className="mr-2 h-6 w-6" />
                       Blej Tani
-                      <ArrowRight className="ml-2 h-5 w-5" />
+                      <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </div>
+
+                  <Link href="/manukat">
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="px-8 py-6 text-lg rounded-2xl font-semibold border-2 border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white transition-all duration-300 shadow-lg bg-transparent"
+                    >
+                      Shiko Produktet
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </Link>
+                </div>
+
+                {/* Trust Indicators */}
+                <div className="flex flex-wrap gap-6 justify-center lg:justify-start pt-4">
+                  {[
+                    { icon: Shield, text: "E Certifikuar" },
+                    { icon: Award, text: "Cilësi Premium" },
+                    { icon: Star, text: "5★ Vlerësim" },
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-2 text-slate-600">
+                      <div className="p-2 bg-white rounded-lg shadow-md">
+                        <item.icon className="h-5 w-5 text-amber-600" />
+                      </div>
+                      <span className="font-medium">{item.text}</span>
+                    </div>
+                  ))}
                 </div>
               </AnimatedSection>
 
+              {/* Right Image */}
               <AnimatedSection animation="fadeInRight" delay={300} className="relative">
-                <div className="relative group">
-                  <div className="absolute -inset-4 bg-gradient-to-r from-amber-400 to-orange-400 rounded-3xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
-                  <Image
-                    src="https://manukahealth.shop/cdn/shop/products/MH-Honey-MGO100_-250g-front-DE_grande.jpg?v=1658158893"
-                    alt="Manuka Albania - Mjalte Premium Manuka nga Zelanda e Re"
-                    width={600}
-                    height={600}
-                    priority
-                    className="relative rounded-3xl shadow-2xl transform group-hover:scale-105 transition-transform duration-300 object-cover"
-                  />
-                  <div className="absolute top-8 right-8 bg-white/90 backdrop-blur-sm rounded-full p-4 shadow-lg">
-                    <Sparkles className="h-8 w-8 text-amber-600 animate-spin" />
+                <div className="relative group perspective-1000">
+                  {/* Floating Card Effect */}
+                  <div className="absolute -inset-8 bg-gradient-to-r from-amber-600/20 to-orange-600/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500 animate-pulse" />
+
+                  <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/50 transform group-hover:scale-105 group-hover:rotate-1 transition-all duration-500">
+                    <Image
+                      src="https://manukahealth.shop/cdn/shop/products/MH-Honey-MGO100_-250g-front-DE_grande.jpg?v=1658158893"
+                      alt="Manuka Albania Premium Honey"
+                      width={500}
+                      height={500}
+                      priority
+                      className="rounded-2xl shadow-xl"
+                    />
+
+                    {/* Floating Badges */}
+                    <div className="absolute -top-4 -right-4 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl p-4 shadow-2xl animate-bounce">
+                      <Crown className="h-8 w-8 text-white" />
+                    </div>
+
+                    <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl p-4 shadow-2xl">
+                      <div className="flex items-center gap-2">
+                        <Star className="h-6 w-6 text-amber-500 fill-amber-500" />
+                        <div>
+                          <p className="text-sm font-bold text-slate-900">5.0 Rating</p>
+                          <p className="text-xs text-slate-600">500+ Reviews</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </AnimatedSection>
@@ -151,14 +227,46 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Features Section */}
-        <section className="py-20 bg-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-50/50 to-orange-50/50"></div>
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Stats Section - Modern Cards */}
+        <section className="py-20 relative">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+              {stats.map((stat, index) => (
+                <AnimatedSection key={index} animation="scaleIn" delay={index * 100}>
+                  <Card className="group relative overflow-hidden border-0 bg-white/80 backdrop-blur-xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+                    />
+                    <CardContent className="p-8 text-center relative z-10">
+                      <div
+                        className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${stat.color} mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                      >
+                        <stat.icon className="h-8 w-8 text-white" />
+                      </div>
+                      <h3 className="text-4xl font-black bg-gradient-to-br from-slate-900 to-slate-600 bg-clip-text text-transparent mb-2">
+                        {stat.value}
+                      </h3>
+                      <p className="text-slate-600 font-medium">{stat.label}</p>
+                    </CardContent>
+                  </Card>
+                </AnimatedSection>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Features Section - Modern Grid */}
+        <section className="py-20 relative">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <AnimatedSection className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Pse të Zgjedhësh Manuka Albania?</h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Cilësi e pakompromis dhe autenticitet në çdo kavanoz nga Manuka Albania
+              <Badge className="mb-4 px-6 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-bold">
+                PSE NE?
+              </Badge>
+              <h2 className="text-4xl lg:text-6xl font-black bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent mb-4">
+                Cilësia që Ju Meritoni
+              </h2>
+              <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+                Tre arsye kryesore pse mijëra klientë na besojnë çdo ditë
               </p>
             </AnimatedSection>
 
@@ -168,30 +276,47 @@ export default function HomePage() {
                   icon: Award,
                   title: "E Certifikuar Autentike",
                   description:
-                    "Çdo sasi nga Manuka Albania testohet dhe certifikohet në mënyrë të pavarur për përmbajtjen MGO dhe autenticitetin",
+                    "Çdo produkt testohet dhe certifikohet nga laboratorë të pavarur me standarde ndërkombëtare ISO 17025",
+                  gradient: "from-blue-500 via-cyan-500 to-teal-500",
                   delay: 0,
                 },
                 {
                   icon: Shield,
                   title: "E Pastër & Natyrore",
-                  description: "Pa shtesa, pa përpunim - vetëm mjalte Manuka e pastër siç e ka menduar natyra",
+                  description: "Pa shtesa artificiale, pa përpunim kimik - vetëm mjalte Manuka e pastër 100% natyror",
+                  gradient: "from-amber-500 via-orange-500 to-red-500",
                   delay: 200,
                 },
                 {
                   icon: Leaf,
                   title: "Burim i Qëndrueshëm",
-                  description: "Mbledhur në mënyrë etike nga zonat e mbrojtura të natyrës së Zelandës së Re",
+                  description: "Mbledhur në mënyrë etike nga zonat e mbrojtura të natyrës së virgjër të Zelandës së Re",
+                  gradient: "from-green-500 via-emerald-500 to-teal-500",
                   delay: 400,
                 },
               ].map((feature, index) => (
-                <AnimatedSection key={index} animation="scaleIn" delay={feature.delay}>
-                  <Card className="text-center p-8 h-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group border-0 bg-gradient-to-br from-white to-amber-50/30">
-                    <CardContent className="pt-8">
-                      <div className="bg-gradient-to-br from-amber-500 to-orange-500 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <AnimatedSection key={index} animation="fadeInUp" delay={feature.delay}>
+                  <Card className="group relative h-full border-0 bg-white/80 backdrop-blur-xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-4 overflow-hidden">
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
+                    />
+
+                    <CardContent className="p-8 relative z-10">
+                      <div
+                        className={`inline-flex p-5 rounded-2xl bg-gradient-to-br ${feature.gradient} mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}
+                      >
                         <feature.icon className="h-10 w-10 text-white" />
                       </div>
-                      <h3 className="text-2xl font-semibold mb-4 text-gray-900">{feature.title}</h3>
-                      <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+
+                      <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-amber-600 group-hover:to-orange-600 transition-all duration-300">
+                        {feature.title}
+                      </h3>
+
+                      <p className="text-slate-600 leading-relaxed">{feature.description}</p>
+
+                      <div
+                        className={`mt-6 w-0 h-1 bg-gradient-to-r ${feature.gradient} group-hover:w-full transition-all duration-500 rounded-full`}
+                      />
                     </CardContent>
                   </Card>
                 </AnimatedSection>
@@ -200,90 +325,113 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Featured Products Row */}
-        <section className="py-20 bg-gradient-to-br from-amber-50 to-orange-50 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-full">
-            <div className="absolute top-20 left-20 w-64 h-64 bg-amber-200/20 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-20 right-20 w-80 h-80 bg-orange-200/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          </div>
+        {/* Featured Products */}
+        <section className="py-20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-50/50 to-orange-50/50" />
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <AnimatedSection className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Produktet e Manuka Albania</h2>
-              <p className="text-xl text-gray-600">Varietetet më të popullarizuara të mjaltit tonë Manuka</p>
+              <Badge className="mb-4 px-6 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-bold">
+                PRODUKTET TONA
+              </Badge>
+              <h2 className="text-4xl lg:text-6xl font-black bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent mb-4">
+                Koleksioni Premium
+              </h2>
+              <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+                Zgjidhni nga produktet më të njohura të mjaltit Manuka
+              </p>
             </AnimatedSection>
 
             <AnimatedSection delay={200}>
               <ProductCardRow products={featuredProducts} />
             </AnimatedSection>
 
-            <AnimatedSection className="text-center mt-12" delay={100}>
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
-                <Link href="/showcase">
+            <AnimatedSection className="text-center mt-12" delay={400}>
+              <Link href="/showcase">
+                <div className="group relative inline-block">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse" />
                   <Button
-                    variant="outline"
                     size="lg"
-                    className="relative border-2 border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white px-8 py-4 text-lg transform hover:scale-105 transition-all duration-300 bg-white shadow-lg hover:shadow-xl"
+                    className="relative bg-white text-slate-900 hover:bg-slate-50 px-8 py-6 text-lg rounded-2xl font-bold shadow-xl border-2 border-slate-900"
                   >
-                    <Crown className="mr-2 h-5 w-5" />
-                    Shiko Koleksionin Koru
+                    <Crown className="mr-2 h-6 w-6 text-amber-600" />
+                    Shiko Koleksionin e Plotë
+                    <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
                   </Button>
-                </Link>
-              </div>
+                </div>
+              </Link>
             </AnimatedSection>
           </div>
         </section>
 
-        {/* Manuka Koru Showcase */}
-        <section className="py-20 bg-white relative overflow-hidden">
+        {/* Koru Showcase */}
+        <section className="py-20 relative bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ManukaKoruShowcase />
           </div>
         </section>
 
-        {/* Benefits Preview */}
-        <section className="py-20 bg-gradient-to-br from-green-50 to-emerald-50 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Benefits Preview - Modern Design */}
+        <section className="py-20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-emerald-50" />
+
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <AnimatedSection animation="fadeInLeft">
-                <Badge className="mb-6 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-2 text-lg">
-                  Përfitime Shëndetësore
+                <Badge className="mb-6 px-6 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-sm font-bold">
+                  PËRFITIMET SHËNDETËSORE
                 </Badge>
-                <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8">
-                  Fuqia e Natyrës për Shëndetin Tuaj
+                <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-8">
+                  Fuqia e Natyrës për
+                  <span className="block bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                    Shëndetin Tuaj
+                  </span>
                 </h2>
-                <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                  Mjalti Manuka nga Manuka Albania është më shumë se një ëmbëlsues natyror. Ai është një superfood i
-                  fuqishëm me përfitime të provuara shkencore.
+                <p className="text-xl text-slate-600 mb-8 leading-relaxed">
+                  Mjalti Manuka është superfood me përfitime të provuara shkencërisht
                 </p>
-                <div className="space-y-6">
+
+                <div className="space-y-4">
                   {[
                     "Mbështet sistemin imunitar",
                     "Përmirëson shëndetin e tretjes",
                     "Ofron energji të qëndrueshme",
                     "Mbështet shërimin natyror",
                   ].map((benefit, index) => (
-                    <div key={index} className="flex items-center group">
-                      <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-full w-3 h-3 mr-4 group-hover:scale-150 transition-transform duration-300"></div>
-                      <span className="text-lg text-gray-700 group-hover:text-green-600 transition-colors duration-300">
+                    <div key={index} className="flex items-center gap-4 group">
+                      <div className="p-3 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                        <Shield className="h-6 w-6 text-white" />
+                      </div>
+                      <span className="text-lg font-semibold text-slate-700 group-hover:text-green-600 transition-colors">
                         {benefit}
                       </span>
                     </div>
                   ))}
                 </div>
+
+                <Link href="/benefits">
+                  <Button
+                    size="lg"
+                    className="mt-8 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-6 text-lg rounded-2xl font-bold shadow-xl"
+                  >
+                    Mëso Më Shumë
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
               </AnimatedSection>
 
               <AnimatedSection animation="fadeInRight" delay={300}>
                 <div className="relative group">
-                  <div className="absolute -inset-4 bg-gradient-to-r from-green-400 to-emerald-400 rounded-3xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
-                  <Image
-                    src="https://neozealand.com/cdn/shop/files/DSC3887_100.jpg?v=1718806711"
-                    alt="Përfitimet e Mjaltit Manuka nga Manuka Albania"
-                    width={500}
-                    height={500}
-                    className="relative rounded-3xl shadow-2xl transform group-hover:scale-105 transition-transform duration-300 object-cover"
-                  />
+                  <div className="absolute -inset-8 bg-gradient-to-r from-green-400 to-emerald-400 rounded-3xl blur-2xl opacity-30 group-hover:opacity-50 transition-all duration-500" />
+                  <div className="relative bg-white rounded-3xl p-6 shadow-2xl transform group-hover:scale-105 transition-all duration-500">
+                    <Image
+                      src="https://neozealand.com/cdn/shop/files/DSC3887_100.jpg?v=1718806711"
+                      alt="Përfitimet e Mjaltit Manuka"
+                      width={600}
+                      height={600}
+                      className="rounded-2xl"
+                    />
+                  </div>
                 </div>
               </AnimatedSection>
             </div>
@@ -293,21 +441,52 @@ export default function HomePage() {
         {/* FAQ Section */}
         <FAQSection />
 
-        {/* Footer */}
-        <footer className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-900/10 to-orange-900/10"></div>
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-4 gap-8">
-              <AnimatedSection animation="fadeInUp">
-                <div className="flex items-center mb-6">
-                  <Leaf className="h-10 w-10 text-amber-500" />
-                  <span className="ml-3 text-2xl font-bold">Manuka Albania</span>
+        {/* CTA Section - Bold & Modern */}
+        <section className="py-20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-amber-900 to-orange-900" />
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE2YzAgMy4zMTQtMi42ODYgNi02IDZzLTYtMi42ODYtNi02IDIuNjg2LTYgNi02IDYgMi42ODYgNiA2ek0wIDEyYzAtMy4zMTQgMi42ODYtNiA2LTZzNiAyLjY4NiA2IDYtMi42ODYgNi02IDYtNi0yLjY4Ni02LTZ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-10" />
+
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <AnimatedSection>
+              <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/10 rounded-full border border-white/20 backdrop-blur-sm mb-8">
+                <Sparkles className="h-5 w-5 text-amber-400 animate-pulse" />
+                <span className="text-sm font-semibold text-white">Ofertë e Kufizuar - Porositni Sot</span>
+              </div>
+
+              <h2 className="text-4xl lg:text-6xl font-black text-white mb-6">
+                Filloni Udhëtimin Tuaj të
+                <span className="block bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
+                  Mirëqenies Sot
+                </span>
+              </h2>
+
+              <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto">
+                Bashkohuni me mijëra klientë të kënaqur në Shqipëri dhe përjetoni fuqinë e mjaltit Manuka
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <div className="group relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 to-orange-400 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse" />
+                  <Button
+                    size="lg"
+                    className="relative bg-white text-slate-900 hover:bg-slate-100 px-10 py-7 text-xl rounded-2xl font-black shadow-2xl"
+                    onClick={() =>
+                      window.open(
+                        "https://www.instagram.com/manuka_mjalte_albania_2014?igsh=MXB2NHA2OWtlamdsMA==",
+                        "_blank",
+                      )
+                    }
+                  >
+                    <Instagram className="mr-3 h-7 w-7" />
+                    Blej Manuka Tani
+                    <ArrowRight className="ml-3 h-7 w-7 group-hover:translate-x-2 transition-transform" />
+                  </Button>
                 </div>
-                <p className="text-gray-300 leading-relaxed mb-6">
-                  Manuka Albania - Mjalte premium Manuka nga Zelanda e Re për shëndet dhe mirëqenie në Shqipëri.
-                </p>
+
                 <Button
-                  className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 transform hover:scale-105 transition-all duration-300"
+                  size="lg"
+                  variant="outline"
+                  className="px-10 py-7 text-xl rounded-2xl font-bold border-2 border-white text-white hover:bg-white hover:text-slate-900 transition-all duration-300 bg-transparent"
                   onClick={() =>
                     window.open(
                       "https://www.instagram.com/manuka_mjalte_albania_2014?igsh=MXB2NHA2OWtlamdsMA==",
@@ -315,14 +494,63 @@ export default function HomePage() {
                     )
                   }
                 >
-                  <Instagram className="mr-2 h-4 w-4" />
+                  Na Kontaktoni
+                </Button>
+              </div>
+
+              {/* Trust Badges */}
+              <div className="flex flex-wrap gap-8 justify-center mt-12 pt-12 border-t border-white/20">
+                {[
+                  { icon: Shield, text: "Pagesa e Sigurt" },
+                  { icon: Package, text: "Dërgesa Falas" },
+                  { icon: Award, text: "Garanci Cilësie" },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3 text-white">
+                    <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm">
+                      <item.icon className="h-6 w-6" />
+                    </div>
+                    <span className="font-semibold text-lg">{item.text}</span>
+                  </div>
+                ))}
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+
+        {/* Footer - Modern & Clean */}
+        <footer className="bg-slate-900 text-white py-16 relative overflow-hidden border-t-4 border-amber-500">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMiI+PHBhdGggZD0iTTM2IDE2YzAgMy4zMTQtMi42ODYgNi02IDZzLTYtMi42ODYtNi02IDIuNjg2LTYgNi02IDYgMi42ODYgNiA2ek0wIDEyYzAtMy4zMTQgMi42ODYtNiA2LTZzNiAyLjY4NiA2IDYtMi42ODYgNi02IDYtNi0yLjY4Ni02LTZ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-50" />
+
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-4 gap-12 mb-12">
+              <AnimatedSection animation="fadeInUp" className="md:col-span-2">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-3 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl">
+                    <Leaf className="h-8 w-8 text-white" />
+                  </div>
+                  <span className="text-3xl font-black">Manuka Albania</span>
+                </div>
+                <p className="text-slate-400 leading-relaxed mb-6 max-w-md">
+                  Mjalte premium Manuka nga Zelanda e Re për shëndet dhe mirëqenie në Shqipëri. Cilësi e garantuar,
+                  rezultate të provuara.
+                </p>
+                <Button
+                  className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white rounded-xl font-bold"
+                  onClick={() =>
+                    window.open(
+                      "https://www.instagram.com/manuka_mjalte_albania_2014?igsh=MXB2NHA2OWtlamdsMA==",
+                      "_blank",
+                    )
+                  }
+                >
+                  <Instagram className="mr-2 h-5 w-5" />
                   Na Ndiqni
                 </Button>
               </AnimatedSection>
 
               <AnimatedSection animation="fadeInUp" delay={200}>
                 <h3 className="font-bold text-xl mb-6 text-amber-400">Lidhje të Shpejta</h3>
-                <ul className="space-y-3 text-gray-300">
+                <ul className="space-y-3">
                   {[
                     { href: "/manukat", label: "Manukat" },
                     { href: "/products", label: "Produktet" },
@@ -333,9 +561,9 @@ export default function HomePage() {
                     <li key={link.href}>
                       <a
                         href={link.href}
-                        className="hover:text-amber-400 transition-colors duration-300 flex items-center group"
+                        className="text-slate-400 hover:text-amber-400 transition-colors duration-300 flex items-center gap-2 group"
                       >
-                        <ArrowRight className="h-4 w-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 -ml-6 group-hover:ml-0 transition-all duration-300" />
                         {link.label}
                       </a>
                     </li>
@@ -344,43 +572,43 @@ export default function HomePage() {
               </AnimatedSection>
 
               <AnimatedSection animation="fadeInUp" delay={400}>
-                <h3 className="font-bold text-xl mb-6 text-amber-400">Shërbimi i Klientit</h3>
-                <ul className="space-y-3 text-gray-300">
-                  <li>
-                    <a href="/shipping" className="hover:text-amber-400 transition-colors duration-300">
-                      Informacione Dërgese
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/returns" className="hover:text-amber-400 transition-colors duration-300">
-                      Kthime
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/faq" className="hover:text-amber-400 transition-colors duration-300">
-                      Pyetje të Shpeshta
-                    </a>
-                  </li>
-                </ul>
-              </AnimatedSection>
-
-              <AnimatedSection animation="fadeInUp" delay={600}>
-                <h3 className="font-bold text-xl mb-6 text-amber-400">Kontaktoni Manuka Albania</h3>
-                <div className="text-gray-300 space-y-3">
-                  <p>Email: info@manuka-albania.com</p>
-                  <p>WhatsApp: +355 69 732 0453</p>
-                  <p>Adresa: Tirana, Shqipëri</p>
-                  <p>Orari: Hën-Pre: 9:00-18:00</p>
-                  <p>Shtunë: 10:00-16:00</p>
+                <h3 className="font-bold text-xl mb-6 text-amber-400">Kontakti</h3>
+                <div className="space-y-4 text-slate-400">
+                  <p className="flex items-center gap-2">
+                    <span className="font-semibold text-white">Email:</span>
+                    info@manuka-albania.com
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <span className="font-semibold text-white">WhatsApp:</span>
+                    +355 69 732 0453
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <span className="font-semibold text-white">Adresa:</span>
+                    Tirana, Shqipëri
+                  </p>
+                  <div className="pt-4">
+                    <p className="font-semibold text-white mb-2">Orari:</p>
+                    <p>Hën-Pre: 9:00-18:00</p>
+                    <p>Shtunë: 10:00-16:00</p>
+                  </div>
                 </div>
               </AnimatedSection>
             </div>
 
-            <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
-              <p>&copy; 2024 Manuka Albania. Të gjitha të drejtat e rezervuara.</p>
+            <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-slate-500 text-sm">&copy; 2025 Manuka Albania. Të gjitha të drejtat e rezervuara.</p>
+              <div className="flex gap-4 text-slate-500 text-sm">
+                <a href="#" className="hover:text-amber-400 transition-colors">
+                  Privatësia
+                </a>
+                <a href="#" className="hover:text-amber-400 transition-colors">
+                  Kushtet
+                </a>
+              </div>
             </div>
           </div>
         </footer>
+
         <WhatsAppButton />
       </div>
     </PageWrapper>
