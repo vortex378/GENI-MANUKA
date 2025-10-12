@@ -10,19 +10,14 @@ import { Leaf, Award, Shield, Instagram, ArrowRight, Sparkles, Crown, Star, Tren
 import Navigation from "@/components/navigation"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
-import LoadingScreen from "@/components/loading-screen"
+import HeroCarousel from "@/components/hero-carousel"
 import ProductCardRow from "@/components/product-card-row"
 import ManukaKoruShowcase from "@/components/manuka-koru-showcase"
 import PageWrapper from "./page-wrapper"
 import FAQSection from "@/components/faq-section"
 
 export default function HomePage() {
-  const [isLoading, setIsLoading] = useState(true)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-
-  const handleLoadingComplete = () => {
-    setIsLoading(false)
-  }
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -91,15 +86,11 @@ export default function HomePage() {
     { icon: Star, value: "5.0", label: "Vlerësim Mesatar", color: "from-purple-500 to-pink-500" },
   ]
 
-  if (isLoading) {
-    return <LoadingScreen onLoadingComplete={handleLoadingComplete} duration={2500} />
-  }
-
   return (
     <PageWrapper>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-amber-50/30 to-orange-50/20 relative overflow-hidden">
         {/* Animated Background Elements */}
-        <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
           <div
             className="absolute w-[500px] h-[500px] bg-gradient-to-r from-amber-400/10 to-orange-400/10 rounded-full blur-3xl transition-all duration-1000 ease-out"
             style={{
@@ -113,122 +104,11 @@ export default function HomePage() {
 
         <Navigation />
 
-        {/* Hero Section - Modern & Bold */}
-        <section className="relative min-h-screen flex items-center justify-center pt-20 pb-16 px-4">
-          <div className="max-w-7xl mx-auto w-full">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Left Content */}
-              <AnimatedSection animation="fadeInLeft" className="text-center lg:text-left space-y-8">
-                <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-amber-500/10 to-orange-500/10 rounded-full border border-amber-200/50 backdrop-blur-sm">
-                  <Sparkles className="h-5 w-5 text-amber-600 animate-pulse" />
-                  <span className="text-sm font-semibold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
-                    100% Autentik nga Zelanda e Re
-                  </span>
-                </div>
-
-                <h1 className="text-5xl lg:text-7xl font-black leading-tight">
-                  <span className="bg-gradient-to-r from-slate-900 via-amber-900 to-orange-900 bg-clip-text text-transparent">
-                    Cilësia Premium
-                  </span>
-                  <br />
-                  <span className="bg-gradient-to-r from-amber-600 via-orange-500 to-red-500 bg-clip-text text-transparent animate-gradient">
-                    Manuka Albania
-                  </span>
-                </h1>
-
-                <p className="text-xl text-slate-600 leading-relaxed max-w-xl">
-                  Zbuloni fuqinë e mjaltit premium Manuka të importuar drejtpërdrejt nga Zelanda e Re.
-                  <span className="font-semibold text-amber-600"> Cilësi e garantuar</span>, rezultate të provuara.
-                </p>
-
-                {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                  <div className="group relative">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
-                    <Button
-                      size="lg"
-                      className="relative bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white px-8 py-6 text-lg rounded-2xl font-bold shadow-2xl transform hover:scale-105 transition-all duration-300"
-                      onClick={() =>
-                        window.open(
-                          "https://www.instagram.com/manuka_mjalte_albania_2014?igsh=MXB2NHA2OWtlamdsMA==",
-                          "_blank",
-                        )
-                      }
-                    >
-                      <Instagram className="mr-2 h-6 w-6" />
-                      Blej Tani
-                      <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </div>
-
-                  <Link href="/manukat">
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="px-8 py-6 text-lg rounded-2xl font-semibold border-2 border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white transition-all duration-300 shadow-lg bg-transparent"
-                    >
-                      Shiko Produktet
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Button>
-                  </Link>
-                </div>
-
-                {/* Trust Indicators */}
-                <div className="flex flex-wrap gap-6 justify-center lg:justify-start pt-4">
-                  {[
-                    { icon: Shield, text: "E Certifikuar" },
-                    { icon: Award, text: "Cilësi Premium" },
-                    { icon: Star, text: "5★ Vlerësim" },
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-2 text-slate-600">
-                      <div className="p-2 bg-white rounded-lg shadow-md">
-                        <item.icon className="h-5 w-5 text-amber-600" />
-                      </div>
-                      <span className="font-medium">{item.text}</span>
-                    </div>
-                  ))}
-                </div>
-              </AnimatedSection>
-
-              {/* Right Image */}
-              <AnimatedSection animation="fadeInRight" delay={300} className="relative">
-                <div className="relative group perspective-1000">
-                  {/* Floating Card Effect */}
-                  <div className="absolute -inset-8 bg-gradient-to-r from-amber-600/20 to-orange-600/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500 animate-pulse" />
-
-                  <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/50 transform group-hover:scale-105 group-hover:rotate-1 transition-all duration-500">
-                    <Image
-                      src="https://manukahealth.shop/cdn/shop/products/MH-Honey-MGO100_-250g-front-DE_grande.jpg?v=1658158893"
-                      alt="Manuka Albania Premium Honey"
-                      width={500}
-                      height={500}
-                      priority
-                      className="rounded-2xl shadow-xl"
-                    />
-
-                    {/* Floating Badges */}
-                    <div className="absolute -top-4 -right-4 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl p-4 shadow-2xl animate-bounce">
-                      <Crown className="h-8 w-8 text-white" />
-                    </div>
-
-                    <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl p-4 shadow-2xl">
-                      <div className="flex items-center gap-2">
-                        <Star className="h-6 w-6 text-amber-500 fill-amber-500" />
-                        <div>
-                          <p className="text-sm font-bold text-slate-900">5.0 Rating</p>
-                          <p className="text-xs text-slate-600">500+ Reviews</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </AnimatedSection>
-            </div>
-          </div>
-        </section>
+        {/* Hero Carousel - Full Screen */}
+        <HeroCarousel />
 
         {/* Stats Section - Modern Cards */}
-        <section className="py-20 relative">
+        <section className="py-20 relative z-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
               {stats.map((stat, index) => (
@@ -256,7 +136,7 @@ export default function HomePage() {
         </section>
 
         {/* Features Section - Modern Grid */}
-        <section className="py-20 relative">
+        <section className="py-20 relative z-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <AnimatedSection className="text-center mb-16">
               <Badge className="mb-4 px-6 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-bold">
@@ -326,7 +206,7 @@ export default function HomePage() {
         </section>
 
         {/* Featured Products */}
-        <section className="py-20 relative overflow-hidden">
+        <section className="py-20 relative overflow-hidden z-10">
           <div className="absolute inset-0 bg-gradient-to-br from-amber-50/50 to-orange-50/50" />
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -365,14 +245,14 @@ export default function HomePage() {
         </section>
 
         {/* Koru Showcase */}
-        <section className="py-20 relative bg-white">
+        <section className="py-20 relative bg-white z-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ManukaKoruShowcase />
           </div>
         </section>
 
         {/* Benefits Preview - Modern Design */}
-        <section className="py-20 relative overflow-hidden">
+        <section className="py-20 relative overflow-hidden z-10">
           <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-emerald-50" />
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -439,10 +319,12 @@ export default function HomePage() {
         </section>
 
         {/* FAQ Section */}
-        <FAQSection />
+        <section className="z-10 relative">
+          <FAQSection />
+        </section>
 
         {/* CTA Section - Bold & Modern */}
-        <section className="py-20 relative overflow-hidden">
+        <section className="py-20 relative overflow-hidden z-10">
           <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-amber-900 to-orange-900" />
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE2YzAgMy4zMTQtMi42ODYgNi02IDZzLTYtMi42ODYtNi02IDIuNjg2LTYgNi02IDYgMi42ODYgNiA2ek0wIDEyYzAtMy4zMTQgMi42ODYtNiA2LTZzNiAyLjY4NiA2IDYtMi42ODYgNi02IDYtNi0yLjY4Ni02LTZ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-10" />
 
@@ -518,7 +400,7 @@ export default function HomePage() {
         </section>
 
         {/* Footer - Modern & Clean */}
-        <footer className="bg-slate-900 text-white py-16 relative overflow-hidden border-t-4 border-amber-500">
+        <footer className="bg-slate-900 text-white py-16 relative overflow-hidden border-t-4 border-amber-500 z-10">
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMiI+PHBhdGggZD0iTTM2IDE2YzAgMy4zMTQtMi42ODYgNi02IDZzLTYtMi42ODYtNi02IDIuNjg2LTYgNi02IDYgMi42ODYgNiA2ek0wIDEyYzAtMy4zMTQgMi42ODYtNiA2LTZzNiAyLjY4NiA2IDYtMi42ODYgNi02IDYtNi0yLjY4Ni02LTZ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-50" />
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
