@@ -18,18 +18,18 @@ const slides: Slide[] = [
   {
     id: 1,
     image: "https://manukahealth.shop/cdn/shop/products/MH-Honey-MGO100_-250g-front-DE_grande.jpg?v=1658158893",
-    title: "Shëndeti Është Pasuri",
-    subtitle: "Përfitimet e provuara shkencore të mjaltit Manuka",
-    ctaText: "Mëso Më Shumë",
-    ctaLink: "/benefits",
-  },
-  {
-    id: 2,
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_2841-BerNBWshVNeJ2GNGar0J6eBTSxPPV1.png",
     title: "Cilësia Premium Manuka",
     subtitle: "Mjalte autentik nga Zelanda e Re për shëndet dhe mirëqenie",
     ctaText: "Blej Tani",
     ctaLink: "https://www.instagram.com/manuka_mjalte_albania_2014?igsh=MXB2NHA2OWtlamdsMA==",
+  },
+  {
+    id: 2,
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_2841-BerNBWshVNeJ2GNGar0J6eBTSxPPV1.png",
+    title: "Shëndeti Është Pasuri",
+    subtitle: "Përfitimet e provuara shkencore të mjaltit Manuka",
+    ctaText: "Mëso Më Shumë",
+    ctaLink: "/benefits",
   },
   {
     id: 3,
@@ -78,7 +78,7 @@ export default function HeroCarousel() {
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-slate-900">
-      {/* VIDEO BACKGROUND - MUCH MORE VISIBLE NOW! */}
+      {/* VIDEO BACKGROUND - Beautiful and Visible! */}
       <div className="absolute inset-0 z-0">
         <video
           autoPlay
@@ -94,7 +94,7 @@ export default function HeroCarousel() {
           Your browser does not support the video tag.
         </video>
 
-        {/* MINIMAL overlay - let the honey video SHINE! */}
+        {/* Minimal overlay - honey video shines! */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-transparent to-slate-900/60" />
       </div>
 
@@ -107,11 +107,11 @@ export default function HeroCarousel() {
               index === currentSlide ? "opacity-100" : "opacity-0"
             }`}
           >
-            {/* Desktop Layout - Text Left, Product Right */}
-            <div className="hidden md:flex h-full items-center px-8 lg:px-16 xl:px-24 max-w-[1800px] mx-auto">
-              {/* LEFT SIDE - Text Content */}
+            {/* DESKTOP Layout - Proper 3-Column: Text | Honey | Product */}
+            <div className="hidden md:grid md:grid-cols-12 h-full items-center gap-4 px-6 lg:px-12 xl:px-16 max-w-[1600px] mx-auto">
+              {/* LEFT COLUMN - Text Content (4 columns) */}
               <div
-                className="flex-1 max-w-2xl pr-8"
+                className="col-span-5 lg:col-span-4 flex flex-col justify-center space-y-4 lg:space-y-6"
                 style={{
                   transform: index === currentSlide ? "translateX(0)" : "translateX(-100px)",
                   opacity: index === currentSlide ? 1 : 0,
@@ -120,14 +120,14 @@ export default function HeroCarousel() {
                 }}
               >
                 {/* Premium Badge */}
-                <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-900/80 backdrop-blur-md rounded-full border-2 border-amber-500/50 mb-8 shadow-2xl">
-                  <Sparkles className="h-5 w-5 text-amber-400 animate-pulse" />
-                  <span className="text-sm font-bold text-white tracking-wide">Premium Quality</span>
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/80 backdrop-blur-md rounded-full border-2 border-amber-500/50 w-fit shadow-2xl">
+                  <Sparkles className="h-4 w-4 text-amber-400 animate-pulse" />
+                  <span className="text-xs lg:text-sm font-bold text-white tracking-wide">Premium Quality</span>
                 </div>
 
                 {/* Main Title - HUGE and BOLD */}
                 <h1
-                  className="text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black leading-[1.1] mb-6"
+                  className="text-4xl lg:text-5xl xl:text-6xl font-black leading-[1.1]"
                   style={{
                     color: "#FDB71A",
                     textShadow:
@@ -140,7 +140,7 @@ export default function HeroCarousel() {
 
                 {/* Subtitle - WHITE and CLEAR */}
                 <p
-                  className="text-xl lg:text-2xl xl:text-3xl font-semibold leading-relaxed mb-10"
+                  className="text-lg lg:text-xl xl:text-2xl font-semibold leading-relaxed"
                   style={{
                     color: "#FFFFFF",
                     textShadow: "2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7)",
@@ -150,9 +150,14 @@ export default function HeroCarousel() {
                 </p>
               </div>
 
-              {/* RIGHT SIDE - Product + CTA */}
+              {/* MIDDLE COLUMN - Empty space for honey video (3-4 columns) */}
+              <div className="col-span-2 lg:col-span-4 pointer-events-none">
+                {/* This space is for the beautiful honey in the video background */}
+              </div>
+
+              {/* RIGHT COLUMN - Product + CTA (4-5 columns) */}
               <div
-                className="flex-shrink-0"
+                className="col-span-5 lg:col-span-4 flex flex-col justify-center items-end space-y-4"
                 style={{
                   transform: index === currentSlide ? "translateX(0)" : "translateX(100px)",
                   opacity: index === currentSlide ? 1 : 0,
@@ -160,40 +165,41 @@ export default function HeroCarousel() {
                   transitionDelay: index === currentSlide ? "400ms" : "0ms",
                 }}
               >
-                {/* Product Card */}
-                <div className="bg-white rounded-3xl p-8 shadow-2xl mb-6 max-w-md">
+                {/* Product Card - Compact Size */}
+                <div className="bg-white rounded-2xl p-6 shadow-2xl w-full max-w-sm">
                   <div className="relative">
                     <div className="absolute inset-0 bg-amber-500/10 blur-2xl" />
                     <Image
                       src={slide.image || "/placeholder.svg"}
                       alt={slide.title}
-                      width={400}
-                      height={400}
+                      width={300}
+                      height={300}
                       priority={index === 0}
                       className="relative object-contain w-full"
                     />
                   </div>
                 </div>
 
-                {/* CTA Button */}
-                <div className="group relative">
-                  <div className="absolute -inset-2 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse" />
+                {/* CTA Button - Full width of product card */}
+                <div className="group relative w-full max-w-sm">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 rounded-xl blur-lg opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse" />
                   <Button
                     size="lg"
                     onClick={() => handleCTAClick(slide.ctaLink)}
-                    className="relative w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white px-10 py-7 text-xl font-black rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+                    className="relative w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white px-8 py-5 text-lg font-black rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-300"
                   >
                     <span className="text-white drop-shadow-lg">{slide.ctaText}</span>
-                    <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform" />
+                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform" />
                   </Button>
                 </div>
               </div>
             </div>
 
-            {/* MOBILE Layout */}
-            <div className="md:hidden flex flex-col h-full items-center justify-center px-4 py-8 space-y-8">
+            {/* MOBILE Layout - Vertical Stack with Better Proportions */}
+            <div className="md:hidden flex flex-col h-full justify-center px-4 py-8 space-y-6">
+              {/* Text Content */}
               <div
-                className="text-center space-y-4 max-w-md"
+                className="text-center space-y-3"
                 style={{
                   transform: index === currentSlide ? "translateY(0)" : "translateY(50px)",
                   opacity: index === currentSlide ? 1 : 0,
@@ -202,14 +208,14 @@ export default function HeroCarousel() {
                 }}
               >
                 {/* Badge */}
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/80 backdrop-blur-md rounded-full border-2 border-amber-500/50">
-                  <Sparkles className="h-4 w-4 text-amber-400 animate-pulse" />
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-900/80 backdrop-blur-md rounded-full border-2 border-amber-500/50">
+                  <Sparkles className="h-3 w-3 text-amber-400 animate-pulse" />
                   <span className="text-xs font-bold text-white">Premium Quality</span>
                 </div>
 
                 {/* Title */}
                 <h1
-                  className="text-4xl sm:text-5xl font-black leading-tight"
+                  className="text-3xl sm:text-4xl font-black leading-tight px-2"
                   style={{
                     color: "#FDB71A",
                     textShadow: "2px 2px 0px rgba(0,0,0,0.8), 4px 4px 15px rgba(0,0,0,0.6)",
@@ -220,7 +226,7 @@ export default function HeroCarousel() {
 
                 {/* Subtitle */}
                 <p
-                  className="text-lg sm:text-xl font-semibold leading-relaxed"
+                  className="text-base sm:text-lg font-semibold leading-relaxed px-4"
                   style={{
                     color: "#FFFFFF",
                     textShadow: "1px 1px 6px rgba(0,0,0,0.9)",
@@ -230,9 +236,9 @@ export default function HeroCarousel() {
                 </p>
               </div>
 
-              {/* Product */}
+              {/* Product Card - SMALLER for mobile */}
               <div
-                className="bg-white rounded-2xl p-6 shadow-2xl max-w-xs w-full"
+                className="mx-auto max-w-xs w-full"
                 style={{
                   transform: index === currentSlide ? "scale(1)" : "scale(0.9)",
                   opacity: index === currentSlide ? 1 : 0,
@@ -240,19 +246,21 @@ export default function HeroCarousel() {
                   transitionDelay: index === currentSlide ? "300ms" : "0ms",
                 }}
               >
-                <Image
-                  src={slide.image || "/placeholder.svg"}
-                  alt={slide.title}
-                  width={300}
-                  height={300}
-                  priority={index === 0}
-                  className="object-contain w-full"
-                />
+                <div className="bg-white rounded-xl p-4 shadow-2xl">
+                  <Image
+                    src={slide.image || "/placeholder.svg"}
+                    alt={slide.title}
+                    width={250}
+                    height={250}
+                    priority={index === 0}
+                    className="object-contain w-full"
+                  />
+                </div>
               </div>
 
-              {/* CTA */}
+              {/* CTA Button */}
               <div
-                className="w-full max-w-xs"
+                className="w-full px-4"
                 style={{
                   transform: index === currentSlide ? "translateY(0)" : "translateY(50px)",
                   opacity: index === currentSlide ? 1 : 0,
@@ -261,11 +269,11 @@ export default function HeroCarousel() {
                 }}
               >
                 <div className="group relative">
-                  <div className="absolute -inset-2 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 rounded-2xl blur-lg opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse" />
+                  <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 rounded-xl blur-lg opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse" />
                   <Button
                     size="lg"
                     onClick={() => handleCTAClick(slide.ctaLink)}
-                    className="relative w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white px-8 py-6 text-lg font-black rounded-2xl shadow-2xl"
+                    className="relative w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white px-6 py-5 text-base font-black rounded-xl shadow-2xl"
                   >
                     <span className="text-white">{slide.ctaText}</span>
                     <ArrowRight className="ml-2 h-5 w-5" />
@@ -277,17 +285,17 @@ export default function HeroCarousel() {
         ))}
       </div>
 
-      {/* Navigation Arrows */}
+      {/* Navigation Arrows - Desktop Only */}
       <div className="hidden md:block">
         <button
           onClick={() => {
             prevSlide()
             setIsAutoPlaying(false)
           }}
-          className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-4 bg-slate-900/80 hover:bg-slate-900/95 backdrop-blur-md rounded-full transition-all duration-300 group border-2 border-white/20 hover:scale-110 shadow-2xl"
+          className="absolute left-6 lg:left-8 top-1/2 -translate-y-1/2 z-20 p-3 lg:p-4 bg-slate-900/80 hover:bg-slate-900/95 backdrop-blur-md rounded-full transition-all duration-300 group border-2 border-white/20 hover:scale-110 shadow-2xl"
           aria-label="Previous slide"
         >
-          <ChevronLeft className="h-8 w-8 text-white group-hover:-translate-x-1 transition-transform" />
+          <ChevronLeft className="h-6 w-6 lg:h-8 lg:w-8 text-white group-hover:-translate-x-1 transition-transform" />
         </button>
 
         <button
@@ -295,23 +303,23 @@ export default function HeroCarousel() {
             nextSlide()
             setIsAutoPlaying(false)
           }}
-          className="absolute right-8 top-1/2 -translate-y-1/2 z-20 p-4 bg-slate-900/80 hover:bg-slate-900/95 backdrop-blur-md rounded-full transition-all duration-300 group border-2 border-white/20 hover:scale-110 shadow-2xl"
+          className="absolute right-6 lg:right-8 top-1/2 -translate-y-1/2 z-20 p-3 lg:p-4 bg-slate-900/80 hover:bg-slate-900/95 backdrop-blur-md rounded-full transition-all duration-300 group border-2 border-white/20 hover:scale-110 shadow-2xl"
           aria-label="Next slide"
         >
-          <ChevronRight className="h-8 w-8 text-white group-hover:translate-x-1 transition-transform" />
+          <ChevronRight className="h-6 w-6 lg:h-8 lg:w-8 text-white group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
 
       {/* Carousel Dots */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex gap-4">
+      <div className="absolute bottom-8 lg:bottom-12 left-1/2 -translate-x-1/2 z-20 flex gap-3 lg:gap-4">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
             className={`transition-all duration-500 rounded-full ${
               index === currentSlide
-                ? "bg-gradient-to-r from-amber-400 to-orange-500 w-16 h-4 shadow-lg"
-                : "bg-white/40 hover:bg-white/60 w-4 h-4"
+                ? "bg-gradient-to-r from-amber-400 to-orange-500 w-12 lg:w-16 h-3 lg:h-4 shadow-lg"
+                : "bg-white/40 hover:bg-white/60 w-3 lg:w-4 h-3 lg:h-4"
             }`}
             style={{
               boxShadow: index === currentSlide ? "0 0 25px rgba(251, 191, 36, 0.6)" : "none",
