@@ -79,6 +79,63 @@ export default function HomePage() {
     },
   ]
 
+  const melloraProducts = [
+    {
+      id: "melora-balm",
+      name: "Krem Restorative Balm",
+      description: "Deep Hydration and Skin Repair - Mjalte Manuka 525+ MGO",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-10-28%20at%206.52.48%20PM%20%281%29-UpylCmAHjXXxlKvaNyuLL51xXBnq23.jpeg",
+      mgoLevel: "525+ MGO",
+      brand: "MELORA" as const,
+      isPremium: false,
+      price: 2800,
+      rating: 5,
+      whatsappMessage: "Krem Restorative Balm - 2800L",
+    },
+    {
+      id: "melora-moisturiser",
+      name: "Krem Moisturiser",
+      description: "Nourish, Restore and Hydrate - Mjalte Manuka 525+ MGO",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-10-28%20at%206.52.48%20PM%20%282%29-RWUhaAqaKUOZK9H8QpgIfqhVw5RSEz.jpeg",
+      mgoLevel: "525+ MGO",
+      brand: "MELORA" as const,
+      isPremium: false,
+      price: 2800,
+      rating: 5,
+      whatsappMessage: "Krem Moisturiser - 2800L",
+    },
+    {
+      id: "melora-facewash",
+      name: "Purifying Face Wash",
+      description: "Cleanse and Protect - Mjalte Manuka 525+ MGO",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-10-28%20at%206.52.48%20PM-IK7LxvwgkD3YuAhSxARyss4v3A8ie4.jpeg",
+      mgoLevel: "525+ MGO",
+      brand: "MELORA" as const,
+      isPremium: false,
+      price: 2500,
+      rating: 5,
+      whatsappMessage: "Purifying Face Wash - 2500L",
+    },
+  ]
+
+  const melloraHoneyProducts = [
+    {
+      id: "melora-lozenges",
+      name: "Karamele Manuka 525+ MGO",
+      description: "Blackcurrant with Propolis - Mjalte Manuka Honey Lozenges",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-NWSLReyWsfhFOJwelXhhBumgmQY30c.png",
+      mgoLevel: "525+ MGO",
+      brand: "MELORA" as const,
+      isPremium: false,
+      price: 1200,
+      rating: 5,
+      whatsappMessage: "Karamele Manuka 525+ MGO - 1200L",
+    },
+  ]
+
   const stats = [
     { icon: Package, value: "500+", label: "Klientë të Kënaqur", color: "from-blue-500 to-cyan-500" },
     { icon: Award, value: "100%", label: "Cilësi Premium", color: "from-amber-500 to-orange-500" },
@@ -98,7 +155,7 @@ export default function HomePage() {
               top: `${mousePosition.y - 250}px`,
             }}
           />
-          <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-r from-amber-300/20 to-yellow-300/20 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-r from-orange-300/20 to-yellow-300/20 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-r from-orange-300/20 to-red-300/20 rounded-full blur-3xl animate-pulse delay-1000" />
         </div>
 
@@ -123,7 +180,7 @@ export default function HomePage() {
                       >
                         <stat.icon className="h-8 w-8 text-white" />
                       </div>
-                      <h3 className="text-4xl font-black bg-gradient-to-br from-slate-900 to-slate-600 bg-clip-text text-transparent mb-2">
+                      <h3 className="text-4xl font-black bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent mb-2">
                         {stat.value}
                       </h3>
                       <p className="text-slate-600 font-medium">{stat.label}</p>
@@ -240,6 +297,51 @@ export default function HomePage() {
                   </Button>
                 </div>
               </Link>
+            </AnimatedSection>
+          </div>
+        </section>
+
+        <section className="py-20 relative overflow-hidden z-10 bg-gradient-to-br from-purple-50 via-pink-50/30 to-purple-50/20">
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-400/5 to-pink-400/5" />
+
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <AnimatedSection className="text-center mb-16">
+              <Badge className="mb-4 px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-bold">
+                PRODUKTET E SKINCARE
+              </Badge>
+              <h2 className="text-4xl lg:text-6xl font-black bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent mb-4">
+                Koleksioni Melora
+              </h2>
+              <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+                Produktet e kujdesit të lëkurës me mjalte Manuka premium për lëkurë të shëndoshë dhe të rrezatuese
+              </p>
+            </AnimatedSection>
+
+            <AnimatedSection delay={200}>
+              <ProductCardRow products={melloraProducts} showPricing={true} showWhatsAppButton={true} />
+            </AnimatedSection>
+          </div>
+        </section>
+
+        {/* Melora Honey Lozenges Section */}
+        <section className="py-20 relative overflow-hidden z-10 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-400/5 to-orange-400/5" />
+
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <AnimatedSection className="text-center mb-16">
+              <Badge className="mb-4 px-6 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-bold">
+                HONEY LOZENGES
+              </Badge>
+              <h2 className="text-4xl lg:text-6xl font-black bg-gradient-to-r from-white to-slate-200 bg-clip-text text-transparent mb-4">
+                Melora Honey Lozenges
+              </h2>
+              <p className="text-xl text-slate-300 max-w-2xl mx-auto">
+                Kombinim i përfektë i mjaltit Manuka premium me propolis dhe mjedra të zezë për shëndetin tuaj
+              </p>
+            </AnimatedSection>
+
+            <AnimatedSection delay={200}>
+              <ProductCardRow products={melloraHoneyProducts} showPricing={true} showWhatsAppButton={true} />
             </AnimatedSection>
           </div>
         </section>
