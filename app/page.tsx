@@ -27,7 +27,7 @@ export default function HomePage() {
     return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [])
 
-  // Featured Products Data
+  // Featured Products Data - ONLY MANUKA PRODUCTS
   const featuredProducts = [
     {
       id: "koru-300",
@@ -76,63 +76,6 @@ export default function HomePage() {
       price: 22000,
       rating: 5,
       whatsappMessage: "Manuka Koru MGO 1000+",
-    },
-  ]
-
-  const melloraProducts = [
-    {
-      id: "melora-balm",
-      name: "Krem Restorative Balm",
-      description: "Deep Hydration and Skin Repair - Mjalte Manuka 525+ MGO",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-10-28%20at%206.52.48%20PM%20%281%29-UpylCmAHjXXxlKvaNyuLL51xXBnq23.jpeg",
-      mgoLevel: "525+ MGO",
-      brand: "MELORA" as const,
-      isPremium: false,
-      price: 2800,
-      rating: 5,
-      whatsappMessage: "Krem Restorative Balm - 2800L",
-    },
-    {
-      id: "melora-moisturiser",
-      name: "Krem Moisturiser",
-      description: "Nourish, Restore and Hydrate - Mjalte Manuka 525+ MGO",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-10-28%20at%206.52.48%20PM%20%282%29-RWUhaAqaKUOZK9H8QpgIfqhVw5RSEz.jpeg",
-      mgoLevel: "525+ MGO",
-      brand: "MELORA" as const,
-      isPremium: false,
-      price: 2800,
-      rating: 5,
-      whatsappMessage: "Krem Moisturiser - 2800L",
-    },
-    {
-      id: "melora-facewash",
-      name: "Purifying Face Wash",
-      description: "Cleanse and Protect - Mjalte Manuka 525+ MGO",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-10-28%20at%206.52.48%20PM-IK7LxvwgkD3YuAhSxARyss4v3A8ie4.jpeg",
-      mgoLevel: "525+ MGO",
-      brand: "MELORA" as const,
-      isPremium: false,
-      price: 2500,
-      rating: 5,
-      whatsappMessage: "Purifying Face Wash - 2500L",
-    },
-  ]
-
-  const melloraHoneyProducts = [
-    {
-      id: "melora-lozenges",
-      name: "Karamele Manuka 525+ MGO",
-      description: "Blackcurrant with Propolis - Mjalte Manuka Honey Lozenges",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-NWSLReyWsfhFOJwelXhhBumgmQY30c.png",
-      mgoLevel: "525+ MGO",
-      brand: "MELORA" as const,
-      isPremium: false,
-      price: 1200,
-      rating: 5,
-      whatsappMessage: "Karamele Manuka 525+ MGO - 1200L",
     },
   ]
 
@@ -262,7 +205,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Featured Products */}
+        {/* Featured Products - MANUKA ONLY */}
         <section className="py-20 relative overflow-hidden z-10">
           <div className="absolute inset-0 bg-gradient-to-br from-amber-50/50 to-orange-50/50" />
 
@@ -284,7 +227,7 @@ export default function HomePage() {
             </AnimatedSection>
 
             <AnimatedSection className="text-center mt-12" delay={400}>
-              <Link href="/showcase">
+              <Link href="/products">
                 <div className="group relative inline-block">
                   <div className="absolute -inset-1 bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse" />
                   <Button
@@ -292,56 +235,11 @@ export default function HomePage() {
                     className="relative bg-white text-slate-900 hover:bg-slate-50 px-8 py-6 text-lg rounded-2xl font-bold shadow-xl border-2 border-slate-900"
                   >
                     <Crown className="mr-2 h-6 w-6 text-amber-600" />
-                    Shiko Koleksionin e Plotë
+                    Shiko Të Gjitha Produktet
                     <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </div>
               </Link>
-            </AnimatedSection>
-          </div>
-        </section>
-
-        <section className="py-20 relative overflow-hidden z-10 bg-gradient-to-br from-purple-50 via-pink-50/30 to-purple-50/20">
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-400/5 to-pink-400/5" />
-
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection className="text-center mb-16">
-              <Badge className="mb-4 px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-bold">
-                PRODUKTET E SKINCARE
-              </Badge>
-              <h2 className="text-4xl lg:text-6xl font-black bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent mb-4">
-                Koleksioni Melora
-              </h2>
-              <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-                Produktet e kujdesit të lëkurës me mjalte Manuka premium për lëkurë të shëndoshë dhe të rrezatuese
-              </p>
-            </AnimatedSection>
-
-            <AnimatedSection delay={200}>
-              <ProductCardRow products={melloraProducts} showPricing={true} showWhatsAppButton={true} />
-            </AnimatedSection>
-          </div>
-        </section>
-
-        {/* Melora Honey Lozenges Section */}
-        <section className="py-20 relative overflow-hidden z-10 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-400/5 to-orange-400/5" />
-
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection className="text-center mb-16">
-              <Badge className="mb-4 px-6 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-bold">
-                HONEY LOZENGES
-              </Badge>
-              <h2 className="text-4xl lg:text-6xl font-black bg-gradient-to-r from-white to-slate-200 bg-clip-text text-transparent mb-4">
-                Melora Honey Lozenges
-              </h2>
-              <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-                Kombinim i përfektë i mjaltit Manuka premium me propolis dhe mjedra të zezë për shëndetin tuaj
-              </p>
-            </AnimatedSection>
-
-            <AnimatedSection delay={200}>
-              <ProductCardRow products={melloraHoneyProducts} showPricing={true} showWhatsAppButton={true} />
             </AnimatedSection>
           </div>
         </section>
@@ -428,7 +326,7 @@ export default function HomePage() {
         {/* CTA Section - Bold & Modern */}
         <section className="py-20 relative overflow-hidden z-10">
           <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-amber-900 to-orange-900" />
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE2YzAgMy4zMTQtMi42ODYgNi02IDZzLTYtMi42ODYtNi02IDIuNjg2LTYgNi02IDYgMi42ODYgNiA2ek0wIDEyYzAtMy4zMTQgMi42ODYtNiA2LTZzNiAyLjY4NiA2IDYtMi42ODYgNi02IDYtNi0yLjY4Ni02LTZ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-10" />
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE2YzAgMy4zMTQtMi42ODYgNiA2LTZzNiAyLjY4NiA2IDYtMi42ODYgNi02IDYtNi0yLjY4Ni02LTZ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-10" />
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <AnimatedSection>
@@ -503,7 +401,7 @@ export default function HomePage() {
 
         {/* Footer - Modern & Clean */}
         <footer className="bg-slate-900 text-white py-16 relative overflow-hidden border-t-4 border-amber-500 z-10">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMiI+PHBhdGggZD0iTTM2IDE2YzAgMy4zMTQtMi42ODYgNi02IDZzLTYtMi42ODYtNi02IDIuNjg2LTYgNi02IDYgMi42ODYgNiA2ek0wIDEyYzAtMy4zMTQgMi42ODYtNiA2LTZzNiAyLjY4NiA2IDYtMi42ODYgNi02IDYtNi0yLjY4Ni02LTZ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-50" />
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMiI+PHBhdGggZD0iTTM2IDE2YzAgMy4zMTQtMi42ODYgNiA2LTZzNiAyLjY4NiA2IDYtMi42ODYgNi02IDYtNi0yLjY4Ni02LTZ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-50" />
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-4 gap-12 mb-12">

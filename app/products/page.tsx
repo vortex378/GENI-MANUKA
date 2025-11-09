@@ -223,6 +223,57 @@ export default function ProductsPage() {
       color: "from-orange-500 to-red-500",
       whatsappMessage: "Krokos Kozanis Safran 0.5g",
     },
+    {
+      id: 14,
+      name: "Krem Restorative Balm",
+      price: 2800,
+      category: "Kujdes Lëkure",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-10-28%20at%206.52.48%20PM%20%281%29-UpylCmAHjXXxlKvaNyuLL51xXBnq23.jpeg",
+      description: "Deep Hydration and Skin Repair - Mjalte Manuka 525+ MGO",
+      benefits: ["Këtimin e thellë të lëkurës", "Riparimi i thellë", "Mjalte Manuka 525+ MGO"],
+      icon: Heart,
+      color: "from-pink-500 to-rose-500",
+      whatsappMessage: "Krem Restorative Balm - 2800L",
+    },
+    {
+      id: 15,
+      name: "Krem Moisturiser",
+      price: 2800,
+      category: "Kujdes Lëkure",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-10-28%20at%206.52.48%20PM%20%282%29-RWUhaAqaKUOZK9H8QpgIfqhVw5RSEz.jpeg",
+      description: "Nourish, Restore and Hydrate - Mjalte Manuka 525+ MGO",
+      benefits: ["Ushqim i lëkurës", "Rivendosje dhe hidratim", "Mjalte Manuka 525+ MGO"],
+      icon: Shield,
+      color: "from-blue-500 to-cyan-500",
+      whatsappMessage: "Krem Moisturiser - 2800L",
+    },
+    {
+      id: 16,
+      name: "Purifying Face Wash",
+      price: 2500,
+      category: "Kujdes Lëkure",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-10-28%20at%206.52.48%20PM-IK7LxvwgkD3YuAhSxARyss4v3A8ie4.jpeg",
+      description: "Cleanse and Protect - Mjalte Manuka 525+ MGO",
+      benefits: ["Pastrimi i thellë", "Mbrojtja e lëkurës", "Mjalte Manuka 525+ MGO"],
+      icon: Zap,
+      color: "from-purple-500 to-violet-500",
+      whatsappMessage: "Purifying Face Wash - 2500L",
+    },
+    {
+      id: 17,
+      name: "Karamele Manuka 525+ MGO",
+      price: 1200,
+      category: "Mjalte Manuka",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-NWSLReyWsfhFOJwelXhhBumgmQY30c.png",
+      description: "Blackcurrant with Propolis - Mjalte Manuka Honey Lozenges",
+      benefits: ["Mjalte Manuka 525+ MGO", "Me propolis dhe minerale", "Me mjedra të zezë"],
+      icon: Star,
+      color: "from-amber-600 to-orange-600",
+      whatsappMessage: "Karamele Manuka 525+ MGO - 1200L",
+    },
   ]
 
   // Get unique categories
