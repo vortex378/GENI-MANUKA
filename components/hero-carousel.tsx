@@ -25,7 +25,7 @@ const slides: Slide[] = [
   },
   {
     id: 2,
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_2841-BerNBWshVNeJ2GNGar0J6eBTSxPPV1.png",
+    image: "/images/img-2841.png",
     title: "Shëndeti Është Pasuri",
     subtitle: "Përfitimet e provuara shkencore të mjaltit Manuka",
     ctaText: "Mëso Më Shumë",
@@ -77,26 +77,13 @@ export default function HeroCarousel() {
   }
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-slate-900">
-      {/* VIDEO BACKGROUND - Beautiful and Visible! */}
-      <div className="absolute inset-0 z-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{
-            filter: "brightness(0.7) saturate(1.4) contrast(1.15)",
-          }}
-        >
-          <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/watermarked_preview-c1RlRbHJ93yjo99ZLSGNQw9bhkfbW8.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-
-        {/* Minimal overlay - honey video shines! */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-transparent to-slate-900/60" />
-      </div>
+    <div className="relative h-screen w-full overflow-hidden">
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          background: "linear-gradient(to bottom, #0D0D0D 0%, #F2A539 100%)",
+        }}
+      />
 
       {/* Slides */}
       <div className="relative h-full w-full z-10">
