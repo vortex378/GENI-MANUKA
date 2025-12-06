@@ -45,7 +45,7 @@ export default function HomePage() {
       id: "koru-500",
       name: "Manuka Koru MGO 500+",
       description: "Mjalte Manuka me aktivitet të lartë antibakterial",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_2841-BerNBWshVNeJ2GNGar0J6eBTSxPPV1.png",
+      image: "/images/img-2841.png",
       mgoLevel: "MGO 500+",
       brand: "KORU" as const,
       isPremium: false,
@@ -223,7 +223,7 @@ export default function HomePage() {
             </AnimatedSection>
 
             <AnimatedSection delay={200}>
-              <ProductCardRow products={featuredProducts} />
+              <ProductCardRow products={featuredProducts} showWhatsAppButton={true} showPricing={true} />
             </AnimatedSection>
 
             <AnimatedSection className="text-center mt-12" delay={400}>

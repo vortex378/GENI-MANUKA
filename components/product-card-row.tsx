@@ -2,10 +2,11 @@
 
 import { useRef, useEffect, useState } from "react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Star, MessageCircle, ChevronLeft, ChevronRight } from "lucide-react"
+import { Star, ShoppingCart, ChevronLeft, ChevronRight } from "lucide-react"
 
 interface ProductCardProps {
   id: string
@@ -36,6 +37,7 @@ export default function ProductCardRow({
   showWhatsAppButton = false,
   title,
 }: ProductCardRowProps) {
+  const router = useRouter()
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
@@ -76,6 +78,18 @@ export default function ProductCardRow({
         behavior: "smooth",
       })
     }
+  }
+
+  const handleCheckout = (product: ProductCardProps) => {
+    const params = new URLSearchParams({
+      name: product.name,
+      price: product.price ? `${product.price.toLocaleString()} L` : "",
+      image: product.image,
+      mgo: product.mgoLevel,
+      brand: product.brand,
+      message: product.whatsappMessage,
+    })
+    router.push(`/checkout?${params.toString()}`)
   }
 
   useEffect(() => {
@@ -237,15 +251,10 @@ export default function ProductCardRow({
                     <div className="pt-4">
                       <Button
                         className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold py-3 rounded-xl transition-all duration-300 transform hover:scale-105 touch-manipulation"
-                        onClick={() => {
-                          const phoneNumber = "+355697320453"
-                          const message = `Dua te porosis ${product.whatsappMessage}`
-                          const whatsappUrl = `https://wa.me/${phoneNumber.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(message)}`
-                          window.open(whatsappUrl, "_blank")
-                        }}
+                        onClick={() => handleCheckout(product)}
                       >
-                        <MessageCircle className="mr-2 h-4 w-4" />
-                        Porosi në WhatsApp
+                        <ShoppingCart className="mr-2 h-4 w-4" />
+                        Blej Tani
                       </Button>
                     </div>
                   )}
