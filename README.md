@@ -1,30 +1,58 @@
-# New Project
+# Manuka Albania
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+**Online store for premium New Zealand Manuka honey in Albania.** Customers browse products by brand, read about the benefits, and order through PokPay checkout or WhatsApp.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/vortex378s-projects/v0-new-project-6k1yvycn4my)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/6K1yvYcn4mY)
+**[Visit the live site](https://v0-new-project-6k1yvycn4my.vercel.app)** · Albanian interface
 
-## Overview
+## Features
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+- **Product catalog** with brand filter and product cards
+- **PokPay checkout:** a server-side API route looks up the price in the product catalog, creates the payment session, and redirects to PokPay's hosted checkout. The browser only sends a product id, so the amount cannot be changed on the client. Webhooks are accepted only with a valid HMAC signature.
+- **WhatsApp ordering** from any product, for customers who prefer to order by message
+- **Content pages:** benefits of Manuka honey, product showcase, FAQ, contact
+- **SEO:** per-page metadata, Open Graph, `sitemap.xml`, `robots.txt`, and structured business data
+- **Responsive** layout with loading states and animated sections
 
-## Deployment
+## Tech stack
 
-Your project is live at:
+Next.js (App Router) · TypeScript · Tailwind CSS · shadcn/ui (Radix) · Vercel
 
-**[https://vercel.com/vortex378s-projects/v0-new-project-6k1yvycn4my](https://vercel.com/vortex378s-projects/v0-new-project-6k1yvycn4my)**
+## Project structure
 
-## Build your app
+```
+app/
+├── api/pokpay/
+│   ├── create-payment/   # creates a PokPay payment session
+│   └── webhook/          # receives payment status updates
+├── products/             # catalog with brand filter
+├── checkout/             # checkout page
+├── payment/success|cancel
+├── benefits/ showcase/ manukat/ contact/
+└── sitemap.ts, robots.txt
+components/               # navigation, carousel, product cards, PokPay and WhatsApp buttons
+```
 
-Continue building your app on:
+## Run locally
 
-**[https://v0.dev/chat/projects/6K1yvYcn4mY](https://v0.dev/chat/projects/6K1yvYcn4mY)**
+```sh
+pnpm install
+pnpm dev
+```
 
-## How It Works
+Create a `.env.local` file with these values first:
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+| Variable | Purpose |
+| --- | --- |
+| `POKPAY_MERCHANT_ID` | Merchant identifier from PokPay |
+| `POKPAY_KEY_ID` / `POKPAY_KEY_SECRET` | API credentials (keep secret) |
+| `POKPAY_API_URL` | `https://api-staging.pokpay.io` for testing, `https://api.pokpay.io` for production |
+| `NEXT_PUBLIC_BASE_URL` | Public URL used for return and webhook links |
+| `POKPAY_WEBHOOK_SECRET` | Secret used to verify webhook signatures (falls back to `POKPAY_KEY_SECRET`) |
+
+Use staging credentials for local development. Full setup steps are in [POKPAY_SETUP.md](POKPAY_SETUP.md).
+
+## Roadmap
+
+- Store orders in a database and update them from the webhook
+- Order confirmation email to the customer
+- English version of the site
