@@ -2,7 +2,7 @@
 
 **Online store for premium New Zealand Manuka honey in Albania.** Customers browse products by brand, read about the benefits, and order through PokPay checkout or WhatsApp.
 
-**[Visit the live site](https://v0-new-project-6k1yvycn4my.vercel.app)** · Albanian interface
+**[Visit the live site](https://manuka-albania-xi.vercel.app)** · Albanian interface
 
 ## Features
 
