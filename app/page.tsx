@@ -15,6 +15,7 @@ import ProductCardRow from "@/components/product-card-row"
 import ManukaKoruShowcase from "@/components/manuka-koru-showcase"
 import PageWrapper from "./page-wrapper"
 import FAQSection from "@/components/faq-section"
+import { featuredProducts } from "@/lib/catalog"
 
 export default function HomePage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -28,57 +29,6 @@ export default function HomePage() {
   }, [])
 
   // Featured Products Data - ONLY MANUKA PRODUCTS
-  const featuredProducts = [
-    {
-      id: "koru-300",
-      name: "Manuka Koru MGO 300+",
-      description: "Mjalte Manuka premium me përmbajtje të lartë antioksidantësh",
-      image: "https://m.media-amazon.com/images/I/71+la-DryjL.jpg",
-      mgoLevel: "MGO 300+",
-      brand: "KORU" as const,
-      isPremium: true,
-      price: 7500,
-      rating: 5,
-      whatsappMessage: "Manuka Koru MGO 300+",
-    },
-    {
-      id: "koru-500",
-      name: "Manuka Koru MGO 500+",
-      description: "Mjalte Manuka me aktivitet të lartë antibakterial",
-      image: "/images/img-2841.png",
-      mgoLevel: "MGO 500+",
-      brand: "KORU" as const,
-      isPremium: false,
-      price: 10000,
-      rating: 5,
-      whatsappMessage: "Manuka Koru MGO 500+",
-    },
-    {
-      id: "koru-800",
-      name: "Manuka Koru MGO 800+",
-      description: "Mjalte Manuka super premium për përdorim terapeutik",
-      image: "https://bioceuticals.co.uk/cdn/shop/products/koru800.jpg?v=1590247373",
-      mgoLevel: "MGO 800+",
-      brand: "KORU" as const,
-      isPremium: true,
-      price: 17000,
-      rating: 5,
-      whatsappMessage: "Manuka Koru MGO 800+",
-    },
-    {
-      id: "koru-1000",
-      name: "Manuka Koru MGO 1000+",
-      description: "Mjalte Manuka me koncentrim të lartë të vetive aktive",
-      image: "https://bioceuticals.co.uk/cdn/shop/products/koru1000.jpg?v=1590247497",
-      mgoLevel: "MGO 1000+",
-      brand: "KORU" as const,
-      isPremium: false,
-      price: 22000,
-      rating: 5,
-      whatsappMessage: "Manuka Koru MGO 1000+",
-    },
-  ]
-
   const stats = [
     { icon: Package, value: "500+", label: "Klientë të Kënaqur", color: "from-blue-500 to-cyan-500" },
     { icon: Award, value: "100%", label: "Cilësi Premium", color: "from-amber-500 to-orange-500" },

@@ -5,43 +5,35 @@ import { CreditCard } from "lucide-react"
 import { useState } from "react"
 
 interface PokPayButtonProps {
-  productName: string
+  productId: string
   amount: number
   currency?: string
   className?: string
 }
 
-export default function PokPayButton({ productName, amount, currency = "ALL", className }: PokPayButtonProps) {
+export default function PokPayButton({ productId, amount, currency = "ALL", className }: PokPayButtonProps) {
   const [isLoading, setIsLoading] = useState(false)
 
   const handlePokPayPayment = async () => {
     try {
       setIsLoading(true)
-      console.log("[v0] Initiating PokPay payment:", { productName, amount, currency })
-
-      const orderId = `ORDER-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
-
       const response = await fetch("/api/pokpay/create-payment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          productName,
-          price: amount,
-          orderId,
-        }),
+        // The server looks up the price for this product; the amount shown
+        // on the button is for display only.
+        body: JSON.stringify({ productId }),
       })
 
       const data = await response.json()
-      console.log("[v0] Payment creation response:", data)
 
       if (!response.ok || !data.success) {
         throw new Error(data.error || "Failed to create payment")
       }
 
       if (data.checkout_url) {
-        console.log("[v0] Redirecting to PokPay checkout:", data.checkout_url)
         window.location.href = data.checkout_url
       } else {
         throw new Error("No checkout URL received")

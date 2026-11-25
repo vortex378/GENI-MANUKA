@@ -81,15 +81,9 @@ export default function ProductCardRow({
   }
 
   const handleCheckout = (product: ProductCardProps) => {
-    const params = new URLSearchParams({
-      name: product.name,
-      price: product.price ? `${product.price.toLocaleString()} L` : "",
-      image: product.image,
-      mgo: product.mgoLevel,
-      brand: product.brand,
-      message: product.whatsappMessage,
-    })
-    router.push(`/checkout?${params.toString()}`)
+    // Only the product id travels in the URL; the checkout page and the
+    // payment API look up name and price in lib/catalog.ts.
+    router.push(`/checkout?${new URLSearchParams({ id: product.id }).toString()}`)
   }
 
   useEffect(() => {

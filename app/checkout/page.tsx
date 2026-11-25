@@ -8,19 +8,21 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { MessageCircle, CreditCard, ArrowLeft, Loader2 } from "lucide-react"
 import PokPayButton from "@/components/pokpay-button"
+import { findProduct, formatLek } from "@/lib/catalog"
 
 function CheckoutContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const [loading, setLoading] = useState(false)
 
-  // Get product details from URL params
-  const productName = searchParams.get("name") || ""
-  const productPrice = searchParams.get("price") || ""
-  const productImage = searchParams.get("image") || ""
-  const productMgo = searchParams.get("mgo") || ""
-  const productBrand = searchParams.get("brand") || ""
-  const whatsappMessage = searchParams.get("message") || ""
+  // Product details come from the catalog; the URL only carries the product id
+  const product = findProduct(searchParams.get("id"))
+  const productName = product?.name ?? ""
+  const productPrice = product ? formatLek(product.price) : ""
+  const productImage = product?.image ?? ""
+  const productMgo = product?.mgoLevel ?? ""
+  const productBrand = product?.brand ?? ""
+  const whatsappMessage = product?.whatsappMessage ?? ""
 
   const handleWhatsAppOrder = () => {
     setLoading(true)
@@ -29,6 +31,15 @@ function CheckoutContent() {
     const whatsappUrl = `https://wa.me/${phoneNumber.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(message)}`
     window.open(whatsappUrl, "_blank")
     setTimeout(() => setLoading(false), 1000)
+  }
+
+  if (!product) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center gap-4 px-4 text-center">
+        <p className="text-lg text-gray-700">Produkti nuk u gjet.</p>
+        <Button onClick={() => router.push("/")}>Kthehu në faqen kryesore</Button>
+      </div>
+    )
   }
 
   return (
@@ -173,8 +184,8 @@ function CheckoutContent() {
                       </li>
                     </ul>
                     <PokPayButton
-                      productName={productName}
-                      amount={Number.parseFloat(productPrice.replace(/[^0-9.]/g, ""))}
+                      productId={product.id}
+                      amount={product.price}
                       currency="ALL"
                       className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold py-3 rounded-xl transition-all duration-300 transform hover:scale-105"
                     />
